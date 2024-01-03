@@ -19,10 +19,6 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ![아키텍쳐](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/9f91a18a-d715-47dc-b589-3bc3b529bf9d)
 
-## ❄️ WBS
-
-<img width="{80%}" src="https://github.com/Imadeveloperrr/petCommunity/assets/99321607/9f91a18a-d715-47dc-b589-3bc3b529bf9d"/>
-
 ## 🛠 Tech Stack
 
 - Spring boot
@@ -55,6 +51,8 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 | redux-thunk                      | 비동기 작업을 처리하기 위해 Redux 미들웨어로 사용              |
 | styled-components                | CSS-in-JS 라이브러리, 컴포넌트 기반의 스타일링을 위해 사용     |
 | material-ui                      | React 컴포넌트 라이브러리, Material Design을 따르는 UI        |
+| swagger-ui                       | REST API 문서화를 위한 Swagger UI 라이브러리                 |
+| springfox-swagger2               | Spring Boot 프로젝트에서 Swagger 2를 구현하기 위한 라이브러리 |
 
 
 ## 🔎 API
