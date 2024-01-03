@@ -36,7 +36,6 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 | Library                          | Description                                                 |
 |----------------------------------|-------------------------------------------------------------|
-| spring-boot-starter-thymeleaf    | 템플릿 엔진으로 Thymeleaf를 사용하기 위한 스프링 부트 스타터    |
 | spring-boot-starter-web          | 웹 애플리케이션 개발을 위한 스프링 부트 스타터 (MVC)            |
 | spring-boot-starter-data-jpa     | JPA를 사용하여 데이터베이스 작업을 쉽게 처리하기 위한 스타터     |
 | spring-boot-starter-security     | 스프링 시큐리티를 사용하여 인증 및 권한 관리를 위한 스타터       |
