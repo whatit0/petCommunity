@@ -59,7 +59,7 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 [Notion API Address](https://www.notion.so/bde8061d127c4b53af622ab558c4df71)
 
-![API-1](readme_images/api-1.png)
+
 
 
 ## 📋 ERD
