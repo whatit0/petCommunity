@@ -36,23 +36,28 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 | Library                          | Description                                                 |
 |----------------------------------|-------------------------------------------------------------|
-| spring-boot-starter-web          | 웹 애플리케이션 개발을 위한 스프링 부트 스타터 (MVC)            |
-| spring-boot-starter-data-jpa     | JPA를 사용하여 데이터베이스 작업을 쉽게 처리하기 위한 스타터     |
-| spring-boot-starter-security     | 스프링 시큐리티를 사용하여 인증 및 권한 관리를 위한 스타터       |
-| spring-security-test             | 스프링 시큐리티 관련 테스트를 위한 라이브러리                   |
+| spring boot                      | 백엔드 개발을 위한 경량화된 스프링 프레임워크                  |
+| jpa                              | JPA를 사용하여 데이터베이스 작업을 쉽게 처리하기 위한 스타터     |
+| spring security                  | 인증 및 권한 부여를 위한 스프링 기반의 보안 프레임워크          |
+| spring security test             | 스프링 시큐리티 관련 테스트를 위한 라이브러리                   |
 | jjwt-api                         | JWT (JSON Web Tokens) 생성 및 검증을 위해 사용                |
 | lombok                           | 코드 간소화를 위해 Getter, Setter, Builder 등 자동 생성        |
 | mariadb-java-client              | MariaDB 데이터베이스 연결을 위한 JDBC 드라이버                 |
 | spring-boot-starter-test         | 스프링 부트 기반 테스트를 위한 스타터 키트                     |
 | axios                            | HTTP 클라이언트, React에서 REST API 호출을 위해 사용          |
+| Nginx                            | 고성능 HTTP 및 리버스 프록시 서버                             |
+| React                            | 사용자 인터페이스를 구축하기 위한 JavaScript 라이브러리        |
 | react-router-dom                 | SPA(Single Page Application) 라우팅을 위해 사용              |
 | redux                            | 애플리케이션의 상태 관리를 위한 JavaScript 라이브러리          |
 | react-redux                      | React와 Redux를 연결하기 위한 라이브러리                      |
 | redux-thunk                      | 비동기 작업을 처리하기 위해 Redux 미들웨어로 사용              |
 | styled-components                | CSS-in-JS 라이브러리, 컴포넌트 기반의 스타일링을 위해 사용     |
 | material-ui                      | React 컴포넌트 라이브러리, Material Design을 따르는 UI        |
-| swagger-ui                       | REST API 문서화를 위한 Swagger UI 라이브러리                 |
-| springfox-swagger2               | Spring Boot 프로젝트에서 Swagger 2를 구현하기 위한 라이브러리 |
+| swagger                          | REST API 문서화를 위한 Swagger 라이브러리                     |
+| Docker                           | 애플리케이션을 컨테이너화하여 배포 및 관리                     |
+| EC2                              | 클라우드 기반의 확장 가능한 컴퓨팅 용량 제공 (AWS)             |
+| S3                               | 객체 스토리지 서비스 제공 (AWS)                              |
+| RDS                              | 클라우드 기반 관계형 데이터베이스 서비스 제공 (AWS)            |
 
 
 ## 🔎 API
