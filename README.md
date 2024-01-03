@@ -17,7 +17,11 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ## ❄️ Project Architecture
 
-![Architecture]<img width="{80%}" src="https://github.com/Imadeveloperrr/petCommunity/assets/99321607/9f91a18a-d715-47dc-b589-3bc3b529bf9d"/>
+![아키텍쳐](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/9f91a18a-d715-47dc-b589-3bc3b529bf9d)
+
+## ❄️ WBS
+
+<img width="{80%}" src="https://github.com/Imadeveloperrr/petCommunity/assets/99321607/9f91a18a-d715-47dc-b589-3bc3b529bf9d"/>
 
 ## 🛠 Tech Stack
 
@@ -62,7 +66,7 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ## 📋 ERD
 
-![ERD](./readme_images/erd2.png)
+![ERD](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/2bdd0826-54d8-4917-9ad1-1bb2289a87b0)
 
 ## ✅ 프로젝트 테스트
 
