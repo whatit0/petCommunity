@@ -8,11 +8,11 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 - **Back End**
   - 유광진(팀장)([https://github.com/Youkwangjin](https://github.com/Youkwangjin))
-  - 이국인([https://github.com/whatit0](https://github.com/whatit0))
+  - 한국인([https://github.com/whatit0](https://github.com/whatit0))
   - 이성호([https://github.com/Imadeveloperrr](https://github.com/Imadeveloperrr))
 - **Front End**
   - 유광진([https://github.com/Youkwangjin](https://github.com/Youkwangjin))
-  - 이국인([https://github.com/whatit0](https://github.com/whatit0))
+  - 한국인([https://github.com/whatit0](https://github.com/whatit0))
   - 이성호([https://github.com/Imadeveloperrr](https://github.com/Imadeveloperrr))
 
 ## ❄️ Project Architecture
@@ -74,7 +74,7 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ## 🌈 주요 기능
 
-1. ㅋ
+1. Spring Security + JWT 토큰으로 회원가입, 로그인 API 구현
 2. ㅋ
 3. ㅋ
 
