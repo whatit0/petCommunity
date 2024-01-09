@@ -1,7 +1,12 @@
 package com.example.petcommunity.entity.member;
 
+import com.example.petcommunity.dto.member.MemberDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -41,9 +46,28 @@ public class MemberEntity {
     @Column(name = "user_tel")
     private String userTel;
 
-    @Column(name = "user_created")
-    private String userCreated;
+    @Column(name = "user_addr")
+    private String userAddress;
 
+    @CreationTimestamp
+    @Column(name = "user_created", updatable = false) // 업데이트시 변경되지 않도록 설정
+    private LocalDateTime userCreated;
+
+    @UpdateTimestamp
     @Column(name = "user_updated")
-    private String userUpdated;
+    private LocalDateTime userUpdated;
+
+    public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
+        return MemberEntity.builder()
+                .userId(memberDTO.getUserId())
+                .userPwd(memberDTO.getUserPwd())
+                .userName(memberDTO.getUserName())
+                .userNickname(memberDTO.getUserNickname())
+                .userAge(Integer.parseInt(memberDTO.getUserAge()))
+                .userGender(memberDTO.getUserGender())
+                .userTel(memberDTO.getUserTel())
+                .userAddress(memberDTO.getUserAddress())
+
+                .build();
+    }
 }
