@@ -91,7 +91,7 @@ export default function LoginPage() {
                     userGender,
                     userAddress
                 });
-                console.log(response.data);
+                window.location.href = '/LoginPage.jsx';
             } catch (error) {
                 console.error("회원가입 오류", error);
             }
@@ -211,5 +211,5 @@ export default function LoginPage() {
                 </div>
             </form>
         </div>
-)
+    )
 }
