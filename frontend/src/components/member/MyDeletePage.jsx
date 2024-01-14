@@ -81,7 +81,7 @@ export default function LoginPage() {
         event.preventDefault();
         if (!notAllow) {
             try {
-                const response = await axios.post('http://localhost:8080/api/delete', {
+                await axios.post('http://localhost:8080/api/delete', {
                     userPwd,
                     userName,
                     userTel,
