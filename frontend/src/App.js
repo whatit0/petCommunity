@@ -1,8 +1,7 @@
-
 // App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider, useAuth } from './AuthContext';
+import { AuthProvider, useAuth } from './AuthContext'; // AuthContext 경로 확인 필요
 import Header from './components/header/Header';
 import MyPageHeader from './components/header/MyPageHeader';
 import LoginPage from './components/member/LoginPage';
@@ -31,6 +30,6 @@ function App() {
 function AuthComponent() {
     const { isLoggedIn } = useAuth();
     return isLoggedIn ? <MyPageHeader /> : <Header />;
+}
 
-    
 export default App;
