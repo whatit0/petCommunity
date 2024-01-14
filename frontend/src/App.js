@@ -1,4 +1,3 @@
-
 // App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -31,6 +30,6 @@ function App() {
 function AuthComponent() {
     const { isLoggedIn } = useAuth();
     return isLoggedIn ? <MyPageHeader /> : <Header />;
+}
 
-    
 export default App;
