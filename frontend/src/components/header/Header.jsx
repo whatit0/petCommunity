@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css'; // 스타일 시트를 임포트합니다.
+import '../style/Header.css';
 
 function Header() {
     return (
@@ -9,9 +9,9 @@ function Header() {
                 <img src="/logo.jpg" alt="Logo"/>
             </div>
             <nav className="navigation">
-                <Link to="/community">Home</Link>
-                <Link to="/community">회사소개</Link>
-                <Link to="/community">미아 서비스</Link>
+                <Link to="/home">Home</Link>
+                <Link to="/info">회사소개</Link>
+                <Link to="/announcement">공지사항</Link>
                 <Link to="/community">커뮤니티</Link>
 
             </nav>

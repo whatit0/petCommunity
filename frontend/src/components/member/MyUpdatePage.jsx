@@ -77,12 +77,11 @@ export default function LoginPage() {
         setNotAllow(true);
     }, [userIdValid, userPwdValid, userNameValid, userTelValid]);
 
-    const handleSubmit = async (event) => {
+    const updateSubmit = async (event) => {
         event.preventDefault();
         if (!notAllow) {
             try {
-                await axios.post('http://localhost:8080/api/register', {
-                    userId,
+                await axios.post('http://localhost:8080/api/update', {
                     userPwd,
                     userName,
                     userTel,
@@ -93,7 +92,7 @@ export default function LoginPage() {
                 });
                 window.location.href = '/LoginPage.jsx';
             } catch (error) {
-                console.error("회원가입 오류", error);
+                console.error("회원수정 오류", error);
             }
         }
     };
@@ -101,8 +100,8 @@ export default function LoginPage() {
 
     return (
         <div className="page">
-            <form onSubmit={handleSubmit}>
-                <div className="titleWrap">회원가입</div>
+            <form onSubmit={updateSubmit}>
+                <div className="titleWrap">회원수정</div>
                 <div className="contentWrap">
                     <div className="inputTitle">아이디</div>
                     <div className="inputWrap">
