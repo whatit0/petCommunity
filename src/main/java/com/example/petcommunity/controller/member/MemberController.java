@@ -2,6 +2,7 @@ package com.example.petcommunity.controller.member;
 
 
 import com.example.petcommunity.dto.member.MemberDTO;
+import com.example.petcommunity.security.JwtToken;
 import com.example.petcommunity.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,23 @@ public class MemberController {
 
     private final MemberService memberService;
 
+
+
     @PostMapping("/api/register")
-    public ResponseEntity<?> memberSave(@RequestBody MemberDTO memberDTO) {
-        memberService.memberSave(memberDTO);
+    public ResponseEntity<?> memberSingUp(@RequestBody MemberDTO memberDTO) {
+        memberService.memberSingUp(memberDTO);
         return ResponseEntity.ok("회원 가입 성공!");
+    }
+
+    @PostMapping("/api/login")
+    public ResponseEntity<?> memberLogin(@RequestBody MemberDTO memberDTO) {
+        JwtToken jwtToken = memberService.memberLogin(memberDTO);
+        return ResponseEntity.ok(jwtToken);
+    }
+
+    @PostMapping("/api/token/refresh")
+    public ResponseEntity<?> refreshAccessToken(@RequestBody String refreshToken) {
+        JwtToken jwtToken = memberService.refreshAccessToken(refreshToken);
+        return ResponseEntity.ok(jwtToken);
     }
 }

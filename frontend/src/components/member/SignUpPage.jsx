@@ -81,7 +81,7 @@ export default function LoginPage() {
         event.preventDefault();
         if (!notAllow) {
             try {
-                const response = await axios.post('http://localhost:8080/api/register', {
+                await axios.post('http://localhost:8080/api/register', {
                     userId,
                     userPwd,
                     userName,

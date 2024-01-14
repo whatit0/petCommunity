@@ -81,7 +81,7 @@ export default function LoginPage() {
         event.preventDefault();
         if (!notAllow) {
             try {
-                const response = await axios.post('http://localhost:8080/api/update', {
+                await axios.post('http://localhost:8080/api/update', {
                     userPwd,
                     userName,
                     userTel,
