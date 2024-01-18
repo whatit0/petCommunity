@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import './MemberPage.css';
+import '../style/MemberPage.css';
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
@@ -91,7 +91,7 @@ export default function LoginPage() {
                     userGender,
                     userAddress
                 });
-                window.location.href = '/LoginPage.jsx';
+                window.location.href = '/login';
             } catch (error) {
                 console.error("회원가입 오류", error);
             }

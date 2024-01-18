@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './MemberPage.css';
+import '../style/MemberPage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
@@ -37,25 +37,23 @@ export default function LoginPage() {
     }
 
     useEffect(() => {
-        if(userIdValid && userPwdValid) {
-            setNotAllow(false);
-            return;
-        }
-        setNotAllow(true);
+        setNotAllow(!(userIdValid && userPwdValid));
     }, [userIdValid, userPwdValid]);
+
+
 
     const handleLogin = async (event) => {
         event.preventDefault();
         if (!notAllow) {
             try {
                 const response = await axios.post('http://localhost:8080/api/login', {
-                    userId: userId,
-                    userPwd: userPwd,
+                    userId,
+                    userPwd,
                 });
-
                 if (response.data && response.data.accessToken) {
-                    localStorage.setItem('userToken', response.data.accessToken); // accessToken 저장
-                    setIsLoggedIn(true); // 로그인 상태 업데이트
+                    localStorage.setItem('userToken', response.data.accessToken);
+                    console.log('Stored token:', localStorage.getItem('userToken'));
+                    setIsLoggedIn(true);
                     navigate('/');
                 } else {
                     console.error('accessToken 반환되지 않았습니다.', response.data);
@@ -106,7 +104,7 @@ export default function LoginPage() {
                         }
                     </div>
                     <div>
-                        <button disabled={notAllow} onClick={handleLogin} className="bottomButton">로그인</button>
+                        <button type="submit" disabled={notAllow} className="bottomButton">로그인</button>
                     </div>
                 </div>
             </form>
