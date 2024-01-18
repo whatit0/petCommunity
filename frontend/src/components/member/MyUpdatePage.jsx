@@ -124,7 +124,7 @@ export default function MyUpdatePage() {
                     userGender,
                     userAddress
                 }, config);
-                window.location.href = '/profile/update';
+                window.location.href = '/login';
             } catch (error) {
                 console.error("회원수정 오류", error);
             }

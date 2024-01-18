@@ -3,9 +3,10 @@ package com.example.petcommunity.service.member;
 import com.example.petcommunity.dto.member.MemberDTO;
 import com.example.petcommunity.entity.member.MemberEntity;
 import com.example.petcommunity.repository.member.MemberRepository;
-import com.example.petcommunity.security.CustomException;
-import com.example.petcommunity.security.JwtProvider;
-import com.example.petcommunity.security.JwtToken;
+import com.example.petcommunity.security.exception.CustomException;
+import com.example.petcommunity.security.jwt.JwtProvider;
+import com.example.petcommunity.security.jwt.JwtToken;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Builder
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -49,17 +51,4 @@ public class MemberService {
                 .refreshToken(refreshToken)
                 .build();
     }
-
-    public JwtToken refreshAccessToken(String refreshToken) {
-        String userId = jwtProvider.validate(refreshToken); // Refresh Token 유효성 검사
-        String newAccessToken = jwtProvider.createJwt(userId); // 새로운 Access Token 생성
-        String newRefreshToken = jwtProvider.createRefreshToken(userId); // 새로운 Refresh Token 생성
-
-        return JwtToken.builder()
-                .grantType("Bearer")
-                .accessToken(newAccessToken)
-                .refreshToken(newRefreshToken)
-                .build();
-    }
 }
-

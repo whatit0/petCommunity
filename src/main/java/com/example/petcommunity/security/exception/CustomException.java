@@ -1,4 +1,4 @@
-package com.example.petcommunity.security;
+package com.example.petcommunity.security.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

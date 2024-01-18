@@ -2,8 +2,9 @@ package com.example.petcommunity.controller.member;
 
 
 import com.example.petcommunity.dto.member.MemberDTO;
-import com.example.petcommunity.security.JwtToken;
+import com.example.petcommunity.security.jwt.JwtToken;
 import com.example.petcommunity.service.member.MemberService;
+import com.example.petcommunity.service.member.MemberUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final MemberService memberService;
-
-
+    private final MemberUpdateService memberUpdateService;
 
     @PostMapping("/api/register")
     public ResponseEntity<?> memberSingUp(@RequestBody MemberDTO memberDTO) {
@@ -31,7 +31,7 @@ public class MemberController {
 
     @PostMapping("/api/token/refresh")
     public ResponseEntity<?> refreshAccessToken(@RequestBody String refreshToken) {
-        JwtToken jwtToken = memberService.refreshAccessToken(refreshToken);
+        JwtToken jwtToken = memberUpdateService.refreshAccessToken(refreshToken);
         return ResponseEntity.ok(jwtToken);
     }
 }
