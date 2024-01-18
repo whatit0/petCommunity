@@ -1,4 +1,4 @@
-package com.example.petcommunity.security;
+package com.example.petcommunity.security.jwt;
 
 
 import lombok.AllArgsConstructor;
