@@ -7,7 +7,6 @@ import com.example.petcommunity.service.member.MemberUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -27,12 +26,14 @@ public class MemberUpdateController {
     }
 
     @PostMapping("/api/userUpdate")
-    public ResponseEntity<?> updateUser(@RequestBody MemberDTO memberDTO, @AuthenticationPrincipal String userId) {
-        // 로그인 상태인 사용자만 회원 수정
-        if (!userId.equals(memberDTO.getUserId())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("자신의 정보만 수정 가능");
+    public ResponseEntity<?> updateUser(@RequestBody MemberDTO memberDTO, Principal principal) {
+        String userId = principal.getName();
+
+        if (userId == null || !userId.equals(memberDTO.getUserId())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("자신의 정보만 수정 가능합니다.");
         }
         JwtToken newTokens = memberUpdateService.updateUser(memberDTO);
         return ResponseEntity.ok(newTokens); // 클라이언트에게 새로운 토큰 전달
     }
+
 }

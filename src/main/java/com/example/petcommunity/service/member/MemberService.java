@@ -23,7 +23,6 @@ public class MemberService {
     private final JwtProvider jwtProvider;
 
 
-
     public void memberSingUp(MemberDTO memberDTO) {
         // 비밀번호 인코딩
         String encodedPassword = passwordEncoder.encode(memberDTO.getUserPwd());
@@ -41,14 +40,6 @@ public class MemberService {
         if (!passwordEncoder.matches(memberDTO.getUserPwd(), memberEntity.getUserPwd())) {
             throw new CustomException("비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED);
         }
-
-        String accessToken = jwtProvider.createJwt(memberEntity.getUserId());
-        String refreshToken = jwtProvider.createRefreshToken(memberEntity.getUserId());
-
-        return JwtToken.builder()
-                .grantType("Bearer")
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .build();
+        return jwtProvider.generateToken(memberEntity.getUserId());
     }
 }
