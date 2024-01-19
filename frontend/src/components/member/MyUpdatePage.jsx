@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import '../style/MemberPage.css';
+import { useAuth } from '../../AuthContext';
 
 export default function MyUpdatePage() {
     const [userId, setUserId] = useState('');
@@ -18,7 +19,7 @@ export default function MyUpdatePage() {
     const [userTelValid, setUserTelValid] = useState(null);
 
     const [notAllow, setNotAllow] = useState(true);
-
+    const { setIsLoggedIn } = useAuth();
 
 
     const handleUserId = (e) => {
@@ -73,15 +74,18 @@ export default function MyUpdatePage() {
         setNotAllow(!(userIdValid !== false && userPwdValid !== false && userNameValid !== false && userTelValid !== false));
     }, [userIdValid, userPwdValid, userNameValid, userTelValid]);
 
+// MyUpdatePage.jsx
+
     useEffect(() => {
-        // 사용자 정보를 가져오는 함수
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/userInfo', {
+                const token = localStorage.getItem('userToken');
+                const config = {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem('userToken')}`
+                        'Authorization': `Bearer ${token}`
                     }
-                });
+                };
+                const response = await axios.get('http://localhost:8080/api/userInfo', config);
                 const userData = response.data;
                 setUserId(userData.userId);
                 setUserName(userData.userName)
@@ -94,26 +98,21 @@ export default function MyUpdatePage() {
                 console.error("사용자 정보 불러오기 오류", error);
             }
         };
-        fetchUserData().catch(error => {
-            console.error("사용자 정보 불러오기 중 오류 발생", error);
-        });
+        fetchUserData();
     }, []);
+
 
 
     const updateSubmit = async (event) => {
         event.preventDefault();
         if (!notAllow) {
             try {
-                const token = localStorage.getItem('userToken'); // 로컬 스토리지에서 토큰 가져오기
-                console.log('Sending token:', token); // 콘솔에 보낼 토큰 출력하여 확인
+                const token = localStorage.getItem('userToken');
                 const config = {
                     headers: {
-                        'Authorization': `Bearer ${token}` // 요청 헤더에 토큰 포함
+                        'Authorization': `Bearer ${token}`
                     }
                 };
-                // 현재 업데이트 하려는 사용자의 ID를 로그로 출력
-                console.log('Updating user:', userId);
-                debugger;
                 await axios.post('http://localhost:8080/api/userUpdate', {
                     userId,
                     userPwd,
@@ -124,9 +123,15 @@ export default function MyUpdatePage() {
                     userGender,
                     userAddress
                 }, config);
+
+                localStorage.removeItem('userToken');
+                if (setIsLoggedIn) {
+                    setIsLoggedIn(false);
+                }
+                alert('회원 정보가 수정되었습니다. 다시 로그인해 주세요.');
                 window.location.href = '/login';
             } catch (error) {
-                console.error("회원수정 오류", error);
+                alert('회원 정보 수정에 실패했습니다.');
             }
         }
     };
@@ -143,7 +148,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userId"
                             value={userId}
-                            placeholder="abcd1234"
+                            readOnly
                             onChange={handleUserId}/>
                     </div>
                     <div className="errorMessageWrap">
@@ -236,7 +241,7 @@ export default function MyUpdatePage() {
                             onChange={handleUserAddress}/>
                     </div>
                     <div>
-                        <button type="submit" disabled={notAllow} className="bottomButton">확인
+                        <button type="submit" disabled={notAllow} className="bottomButton">회원 수정
                         </button>
                     </div>
                 </div>
