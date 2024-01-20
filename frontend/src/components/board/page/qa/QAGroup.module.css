@@ -1,0 +1,185 @@
+.qAGroupChild {
+    width: 639.1px;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-lightgray);
+    box-sizing: border-box;
+    height: 150.9px;
+    display: none;
+    max-width: 100%;
+}
+.frameChild,
+.qAGroupChild,
+.qa {
+    position: relative;
+}
+.qa {
+    z-index: 1;
+}
+.frameChild {
+    height: 17.7px;
+    width: 48.3px;
+    border-radius: 32.22px;
+    background-color: var(--color-gainsboro);
+    display: none;
+}
+.frameItem {
+    height: 13.7px;
+    width: 13.7px;
+    min-height: 14px;
+}
+.div,
+.frameItem {
+    position: relative;
+    z-index: 1;
+}
+.qaParent,
+.rectangleParent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.rectangleParent {
+    border-radius: 32.22px;
+    background-color: var(--color-gainsboro);
+    padding: var(--padding-10xs) var(--padding-2xs) var(--padding-12xs)
+    var(--padding-10xs);
+    z-index: 1;
+    font-size: var(--font-size-4xs-1);
+}
+.qaParent {
+    gap: var(--gap-6xl);
+}
+.div1 {
+    align-self: stretch;
+    position: relative;
+    font-size: var(--font-size-2xs-8);
+    text-align: left;
+    z-index: 1;
+}
+.infoBox {
+    width: 389px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-2xs);
+    max-width: 100%;
+}
+.circleUserIcon,
+.div2 {
+    position: relative;
+    z-index: 1;
+}
+.circleUserIcon {
+    height: 13.8px;
+    width: 13.8px;
+}
+.div2 {
+    line-height: 14.79px;
+}
+.circleUserParent {
+    height: 13px;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-10xs);
+}
+.chatting2Icon,
+.div3 {
+    position: relative;
+    z-index: 1;
+}
+.chatting2Icon {
+    height: 13.8px;
+    width: 13.8px;
+    min-height: 14px;
+}
+.div3 {
+    flex: 1;
+    line-height: 14.79px;
+    flex-shrink: 0;
+}
+.reasonUnknown {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-12xs) 0 var(--padding-5xs);
+    box-sizing: border-box;
+    max-width: 100%;
+    margin-top: -82px;
+}
+.chatting2Parent {
+    width: 64px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-8xs);
+}
+.vuesaxlineartimerIcon {
+    height: 13.8px;
+    width: 13.8px;
+    position: relative;
+    min-height: 14px;
+    z-index: 1;
+}
+.div4 {
+    flex: 1;
+    position: relative;
+    line-height: 14.79px;
+    flex-shrink: 0;
+    z-index: 1;
+}
+.vuesaxlineartimerParent {
+    width: 61px;
+    flex-direction: row;
+    gap: var(--gap-11xs);
+}
+.frameParent,
+.qAGroup,
+.qAGroupInner,
+.vuesaxlineartimerParent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.frameParent {
+    flex: 1;
+    flex-direction: row;
+    gap: var(--gap-sm);
+}
+.qAGroup,
+.qAGroupInner {
+    box-sizing: border-box;
+}
+.qAGroupInner {
+    width: 255px;
+    flex-direction: row;
+    padding: 0 var(--padding-7xs);
+    text-align: left;
+    font-size: var(--font-size-3xs-9);
+    color: var(--color-dimgray-100);
+}
+.qAGroup {
+    align-self: stretch;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-lightgray);
+    flex-direction: column;
+    padding: var(--padding-xs) var(--padding-5xs) var(--padding-mid);
+    gap: var(--gap-40xl);
+    max-width: 100%;
+    text-align: center;
+    font-size: var(--font-size-mid-8);
+    color: var(--color-black);
+    font-family: var(--font-inter);
+}
+@media screen and (max-width: 450px) {
+    .qAGroup {
+        gap: var(--gap-10xl);
+    }
+}

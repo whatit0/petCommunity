@@ -8,6 +8,7 @@ import LoginPage from './components/member/LoginPage';
 import SignUpPage from './components/member/SignUpPage';
 import MyUpdatePage from './components/member/MyUpdatePage';
 import MyDeletePage from './components/member/MyDeletePage';
+import TotalBoard from './components/board/page/total/TotalBoard';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                         <Route path="/signup" element={<SignUpPage />} />
                         <Route path="/profile/update" element={<MyUpdatePage />} />
                         <Route path="/profile/delete" element={<MyDeletePage />} />
+                        <Route path="/community" element={<TotalBoard />} />
                     </Routes>
             </div>
         </AuthProvider>
