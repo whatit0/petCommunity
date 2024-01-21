@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './MemberPage.css';
+import '../style/MemberPage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
@@ -10,6 +10,8 @@ export default function LoginPage() {
     const [userIdValid, setUserIdValid] = useState(false);
     const [userPwdValid, setUserPwdValid] = useState(false);
     const [notAllow, setNotAllow] = useState(true);
+    const [userIdError, setUserIdError] = useState('');
+    const [userPwdError, setUserPwdError] = useState('');
 
     const navigate = useNavigate();
     const { setIsLoggedIn } = useAuth();
@@ -18,53 +20,48 @@ export default function LoginPage() {
         const newId = e.target.value;
         setUserId(newId);
         const regex = /^[a-z]+[a-z0-9]{5,19}$/g;
-        if(regex.test(newId)) {
-            setUserIdValid(true);
-        } else {
-            setUserIdValid(false);
-        }
+        setUserIdValid(regex.test(newId));
     }
 
     const handleUserPwd = (e) => {
         const newPassword = e.target.value;
         setUserPwd(newPassword);
         const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@%*#^?&\\()\-_=+]).{8,16}$/;
-        if(regex.test(newPassword)) {
-            setUserPwdValid(true);
-        } else {
-            setUserPwdValid(false);
-        }
+        setUserPwdValid(regex.test(newPassword));
     }
 
     useEffect(() => {
-        if(userIdValid && userPwdValid) {
-            setNotAllow(false);
-            return;
-        }
-        setNotAllow(true);
+        setNotAllow(!(userIdValid && userPwdValid));
     }, [userIdValid, userPwdValid]);
 
     const handleLogin = async (event) => {
         event.preventDefault();
+        setUserIdError('');
+        setUserPwdError('');
+
         if (!notAllow) {
             try {
                 const response = await axios.post('http://localhost:8080/api/login', {
-                    userId: userId,
-                    userPwd: userPwd,
+                    userId,
+                    userPwd,
                 });
-
                 if (response.data && response.data.accessToken) {
-                    localStorage.setItem('userToken', response.data.accessToken); // accessToken 저장
-                    setIsLoggedIn(true); // 로그인 상태 업데이트
+                    localStorage.setItem('userToken', response.data.accessToken);
+                    setIsLoggedIn(true);
                     navigate('/');
-                } else {
-                    console.error('accessToken 반환되지 않았습니다.', response.data);
                 }
             } catch (error) {
-                console.error("로그인 실패", error);
+                if (error.response) {
+                    const errorMessage = error.response.data.message || "아이디와 비밀번호를 올바르게 입력하세요.";
+                    setUserIdError(errorMessage);
+                    setUserPwdError(errorMessage);
+                } else {
+                    console.error("서버로부터 응답을 받을 수 없습니다.", error);
+                }
             }
         }
     };
+
 
 
     return (
@@ -88,6 +85,11 @@ export default function LoginPage() {
                                 <div>올바른 아이디를 입력해주세요.</div>
                             )
                         }
+                        {
+                            userIdError && (
+                                <div>{userIdError}</div>
+                            )
+                        }
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">비밀번호</div>
                     <div className="inputWrap">
@@ -104,9 +106,14 @@ export default function LoginPage() {
                                 <div>올바른 비밀번호를 입력해주세요.</div>
                             )
                         }
+                        {
+                            userPwdError && (
+                                <div>{userPwdError}</div>
+                            )
+                        }
                     </div>
                     <div>
-                        <button disabled={notAllow} onClick={handleLogin} className="bottomButton">로그인</button>
+                        <button type="submit" disabled={notAllow} className="bottomButton">로그인</button>
                     </div>
                 </div>
             </form>

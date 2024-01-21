@@ -1,7 +1,7 @@
 package com.example.petcommunity.config;
 
 
-import com.example.petcommunity.security.JwtAuthenticationFilter;
+import com.example.petcommunity.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,12 +35,12 @@ public class SecurityConfig {
                 )
                 .csrf(CsrfConfigurer::disable)
                 .httpBasic(HttpBasicConfigurer::disable)
-                // jwt 를 사용하기 때문에 세션을 사용하지 않는다.
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/", "/api/register", "/api/login").permitAll()
+                        .requestMatchers("/api/userInfo", "/api/userUpdate", "/api/userDelete").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

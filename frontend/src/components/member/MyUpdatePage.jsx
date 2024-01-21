@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import './MemberPage.css';
+import '../style/MemberPage.css';
+import { useAuth } from '../../AuthContext';
 
-export default function LoginPage() {
+export default function MyUpdatePage() {
     const [userId, setUserId] = useState('');
     const [userPwd, setUserPwd] = useState('');
     const [userName, setUserName] = useState('');
@@ -12,57 +13,57 @@ export default function LoginPage() {
     const [userGender, setUserGender] = useState('');
     const [userAddress, setUserAddress] = useState('');
 
-    const [userIdValid, setUserIdValid] = useState(false);
-    const [userPwdValid, setUserPwdValid] = useState(false);
-    const [userNameValid, setUserNameValid] = useState(false);
-    const [userTelValid, setUserTelValid] = useState(false);
+    const [userIdValid, setUserIdValid] = useState(null);
+    const [userPwdValid, setUserPwdValid] = useState(null);
+    const [userNameValid, setUserNameValid] = useState(null);
+    const [userTelValid, setUserTelValid] = useState(null);
 
     const [notAllow, setNotAllow] = useState(true);
+    const { setIsLoggedIn } = useAuth();
 
 
     const handleUserId = (e) => {
         const newId = e.target.value;
         setUserId(newId);
-        const regex = /^[a-z]+[a-z0-9]{5,19}$/g;
-        if(regex.test(newId)) {
-            setUserIdValid(true);
+        if (newId.length > 0) {
+            const regex = /^[a-z]+[a-z0-9]{5,19}$/g;
+            setUserIdValid(regex.test(newId));
         } else {
-            setUserIdValid(false);
+            setUserIdValid(null);
         }
-    }
-
+    };
     const handleUserPwd = (e) => {
         const newPassword = e.target.value;
         setUserPwd(newPassword);
-        const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@%*#^?&\\()\-_=+]).{8,16}$/;
-        if(regex.test(newPassword)) {
-            setUserPwdValid(true);
+        if (newPassword.length > 0) {
+            const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@%*#^?&\\()\-_=+]).{8,16}$/;
+            setUserPwdValid(regex.test(newPassword));
         } else {
-            setUserPwdValid(false);
+            setUserPwdValid(null);
         }
-    }
+    };
 
     const handleUserName = (e) => {
         const newName = e.target.value;
         setUserName(newName);
-        const regex = /^[가-힣]+$/;
-        if(regex.test(newName)) {
-            setUserNameValid(true);
+        if (newName.length > 0) {
+            const regex = /^[가-힣]+$/;
+            setUserNameValid(regex.test(newName));
         } else {
-            setUserNameValid(false);
+            setUserNameValid(null);
         }
-    }
+    };
 
     const handleUserTel = (e) => {
         const newTel = e.target.value;
         setUserTel(newTel);
-        const regex = /^01[0-9]-[0-9]{3,4}-[0-9]{4}$/;
-        if(regex.test(newTel)) {
-            setUserTelValid(true);
+        if (newTel.length > 0) {
+            const regex = /^01[0-9]-[0-9]{3,4}-[0-9]{4}$/;
+            setUserTelValid(regex.test(newTel));
         } else {
-            setUserTelValid(false);
+            setUserTelValid(null);
         }
-    }
+    };
 
     const handleUserNickname = (e) => setUserNickname(e.target.value);
     const handleUserAge = (e) => setUserAge(e.target.value);
@@ -70,18 +71,50 @@ export default function LoginPage() {
     const handleUserAddress = (e) => setUserAddress(e.target.value);
 
     useEffect(() => {
-        if(userIdValid && userPwdValid && userNameValid && userTelValid) {
-            setNotAllow(false);
-            return;
-        }
-        setNotAllow(true);
+        setNotAllow(!(userIdValid !== false && userPwdValid !== false && userNameValid !== false && userTelValid !== false));
     }, [userIdValid, userPwdValid, userNameValid, userTelValid]);
+
+// MyUpdatePage.jsx
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const token = localStorage.getItem('userToken');
+                const config = {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                };
+                const response = await axios.get('http://localhost:8080/api/userInfo', config);
+                const userData = response.data;
+                setUserId(userData.userId);
+                setUserName(userData.userName)
+                setUserTel(userData.userTel)
+                setUserNickname(userData.userNickname)
+                setUserAge(userData.userAge)
+                setUserGender(userData.userGender)
+                setUserAddress(userData.userAddress)
+            } catch (error) {
+                console.error("사용자 정보 불러오기 오류", error);
+            }
+        };
+        fetchUserData();
+    }, []);
+
+
 
     const updateSubmit = async (event) => {
         event.preventDefault();
         if (!notAllow) {
             try {
-                await axios.post('http://localhost:8080/api/update', {
+                const token = localStorage.getItem('userToken');
+                const config = {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                };
+                await axios.post('http://localhost:8080/api/userUpdate', {
+                    userId,
                     userPwd,
                     userName,
                     userTel,
@@ -89,10 +122,16 @@ export default function LoginPage() {
                     userAge,
                     userGender,
                     userAddress
-                });
-                window.location.href = '/LoginPage.jsx';
+                }, config);
+
+                localStorage.removeItem('userToken');
+                if (setIsLoggedIn) {
+                    setIsLoggedIn(false);
+                }
+                alert('회원 정보가 수정되었습니다. 다시 로그인해 주세요.');
+                window.location.href = '/login';
             } catch (error) {
-                console.error("회원수정 오류", error);
+                alert('회원 정보 수정에 실패했습니다.');
             }
         }
     };
@@ -109,15 +148,13 @@ export default function LoginPage() {
                             className="input"
                             name="userId"
                             value={userId}
-                            placeholder="abcd1234"
+                            readOnly
                             onChange={handleUserId}/>
                     </div>
                     <div className="errorMessageWrap">
-                        {
-                            !userIdValid && userId.length > 0 && (
-                                <div>올바른 아이디를 입력해주세요.</div>
-                            )
-                        }
+                        {userIdValid === false && (
+                            <div className="errorMessage">올바른 아이디를 입력해주세요.</div>
+                        )}
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">비밀번호</div>
                     <div className="inputWrap">
@@ -130,8 +167,8 @@ export default function LoginPage() {
                     </div>
                     <div className="errorMessageWrap">
                         {
-                            !userPwdValid && userPwd.length > 0 && (
-                                <div>올바른 비밀번호를 입력해주세요.</div>
+                            userPwdValid === false && (
+                                <div className="errorMessage">올바른 비밀번호를 입력해주세요.</div>
                             )
                         }
                     </div>
@@ -146,8 +183,8 @@ export default function LoginPage() {
                     </div>
                     <div className="errorMessageWrap">
                         {
-                            !userNameValid && userName.length > 0 && (
-                                <div>올바른 이름을 입력해주세요.</div>
+                            userNameValid === false && (
+                                <div className="errorMessage">올바른 이름을 입력해주세요.</div>
                             )
                         }
                     </div>
@@ -189,8 +226,8 @@ export default function LoginPage() {
                     </div>
                     <div className="errorMessageWrap">
                         {
-                            !userTelValid && userTel.length > 0 && (
-                                <div>올바른 전화번호를 입력해주세요.</div>
+                            userTelValid === false && (
+                                <div className="errorMessage">올바른 전화번호를 입력해주세요.</div>
                             )
                         }
                     </div>
@@ -204,7 +241,7 @@ export default function LoginPage() {
                             onChange={handleUserAddress}/>
                     </div>
                     <div>
-                        <button type="submit" disabled={notAllow} className="bottomButton">확인
+                        <button type="submit" disabled={notAllow} className="bottomButton">회원 수정
                         </button>
                     </div>
                 </div>

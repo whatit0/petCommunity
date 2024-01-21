@@ -50,7 +50,7 @@ public class MemberEntity {
     private String userAddress;
 
     @CreationTimestamp
-    @Column(name = "user_created", updatable = false) // 업데이트시 변경되지 않도록 설정
+    @Column(name = "user_created", updatable = false)
     private LocalDateTime userCreated;
 
     @UpdateTimestamp
@@ -63,11 +63,10 @@ public class MemberEntity {
                 .userPwd(memberDTO.getUserPwd())
                 .userName(memberDTO.getUserName())
                 .userNickname(memberDTO.getUserNickname())
-                .userAge(Integer.parseInt(memberDTO.getUserAge()))
+                .userAge(memberDTO.getUserAge())
                 .userGender(memberDTO.getUserGender())
                 .userTel(memberDTO.getUserTel())
                 .userAddress(memberDTO.getUserAddress())
-
                 .build();
     }
 }
