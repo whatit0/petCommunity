@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
-import {Col, FormControl, InputGroup, Row} from "react-bootstrap";
+import {Accordion, Col, FormControl, InputGroup, Row} from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import {AiOutlineSearch} from "react-icons/ai";
 import {FaLock, FaLockOpen} from "react-icons/fa";
@@ -15,6 +15,7 @@ const MessageHeader = ({handleSearchChange}) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const usersRef = ref(db, 'users');
     const {currentUser} = useSelector(state => state.user);
+    const {userPosts} = useSelector(state => state.chatRoom);
 
     useEffect(() => {
         if (currentChatRoom?.id && currentUser?.uid) {
@@ -50,6 +51,19 @@ const MessageHeader = ({handleSearchChange}) => {
             })
         }
     }
+
+    const renderUserPosts = (userPosts) =>
+        Object.entries(userPosts)
+            .sort((a,b) => b[1].count - a[1].count)
+            .map(([key, val], i) => (
+                <div key={i} style={{display:'flex'}}>
+                    <Image style={{width:45, height:45, marginRight:10}} roundedCircle src={val.image} alt={key}/>
+                    <div>
+                        <h6>{key}</h6>
+                        <p>{val.count} 개</p>
+                    </div>
+                </div>
+            ))
 
     return (
         <div style={{width:'100%', border:'0.2rem solid #ececec', borderRadius:'4px', height:'190px', padding:'1rem', marginBottom:'1rem'}}>
@@ -93,6 +107,38 @@ const MessageHeader = ({handleSearchChange}) => {
                 <p>{currentChatRoom?.createdBy.name}</p>
             </div>
             }
+            <Row>
+                <Col>
+                    <div>
+                        <div>
+                            <h5>채팅방 소개</h5>
+                        </div>
+                        <h6># {currentChatRoom?.description}</h6>
+                    </div>
+                    {/*<Accordion>*/}
+                    {/*    <Accordion.Item eventKey='0'>*/}
+                    {/*        <Accordion.Header>채팅방 소개</Accordion.Header>*/}
+                    {/*        <Accordion.Collapse eventKey='0'>*/}
+                    {/*            <Accordion.Body>*/}
+                    {/*                {currentChatRoom?.description}*/}
+                    {/*            </Accordion.Body>*/}
+                    {/*        </Accordion.Collapse>*/}
+                    {/*    </Accordion.Item>*/}
+                    {/*</Accordion>*/}
+                </Col>
+                <Col>
+                    <Accordion>
+                        <Accordion.Item eventKey='1'>
+                            <Accordion.Header>작성 글 수</Accordion.Header>
+                            <Accordion.Collapse eventKey='1'>
+                                <Accordion.Body>
+                                    {userPosts && renderUserPosts(userPosts)}
+                                </Accordion.Body>
+                            </Accordion.Collapse>
+                        </Accordion.Item>
+                    </Accordion>
+                </Col>
+            </Row>
         </div>
     );
 };
