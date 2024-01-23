@@ -65,9 +65,7 @@ const DirectMessages = () => {
     return (
         <div>
             <span style={{display:'flex', alignItems:'center'}}>
-                <FaRegSmile
-                    style={{marginRight:3}}
-                />
+                {/*<FaRegSmile style={{marginRight:3}}/>*/}
                 개인 채팅방
             </span>
             <ul style={{listStyleType:'none', padding:0}}>

@@ -98,7 +98,7 @@ const ChatRooms = () => {
                 display: 'flex',
                 alignItems: 'center'
             }}>
-                <FaRegSmileWink style={{marginRight: 3}}/>
+                {/*<FaRegSmileWink style={{marginRight: 3}}/>*/}
                 단체 채팅방 {" "}
 
                 <FaPlus
