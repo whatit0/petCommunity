@@ -5,6 +5,8 @@ import {createUserWithEmailAndPassword, getAuth, updateProfile} from 'firebase/a
 import {set, ref} from 'firebase/database';
 import md5 from 'md5';
 import app, { db } from '../../firebase';
+import {useDispatch} from "react-redux";
+import {setUser} from "../../store/userSlice";
 
 const RegisterPage = () => {
 
@@ -12,6 +14,7 @@ const RegisterPage = () => {
 
     const [loading, setLoading] = useState(false);
     const [errorFromSubmit, setErrorFromSubmit] = useState("");
+    const dispatch = useDispatch();
 
     const {register, watch, formState: { errors }, handleSubmit} = useForm();
 
@@ -27,6 +30,14 @@ const RegisterPage = () => {
                 photoURL: `http://gravatar.com/avatar/${md5(
                     createdUser.user.email)}?d=identicon`
             })
+
+            const userData = {
+                uid: createdUser.user.uid,
+                displayName: createdUser.user.displayName,
+                photoURL: createdUser.user.photoURL
+            }
+            dispatch(setUser(userData));
+
             set(ref(db, `users/${createdUser.user.uid}`),{
                 name: createdUser.user.displayName,
                 image: createdUser.user.photoURL
