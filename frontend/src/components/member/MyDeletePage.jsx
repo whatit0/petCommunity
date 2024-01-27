@@ -157,6 +157,7 @@ export default function MyUpdatePage() {
                     <div className="inputWrap">
                         <input
                             className="input"
+                            type="password"
                             name="userPwd"
                             value={userPwd}
                             placeholder="영문, 숫자, 특수문자 포함 8자 이상"
