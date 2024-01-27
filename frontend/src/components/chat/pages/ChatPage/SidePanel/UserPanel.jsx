@@ -96,7 +96,7 @@ const UserPanel = () => {
     return (
         <div>
             <h3 style={{color:'white'}}>
-                <IoIosChatboxes />{" "} Chat App
+                <IoIosChatboxes />{" "} 회원 채팅
             </h3>
 
         <div style={{display:'flex', marginBottom:'1rem'}}>

@@ -29,6 +29,7 @@ const MessageForm = () => {
         setLoading(true);
         try {
             await set(push(child(messagesRef, currentChatRoom.id)),createMessage());
+            await remove(dbRef(db, `typing/${currentChatRoom.id}/${currentUser.uid}`));
             setLoading(false);
             setContent("");
             setErrors([]);
@@ -130,9 +131,17 @@ const MessageForm = () => {
         if (event.target.value){
             set(dbRef(db, `typing/${currentChatRoom.id}/${currentUser.uid}`), {
                 userUid: currentUser.displayName
-            })
+            });
         } else {
             remove(dbRef(db, `typing/${currentChatRoom.id}/${currentUser.uid}`));
+        }
+    }
+
+    // 메시지 엔터키 전송
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSubmit(e);
         }
     }
 
@@ -143,6 +152,7 @@ const MessageForm = () => {
                     style={{width:'100%', height:90, border:'0.2rem solid rgb(236, 236, 236)', borderRadius:4}}
                     value={content}
                     onChange={handleChange}
+                    onKeyDown={handleKeyDown}
                 />
                 {!(percentage === 0 || percentage === 100) && <ProgressBar variant='warning' label={`${percentage}%`} now={percentage} />}
                 <div>

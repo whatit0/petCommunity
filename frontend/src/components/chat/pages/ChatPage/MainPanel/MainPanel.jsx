@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import MessageHeader from "./MessageHeader";
 import MessageForm from "./MessageForm";
 import {child, onChildAdded, off, ref as dbRef, onChildRemoved} from "firebase/database";
@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Message from "./Message";
 import message from "./Message";
 import {setUserPosts} from "../../../store/chatRoomSlice";
+import Skeleton from "../../../Skeleton";
 
 const MainPanel = () => {
 
@@ -22,7 +23,13 @@ const MainPanel = () => {
 
     const {currentUser} = useSelector(state => state.user);
     const {currentChatRoom} = useSelector(state => state.chatRoom);
+
+    const messageEndRef = useRef(null);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        messageEndRef.current.scrollIntoView({behavior:'smooth'});
+    })
 
     useEffect(() => {
         if (currentChatRoom.id){
@@ -82,6 +89,7 @@ const MainPanel = () => {
         setMessages([]);
         onChildAdded(child(messagesRef, chatRoomId), DataSnapshot => {
             messagesArray.push(DataSnapshot.val());
+
             const newMessageArray = [...messagesArray];
             setMessages(newMessageArray);
             setMessagesLoading(false);
@@ -122,6 +130,16 @@ const MainPanel = () => {
             </span>
         ))
 
+    const renderMessageSkeleton = (loading) =>
+        loading && (
+            <>
+                {[...Array(13)].map((_, i) => (
+                    <Skeleton key={i}/>
+                ))}
+                <Skeleton/>
+            </>
+        )
+
     return (
         <div style={{padding:'2rem 2rem 0 2rem'}}>
             <MessageHeader handleSearchChange={handleSearchChange}/>
@@ -135,9 +153,11 @@ const MainPanel = () => {
                 marginBottom:'1rem',
                 overflowY:'auto'
             }}>
+                {renderMessageSkeleton(messagesLoading)}
                 {searchLoading && <div>loading...</div>}
                 {searchTerm ? renderMessages(searchResults) : renderMessages(messages)}
                 {renderTypingUsers(typingUsers)}
+                <div ref={messageEndRef} style={{padding:'1rem'}}/>
             </div>
 
             <MessageForm/>
