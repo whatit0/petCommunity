@@ -8,17 +8,19 @@ import app,{db, storage} from '../../../firebase';
 import { ref as strRef, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import {setPhotoUrl} from "../../../store/userSlice";
 import {update, ref as dbRef} from 'firebase/database';
+import {useNavigate} from "react-router-dom";
 
 const UserPanel = () => {
     const dispatch = useDispatch();
     const {currentUser} = useSelector(state => state.user);
     const auth = getAuth(app);
     const inputOpenImageRef = useRef(null);
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         signOut(auth)
             .then(() => {
-
+                navigate('/log');
             })
             .catch((err) => {
                 console.error(err);

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth, updateProfile} from "firebase/auth";
 import app, {db} from "../../firebase";
 import {useForm} from "react-hook-form";
@@ -9,6 +9,7 @@ import {ref, set} from "firebase/database";
 const LogPage = () => {
 
     const auth = getAuth(app);
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [errorFromSubmit, setErrorFromSubmit] = useState("");
     const {register, watch, formState: { errors }, handleSubmit} = useForm();
@@ -16,8 +17,8 @@ const LogPage = () => {
     const onSubmit = async (data) => {
         try{
             setLoading(true);
-
             await signInWithEmailAndPassword(auth, data.email, data.password);
+            navigate('/chat');
 
         }catch (error){
             console.error(error);

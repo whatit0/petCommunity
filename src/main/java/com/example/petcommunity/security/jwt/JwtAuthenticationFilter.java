@@ -30,6 +30,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
+        String requestURI = request.getRequestURI();
+
+        // /calorie 경로에 대한 요청을 별도로 처리
+        if ("/api/calorie".equals(requestURI)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        // /calorie 경로에 대한 요청을 별도로 처리
+        if ("/api/age".equals(requestURI)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         try {
             String token = parseBearerToken(request);
             log.debug("Token: {}", token);

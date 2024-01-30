@@ -1,6 +1,6 @@
 // App.js
-import React, {useEffect} from 'react';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Routes, Route, useNavigate, useLocation} from 'react-router-dom';
 import { AuthProvider, useAuth } from './AuthContext';
 import Header from './components/header/Header';
 import MyPageHeader from './components/header/MyPageHeader';
@@ -15,6 +15,10 @@ import app from './components/chat/firebase';
 import ChatPage from "./components/chat/pages/ChatPage/ChatPage";
 import {useDispatch} from "react-redux";
 import {clearUser, setUser} from "./components/chat/store/userSlice";
+import HealthMain from "./components/health/HealthMain";
+import PetCalorie from "./components/health/PetCalorie";
+import PetBmi from "./components/health/PetBmi";
+import PetAge from "./components/health/PetAge";
 
 function App() {
 
@@ -25,8 +29,7 @@ function App() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if(user){
-                navigate('/chat');
-
+                // navigate('/chat');
                 dispatch(setUser({
                     uid: user.uid,
                     displayName: user.displayName,
@@ -34,7 +37,7 @@ function App() {
                 }))
 
             }else{
-                navigate('/log');
+                // navigate('/log');
                 dispatch(clearUser());
             }
         })
@@ -52,6 +55,10 @@ function App() {
                         <Route path="/log" element={<LogPage/>} />
                         <Route path="/register" element={<RegisterPage/>} />
                         <Route path="/chat" element={<ChatPage/>} />
+                        <Route path="/health" element={<HealthMain/>} />
+                        <Route path="/calorie" element={<PetCalorie/>} />
+                        <Route path="/bmi" element={<PetBmi/>} />
+                        <Route path="/age" element={<PetAge/>} />
 
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/signup" element={<SignUpPage />} />
