@@ -1,0 +1,187 @@
+.write-board {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+.write-board .div {
+    background-color: #ffffff;
+    height: 1038px;
+    position: relative;
+    width: 1706px;
+}
+.write-board .quill-editor-container {
+    position: absolute;
+    top: 380px;
+    left: 448px;
+    width: 100%;
+    max-width: 830px;
+}
+.write-board .text-wrapper {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    height: 19px;
+    left: 448px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 41px;
+    width: 74px;
+}
+.write-board .text-wrapper-2 {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    height: 19px;
+    left: 448px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 149px;
+    width: 74px;
+}
+.write-board .text-wrapper-3 {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    height: 19px;
+    left: 448px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 257px;
+    width: 74px;
+}
+.write-board .search {
+    background-color: #f7f7f7;
+    border: 1px solid;
+    border-color: #afafaf;
+    border-radius: 14px;
+    height: 52px;
+    left: 448px;
+    position: absolute;
+    top: 291px;
+    width: 729px;
+}
+.write-board .text-wrapper-4 {
+    color: #797878;
+    font-family: "Poppins-Regular", Helvetica;
+    font-size: 15px;
+    font-weight: 400;
+    left: 13px;
+    letter-spacing: 0.45px;
+    line-height: normal;
+    position: absolute;
+    top: 13px;
+    width: 645px;
+}
+.write-board .overlap-group-wrapper {
+    height: 52px;
+    left: 448px;
+    position: absolute;
+    top: 183px;
+    width: 211px;
+}
+.write-board .overlap-group {
+    background-color: #f7f7f7;
+    border: 1px solid;
+    border-color: #afafaf;
+    height: 52px;
+    position: relative;
+    width: 228px;
+}
+.write-board .text-wrapper-5 {
+    color: #797878;
+    font-family: var(--font-inter);
+    font-size: 15px;
+    font-weight: 400;
+    left: 7px;
+    letter-spacing: 0.45px;
+    line-height: normal;
+    position: absolute;
+    top: 13px;
+    width: 187px;
+}
+.write-board .arrow-down {
+    height: 24px;
+    left: 188px;
+    position: absolute;
+    top: 14px;
+    width: 26px;
+}
+.write-board .overlap-wrapper {
+    background-color: #f7f7f7;
+    border: 1px solid;
+    border-color: #afafaf;
+    height: 52px;
+    left: 448px;
+    position: absolute;
+    top: 75px;
+    width: 228px;
+}
+.write-board .overlap {
+    height: 24px;
+    left: 9px;
+    position: relative;
+    top: 14px;
+    width: 209px;
+}
+.write-board .text-wrapper-6 {
+    color: #797878;
+    font-family: var(--font-inter);
+    font-size: 15px;
+    font-weight: 400;
+    left: 0;
+    letter-spacing: 0.45px;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    width: 202px;
+}
+.write-board .img {
+    height: 24px;
+    left: 183px;
+    position: absolute;
+    top: 0;
+    width: 26px;
+}
+.write-board .group {
+    height: 36px;
+    left: 1207px;
+    position: absolute;
+    top: 299px;
+    width: 80px;
+}
+.write-board .overlap-2 {
+    background-image: url(inputBox.png);
+    background-size: 100% 100%;
+    height: 36px;
+    position: relative;
+    width: 78px;
+}
+.write-board .text-wrapper-7 {
+    color: #000000;
+    font-family: var(--font-inter);
+    font-size: 12px;
+    font-weight: 400;
+    height: 15px;
+    left: 28px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    width: 46px;
+}
+.write-board .edit {
+    height: 24px;
+    left: 5px;
+    position: absolute;
+    top: 8px;
+    width: 22px;
+}

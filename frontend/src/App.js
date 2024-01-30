@@ -9,6 +9,7 @@ import SignUpPage from './components/member/SignUpPage';
 import MyUpdatePage from './components/member/MyUpdatePage';
 import MyDeletePage from './components/member/MyDeletePage';
 import TotalBoard from './components/board/page/total/TotalBoard';
+import WriteBoard from "./components/board/page/write/WriteBoard";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/profile/update" element={<MyUpdatePage />} />
                         <Route path="/profile/delete" element={<MyDeletePage />} />
                         <Route path="/community" element={<TotalBoard />} />
+                        <Route path="/write" element={<WriteBoard />} />
                     </Routes>
             </div>
         </AuthProvider>

@@ -131,8 +131,13 @@
     justify-content: flex-start;
 }
 .checkboxPair {
+    width: 100%;
+    display: flex;
     flex-direction: row;
-    padding: 0 var(--padding-xl);
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 100%;
 }
 .frameSearch {
     width: 648px;
@@ -148,6 +153,34 @@
     display: inline-block;
     max-width: 100%;
     z-index: 1;
+}
+.divWrite,
+.editIcon {
+    position: relative;
+    z-index: 1;
+}
+.editIcon {
+    height: 20.2px;
+    width: 20.2px;
+}
+.divWrtie {
+    font-size: 12px;
+    font-family: var(--font-inter);
+    text-align: center;
+}
+.vectorParent {
+    cursor: pointer;
+    border: 0;
+    padding: 7px 11px 5px var(--padding-7xs);
+    background-color: var(--color-gainsboro);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--color-black);
+    gap: 6px;
+    text-decoration: none;
+    border-radius: 10px;
 }
 .reasonUnknown {
     align-self: stretch;
