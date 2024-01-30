@@ -42,6 +42,6 @@ public class InfoBoardEntity {
     private String infoUpload;
 
     @ManyToOne
-    @Column(name = "user_no")
+    @JoinColumn(name = "user_no")
     private MemberEntity userNo;
 }

@@ -15,6 +15,7 @@ public class MemberDeleteService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+
     public void deleteUser(String userId, String userPwd) {
         // 데이터베이스에서 사용자 찾기
         MemberEntity member = memberRepository.findByUserId(userId)
@@ -24,7 +25,6 @@ public class MemberDeleteService {
         if (!passwordEncoder.matches(userPwd, member.getUserPwd())) {
             throw new CustomException("비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED);
         }
-
         // 사용자 삭제
         memberRepository.delete(member);
     }

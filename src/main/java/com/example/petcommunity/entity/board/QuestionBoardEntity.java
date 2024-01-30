@@ -42,6 +42,6 @@ public class QuestionBoardEntity {
     private String questionUpload;
 
     @ManyToOne
-    @Column(name = "user_no")
+    @JoinColumn(name = "user_no")
     private MemberEntity userNo;
 }
