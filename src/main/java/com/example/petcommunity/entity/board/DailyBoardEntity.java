@@ -44,6 +44,6 @@ public class DailyBoardEntity {
     private String dailyUpload;
 
     @ManyToOne
-    @Column(name = "user_no")
+    @JoinColumn(name = "user_no")
     private MemberEntity userNo;
 }

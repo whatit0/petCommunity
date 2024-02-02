@@ -1,0 +1,60 @@
+.div2 {
+    width: 74px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.div3 {
+    width: 201.6px;
+    position: relative;
+    letter-spacing: 0.03em;
+    display: inline-block;
+    z-index: 1;
+}
+.main-frame {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+}
+.arrow-down-2-icon {
+    height: 24px;
+    width: 25.9px;
+    position: relative;
+    min-height: 24px;
+    z-index: 1;
+}
+.search1 {
+    align-self: stretch;
+    background-color: var(--color-whitesmoke);
+    border: 1px solid var(--color-darkgray-100);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 14px var(--padding-2xs) 14px var(--padding-5xs);
+    font-size: 15px;
+    color: #797979;
+    font-family: var(--font-poppins);
+}
+.category-frame,
+.frame-board1 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.category-frame {
+    width: 245px;
+    flex-direction: column;
+    gap: var(--gap-sm);
+}
+.frame-board1 {
+    width: 837px;
+    flex-direction: row;
+    text-align: left;
+    font-size: var(--font-size-base);
+    color: var(--color-black);
+    font-family: var(--font-inter);
+}
