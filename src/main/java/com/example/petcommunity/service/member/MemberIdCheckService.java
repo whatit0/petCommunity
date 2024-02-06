@@ -3,8 +3,6 @@ package com.example.petcommunity.service.member;
 import org.springframework.stereotype.Service;
 
 @Service
-
-public interface MemberDeleteService {
-    void deleteUser(String userId, String userPwd);
+public interface MemberIdCheckService {
+    boolean userIdCheck(String userId);
 }
-

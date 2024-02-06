@@ -1,4 +1,4 @@
-package com.example.petcommunity.security.jwt;
+package com.example.petcommunity.security.jwt.user;
 
 
 import io.jsonwebtoken.*;
@@ -23,43 +23,46 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class JwtProvider {
+public class JwtUserTokenProvider {
     private final Key key;
 
-    public JwtProvider(@Value("${jwt.secret}") String secretKey) {
+    public JwtUserTokenProvider(@Value("${jwt.secret}") String secretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public JwtToken generateToken(String userId) {
+    public JwtUserToken createToken(String username, Collection<? extends GrantedAuthority> authorities) {
         long now = (new Date()).getTime();
+        // 사용자의 권한 정보 설정 ("ROLE_USER")
+        String authoritiesString = authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
 
-        String authorities = "USER";
-
-        Date accessTokenExpiresIn = new Date(now + 3600000); // 1 hour
+        Date accessTokenExpiresIn = new Date(now + 3600000);
         String accessToken = Jwts.builder()
-                .setSubject(userId)
-                .claim("auth", authorities)
+                .setHeaderParam("typ", "JWT")
+                .setSubject(username)
+                .claim("auth", authoritiesString)
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
-        Date refreshTokenExpiresIn = new Date(now + 604800000); // 7 days
+        Date refreshTokenExpiresIn = new Date(now + 604800000);
         String refreshToken = Jwts.builder()
                 .setExpiration(refreshTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
-        return JwtToken.builder()
+        return JwtUserToken.builder()
                 .grantType("Bearer")
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
     }
 
+    // 토큰에서 사용자 정보를 추출하여 Authentication 객체를 생성
     public Authentication getAuthentication(String accessToken) {
         Claims claims = parseClaims(accessToken);
-
         if (claims.get("auth") == null) {
             throw new RuntimeException("권한 정보가 없는 토큰입니다.");
         }
@@ -72,7 +75,7 @@ public class JwtProvider {
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);
     }
 
-    public boolean validateToken(String token) {
+    public boolean validateToken(String token) { // JWT 토큰이 유효한지 검증
         try {
             Jwts.parserBuilder()
                     .setSigningKey(key)

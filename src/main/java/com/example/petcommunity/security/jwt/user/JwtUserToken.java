@@ -1,4 +1,4 @@
-package com.example.petcommunity.security.jwt;
+package com.example.petcommunity.security.jwt.user;
 
 
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 @Data
 @AllArgsConstructor
-public class JwtToken {
+public class JwtUserToken {
     private String grantType; // JWT에 대한 인증 타입 Bearer 인증 방식을 사용
     private String accessToken;
     private String refreshToken;

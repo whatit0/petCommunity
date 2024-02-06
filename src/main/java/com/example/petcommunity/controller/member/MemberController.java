@@ -3,7 +3,7 @@ package com.example.petcommunity.controller.member;
 
 import com.example.petcommunity.dto.member.MemberDTO;
 import com.example.petcommunity.security.exception.CustomException;
-import com.example.petcommunity.security.jwt.JwtToken;
+import com.example.petcommunity.security.jwt.user.JwtUserToken;
 import com.example.petcommunity.service.member.MemberService;
 import com.example.petcommunity.service.member.MemberUpdateService;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +31,8 @@ public class MemberController {
     @PostMapping("/api/login")
     public ResponseEntity<?> memberLogin(@RequestBody MemberDTO memberDTO) {
         try {
-            JwtToken jwtToken = memberService.memberLogin(memberDTO);
-            return ResponseEntity.ok(jwtToken);
+            JwtUserToken jwtUserToken = memberService.memberLogin(memberDTO);
+            return ResponseEntity.ok(jwtUserToken);
         } catch (UsernameNotFoundException | CustomException e) {
             return ResponseEntity
                     .status(HttpStatus.FORBIDDEN)
@@ -42,7 +42,7 @@ public class MemberController {
 
     @PostMapping("/api/token/refresh")
     public ResponseEntity<?> refreshAccessToken(@RequestBody String refreshToken) {
-        JwtToken jwtToken = memberUpdateService.refreshAccessToken(refreshToken);
-        return ResponseEntity.ok(jwtToken);
+        JwtUserToken jwtUserToken = memberUpdateService.refreshAccessToken(refreshToken);
+        return ResponseEntity.ok(jwtUserToken);
     }
 }
