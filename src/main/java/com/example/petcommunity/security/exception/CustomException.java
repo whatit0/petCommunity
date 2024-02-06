@@ -11,5 +11,4 @@ public class CustomException extends RuntimeException { // 예외 처리
         super(message);
         this.httpStatus = httpStatus;
     }
-
 }

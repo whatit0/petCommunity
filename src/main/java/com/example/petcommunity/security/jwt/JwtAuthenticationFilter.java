@@ -22,7 +22,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final JwtProvider jwtProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -34,12 +34,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = parseBearerToken(request);
             log.debug("Token: {}", token);
 
-            if (token != null && jwtProvider.validateToken(token)) {
+            if (token != null && jwtTokenProvider.validateToken(token)) {
                 // 토큰에서 userId 추출(아니면 userId가 null 값으로 발생한다!)
-                String userId = jwtProvider.getUserIdFromToken(token);
+                String userId = jwtTokenProvider.getUserIdFromToken(token);
                 log.debug("Authenticated userId: {}", userId);
 
-                Authentication authentication = jwtProvider.getAuthentication(token);
+                Authentication authentication = jwtTokenProvider.getAuthentication(token);
                 log.debug("Authentication: {}", authentication);
 
                 // Authentication 객체에 UserDetails 대신 userId를 직접 principal 로 설정
@@ -66,6 +66,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    // Request Header 에서 토큰 정보 추출
     private String parseBearerToken(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
         log.debug("Authorization Header: {}", authorization);

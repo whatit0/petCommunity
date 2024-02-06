@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @ToString
 @Table(name = "user")
 /*
-    1. Entity는 일종의 테이블 역할(DB의 테이블을 일종의 자바 객체처럼 사용할 수 있다.)
+    1. Entity는 일종의 테이블 역할(DB의 테이블을 일종의 자바 객체처럼 사용할 수 있다.
 */
 public class MemberEntity {
     @Id
