@@ -1,7 +1,7 @@
 package com.example.petcommunity.config;
 
 
-import com.example.petcommunity.security.jwt.user.JwtUserAuthenticationFilter;
+import com.example.petcommunity.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +30,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtUserAuthenticationFilter jwtUserAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsService userDetailsService;
 
     @Bean
@@ -58,13 +58,13 @@ public class SecurityConfig {
                 // 경로별 인가 작업
                 .authorizeHttpRequests(auth -> auth
                         // 모든 권한 허용 (permitAll)
-                        .requestMatchers("/", "/api/register", "/api/login", "/api/check-userId",
-                                "/api/admin/login").permitAll()
+                        .requestMatchers("/", "/api/register", "/api/login", "/api/check-userId").permitAll()
                         // USER 권한이 있어야 접근 가능
                         .requestMatchers("/api/userInfo", "/api/userUpdate", "/api/userDelete").hasRole("USER")
+                        .requestMatchers("/api/admin/login").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtUserAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }

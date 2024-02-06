@@ -1,8 +1,10 @@
-package com.example.petcommunity.security.jwt.admin;
+package com.example.petcommunity.security.jwt;
+
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,18 +23,17 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class JwtAdminTokenProvider {
+public class JwtTokenProvider {
+    private final Key key;
 
-    private final Key adminKey;
-
-    public JwtAdminTokenProvider(@Value("${jwt.adminSecret}") String secretKey) {
+    public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        this.adminKey = Keys.hmacShaKeyFor(keyBytes);
+        this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public JwtAdminToken createAdminToken(String username, Collection<? extends GrantedAuthority> authorities) {
+    public JwtToken createToken(String username, Collection<? extends GrantedAuthority> authorities) {
         long now = (new Date()).getTime();
-        // 관리자의 권한 정보 설정 ("ROLE_ADMIN")
+        // 사용자의 권한 정보 설정 ("ROLE_USER")
         String authoritiesString = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
@@ -43,24 +44,25 @@ public class JwtAdminTokenProvider {
                 .setSubject(username)
                 .claim("auth", authoritiesString)
                 .setExpiration(accessTokenExpiresIn)
-                .signWith(adminKey, SignatureAlgorithm.HS256)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
         Date refreshTokenExpiresIn = new Date(now + 604800000);
         String refreshToken = Jwts.builder()
                 .setExpiration(refreshTokenExpiresIn)
-                .signWith(adminKey, SignatureAlgorithm.HS256)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
-        return JwtAdminToken.builder()
+        return JwtToken.builder()
                 .grantType("Bearer")
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
     }
 
+    // 토큰에서 사용자 정보를 추출하여 Authentication 객체를 생성
     public Authentication getAuthentication(String accessToken) {
-        Claims claims = parseAdminClaims(accessToken);
+        Claims claims = parseClaims(accessToken);
         if (claims.get("auth") == null) {
             throw new RuntimeException("권한 정보가 없는 토큰입니다.");
         }
@@ -73,10 +75,10 @@ public class JwtAdminTokenProvider {
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);
     }
 
-    public boolean validateAdminToken(String token) { // JWT 토큰이 유효한지 검증
+    public boolean validateToken(String token) { // JWT 토큰이 유효한지 검증
         try {
             Jwts.parserBuilder()
-                    .setSigningKey(adminKey)
+                    .setSigningKey(key)
                     .build()
                     .parseClaimsJws(token);
             return true;
@@ -92,15 +94,24 @@ public class JwtAdminTokenProvider {
         return false;
     }
 
-    private Claims parseAdminClaims(String accessToken) {
+    private Claims parseClaims(String accessToken) {
         try {
             return Jwts.parserBuilder()
-                    .setSigningKey(adminKey)
+                    .setSigningKey(key)
                     .build()
                     .parseClaimsJws(accessToken)
                     .getBody();
         } catch (ExpiredJwtException e) {
             return e.getClaims();
         }
+    }
+
+    public String getUserIdFromToken(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
     }
 }

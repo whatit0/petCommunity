@@ -1,4 +1,4 @@
-package com.example.petcommunity.security.jwt.user;
+package com.example.petcommunity.security.jwt;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
@@ -21,8 +21,8 @@ import java.io.IOException;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class JwtUserAuthenticationFilter extends OncePerRequestFilter {
-    private final JwtUserTokenProvider jwtUserTokenProvider;
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -34,12 +34,12 @@ public class JwtUserAuthenticationFilter extends OncePerRequestFilter {
             String token = parseBearerToken(request);
             log.debug("Token: {}", token);
 
-            if (token != null && jwtUserTokenProvider.validateToken(token)) {
+            if (token != null && jwtTokenProvider.validateToken(token)) {
                 // 토큰에서 userId 추출(아니면 userId가 null 값으로 발생한다!)
-                String userId = jwtUserTokenProvider.getUserIdFromToken(token);
+                String userId = jwtTokenProvider.getUserIdFromToken(token);
                 log.debug("Authenticated userId: {}", userId);
 
-                Authentication authentication = jwtUserTokenProvider.getAuthentication(token);
+                Authentication authentication = jwtTokenProvider.getAuthentication(token);
                 log.debug("Authentication: {}", authentication);
 
                 // Authentication 객체에 UserDetails 대신 userId를 직접 principal 로 설정
