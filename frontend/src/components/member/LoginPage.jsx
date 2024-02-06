@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import '../style/MemberPage.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../AuthContext';
+import {useNavigate} from 'react-router-dom';
+import {useAuth} from '../../AuthContext';
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
-    const [userPwd, setUserPwd] =  useState('');
+    const [userPwd, setUserPwd] = useState('');
     const [userIdValid, setUserIdValid] = useState(false);
     const [userPwdValid, setUserPwdValid] = useState(false);
     const [notAllow, setNotAllow] = useState(true);
@@ -14,7 +14,7 @@ export default function LoginPage() {
     const [userPwdError, setUserPwdError] = useState('');
 
     const navigate = useNavigate();
-    const { setIsLoggedIn } = useAuth();
+    const {setIsLoggedIn} = useAuth();
 
     const handleUserId = (e) => {
         const newId = e.target.value;
@@ -61,7 +61,6 @@ export default function LoginPage() {
             }
         }
     };
-
 
 
     return (
