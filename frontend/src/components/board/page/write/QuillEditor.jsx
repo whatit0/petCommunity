@@ -21,7 +21,7 @@ const formats = [
     'h1',
 ];
 
-const QuillEditor = () => { // 'export default function' 제거 및 정의 방식 변경
+const QuillEditor = ({ onChange }) => { // 'export default function' 제거 및 정의 방식 변경
     const [values, setValues] = useState(""); // 초기값 설정 (예: 빈 문자열)
 
     const modules = useMemo(() => {
@@ -32,13 +32,18 @@ const QuillEditor = () => { // 'export default function' 제거 및 정의 방�
         };
     }, []);
 
+    const handleChange = (content, delta, source, editor) => {
+        setValues(editor.getContents());
+        onChange(editor.getContents());
+    };
+
     return (
         <ReactQuill
             theme="snow"
             modules={modules}
             formats={formats}
             value={values} // value 속성 추가
-            onChange={setValues}
+            onChange={handleChange} // setValues
         />
     );
 };

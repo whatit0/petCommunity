@@ -13,7 +13,6 @@ const TotalBoard = () => {
         return selectedTap === tabName ? `${styles.div} ${styles.selectedTab}` : styles.div;
     };
 
-
     return (
         <div className={styles.desktop2}>
             <nav className={styles.parent}>

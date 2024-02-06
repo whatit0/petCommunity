@@ -29,6 +29,12 @@ public class DailyBoardEntity {
     @Column(name = "daily_content")
     private String dailyContent;
 
+    @Column(name = "daily_category")
+    private String dailyCategory;
+
+    @Column(name = "daily_dogbreed")
+    private String dailyDogBreed;
+
     @Column(name = "daily_cnt")
     private int dailyCnt;
 

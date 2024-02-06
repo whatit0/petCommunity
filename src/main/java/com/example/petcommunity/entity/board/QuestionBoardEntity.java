@@ -28,6 +28,12 @@ public class QuestionBoardEntity {
     @Column(name = "question_content")
     private String questionContent;
 
+    @Column(name = "question_category")
+    private String questionCategory;
+
+    @Column(name = "question_dogbreed")
+    private String questionDogBreed;
+
     @Column(name = "question_cnt")
     private int questionCnt;
 

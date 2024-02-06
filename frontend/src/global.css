@@ -18,10 +18,12 @@ body {
     --font-size-mid-8: 17.8px;
     --font-size-smi: 13px;
     --font-size-base: 16px;
+    --font-size-mini: 15px;
     --font-size-selected: 17px;
 
     /* Colors */
     --color-white: #fff;
+    --color-gray-100: #797979;
     --color-dimgray-100: #5e5e5e;
     --color-lightgray: #cecece;
     --color-black: #000;
@@ -49,6 +51,8 @@ body {
     --padding-5xs: 8px;
     --padding-xs: 12px;
     --padding-mid: 17px;
+    --padding-mini: 15px;
+    --padding-sm: 14px;
     --padding-7xs: 6px;
     --padding-10xs: 3px;
     --padding-2xs: 11px;
