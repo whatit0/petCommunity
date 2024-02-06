@@ -14,6 +14,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
@@ -28,14 +30,20 @@ public class BoardServiceImpl implements BoardService {
             throw new IllegalArgumentException("게시글 제목은 필수입니다.");
         }
 
-        // MemberEntity memberEntity = memberRepository.findByUserId(dai)
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByUserId(authentication.getName());
+
+        if (!optionalMemberEntity.isPresent()) {
+            throw new IllegalArgumentException("사용자를 찾을 수 없습니다.");
+        }
+        MemberEntity memberEntity = optionalMemberEntity.get();
 
         DailyBoardEntity dailyBoardEntity = DailyBoardEntity.builder()
                 .dailyTitle(dailyBoardDTO.getDailyTitle())
                 .dailyContent(dailyBoardDTO.getDailyContent())
                 .dailyCategory(dailyBoardDTO.getDailyCategory())
                 .dailyDogBreed(dailyBoardDTO.getDailyDogBreed())
-                //.userNo(memberEntity)
+                .userNo(memberEntity)
                 .build();
 
         dailyBoardRepository.save(dailyBoardEntity);

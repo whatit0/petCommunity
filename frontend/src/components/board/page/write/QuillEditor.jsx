@@ -32,13 +32,18 @@ const QuillEditor = ({ onChange }) => { // 'export default function' 제거 및 
         };
     }, []);
 
+    const handleChange = (content, delta, source, editor) => {
+        setValues(editor.getContents());
+        onChange(editor.getContents());
+    };
+
     return (
         <ReactQuill
             theme="snow"
             modules={modules}
             formats={formats}
             value={values} // value 속성 추가
-            onChange={onChange} // setValues
+            onChange={handleChange} // setValues
         />
     );
 };

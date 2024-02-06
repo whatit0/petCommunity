@@ -35,10 +35,10 @@ const WriteBoard = () => {
         event.preventDefault();
 
         const postData = {
-            category: selectedCategory,
-            dogBreeds: selectedDogBreed,
-            title: title,
-            content: content,
+            dailyCategory: selectedCategory,
+            dailyDogBreeds: selectedDogBreed,
+            dailyTitle: title,
+            dailyContent: content,
         };
 
         try {
