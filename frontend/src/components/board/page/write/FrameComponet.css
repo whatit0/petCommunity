@@ -45,6 +45,27 @@
     align-items: flex-start;
     justify-content: flex-start;
 }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    margin-left: 240px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content .dropdown-item {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.category-frame:hover .dropdown-content {
+    display: block;
+}
+
 .category-frame {
     width: 245px;
     flex-direction: column;

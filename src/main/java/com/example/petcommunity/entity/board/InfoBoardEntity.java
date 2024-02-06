@@ -28,6 +28,12 @@ public class InfoBoardEntity {
     @Column(name = "info_content")
     private String infoContent;
 
+    @Column(name = "info_category")
+    private String infoCategory;
+
+    @Column(name = "info_dogbreed")
+    private String infoDogBreed;
+
     @Column(name = "info_cnt")
     private int infoCnt;
 
