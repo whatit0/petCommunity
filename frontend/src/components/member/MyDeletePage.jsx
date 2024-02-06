@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
-import '../style/MemberPage.css';
+import '../../style/MemberPage.css';
 import {useAuth} from '../../AuthContext';
 
 export default function MyUpdatePage() {
@@ -74,18 +74,15 @@ export default function MyUpdatePage() {
         setNotAllow(!(userIdValid !== false && userPwdValid !== false && userNameValid !== false && userTelValid !== false));
     }, [userIdValid, userPwdValid, userNameValid, userTelValid]);
 
-// MyUpdatePage.jsx
-
     useEffect(() => {
+        // 사용자 정보를 가져오는 함수
         const fetchUserData = async () => {
             try {
-                const token = localStorage.getItem('userToken');
-                const config = {
+                const response = await axios.get('http://localhost:8080/api/userInfo', {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        Authorization: `Bearer ${localStorage.getItem('userToken')}`
                     }
-                };
-                const response = await axios.get('http://localhost:8080/api/userInfo', config);
+                });
                 const userData = response.data;
                 setUserId(userData.userId);
                 setUserName(userData.userName)
@@ -98,11 +95,13 @@ export default function MyUpdatePage() {
                 console.error("사용자 정보 불러오기 오류", error);
             }
         };
-        fetchUserData();
+        fetchUserData().catch(error => {
+            console.error("사용자 정보 불러오기 중 오류 발생", error);
+        });
     }, []);
 
 
-    const updateSubmit = async (event) => {
+    const deleteSubmit = async (event) => {
         event.preventDefault();
         if (!notAllow) {
             try {
@@ -112,7 +111,7 @@ export default function MyUpdatePage() {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                await axios.post('http://localhost:8080/api/userUpdate', {
+                await axios.post('http://localhost:8080/api/userDelete', {
                     userId,
                     userPwd,
                     userName,
@@ -127,19 +126,18 @@ export default function MyUpdatePage() {
                 if (setIsLoggedIn) {
                     setIsLoggedIn(false);
                 }
-                alert('회원 정보가 수정되었습니다. 다시 로그인해 주세요.');
+                alert('그 동안 이용해 주셔서 감사합니다.');
                 window.location.href = '/login';
             } catch (error) {
-                alert('회원 정보 수정에 실패했습니다.');
+                alert('비밀번호를 올바르게 입력해주세요.');
             }
         }
     };
 
-
     return (
         <div className="page">
-            <form onSubmit={updateSubmit}>
-                <div className="titleWrap">회원수정</div>
+            <form onSubmit={deleteSubmit}>
+                <div className="titleWrap">회원탈퇴</div>
                 <div className="contentWrap">
                     <div className="inputTitle">아이디</div>
                     <div className="inputWrap">
@@ -178,7 +176,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userName"
                             value={userName}
-                            placeholder="이름을 입력해주세요."
+                            readOnly
                             onChange={handleUserName}/>
                     </div>
                     <div className="errorMessageWrap">
@@ -194,7 +192,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userNickname"
                             value={userNickname}
-                            placeholder="닉네임을 입력해주세요."
+                            readOnly
                             onChange={handleUserNickname}/>
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">나이</div>
@@ -203,7 +201,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userAge"
                             value={userAge}
-                            placeholder="나이를 입력해주세요."
+                            readOnly
                             onChange={handleUserAge}/>
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">성별</div>
@@ -212,7 +210,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userGender"
                             value={userGender}
-                            placeholder="성별을 입력해주세요."
+                            readOnly
                             onChange={handleUserGender}/>
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">전화번호</div>
@@ -221,7 +219,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userTel"
                             value={userTel}
-                            placeholder="전화번호를 입력해주세요."
+                            readOnly
                             onChange={handleUserTel}/>
                     </div>
                     <div className="errorMessageWrap">
@@ -237,11 +235,11 @@ export default function MyUpdatePage() {
                             className="input"
                             name="user_address"
                             value={userAddress}
-                            placeholder="주소를 입력해주세요."
+                            readOnly
                             onChange={handleUserAddress}/>
                     </div>
                     <div>
-                        <button type="submit" disabled={notAllow} className="bottomButton">회원 수정
+                        <button type="submit" disabled={notAllow} className="bottomButton">회원 탈퇴
                         </button>
                     </div>
                 </div>
