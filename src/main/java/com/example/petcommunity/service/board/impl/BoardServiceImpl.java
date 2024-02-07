@@ -26,14 +26,14 @@ public class BoardServiceImpl implements BoardService {
     @Override
     @Transactional
     public void saveBoard(DailyBoardDTO dailyBoardDTO) throws IllegalArgumentException{
-        if (StringUtils.isEmpty(dailyBoardDTO.getDailyTitle())) {
+        if (!StringUtils.hasText(dailyBoardDTO.getDailyTitle())) {
             throw new IllegalArgumentException("게시글 제목은 필수입니다.");
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByUserId(authentication.getName());
 
-        if (!optionalMemberEntity.isPresent()) {
+        if (optionalMemberEntity.isEmpty()) {
             throw new IllegalArgumentException("사용자를 찾을 수 없습니다.");
         }
         MemberEntity memberEntity = optionalMemberEntity.get();
