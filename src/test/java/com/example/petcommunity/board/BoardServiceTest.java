@@ -1,9 +1,9 @@
 package com.example.petcommunity.board;
 
-import com.example.petcommunity.dto.board.DailyBoardDTO;
-import com.example.petcommunity.entity.board.DailyBoardEntity;
+import com.example.petcommunity.dto.board.BoardDTO;
+import com.example.petcommunity.entity.board.BoardEntity;
 import com.example.petcommunity.entity.member.MemberEntity;
-import com.example.petcommunity.repository.board.DailyBoardRepository;
+import com.example.petcommunity.repository.board.BoardRepository;
 import com.example.petcommunity.repository.member.MemberRepository;
 import com.example.petcommunity.service.board.impl.BoardServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
 public class BoardServiceTest {
 
     @Mock
-    private DailyBoardRepository dailyBoardRepository;
+    private BoardRepository BoardRepository;
 
     @Mock
     private MemberRepository memberRepository;
@@ -46,14 +46,14 @@ public class BoardServiceTest {
         when(memberRepository.findByUserId(anyString())).thenReturn(Optional.of(fakeMemberEntity));
 
         // DailyBoardDTO 객체 생성
-        DailyBoardDTO dailyBoardDTO = new DailyBoardDTO();
-        dailyBoardDTO.setDailyTitle("제목");
-        dailyBoardDTO.setDailyContent("내용");
-        dailyBoardDTO.setDailyCategory("카테고리");
-        dailyBoardDTO.setDailyDogBreed("견종");
+        BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setBoardTitle("제목");
+        boardDTO.setBoardContent("내용");
+        boardDTO.setBoardCategory("카테고리");
+        boardDTO.setBoardDogBreed("견종");
 
-        boardService.saveBoard(dailyBoardDTO);
+        boardService.saveBoard(boardDTO);
 
-        verify(dailyBoardRepository).save(any(DailyBoardEntity.class));
+        verify(BoardRepository).save(any(BoardEntity.class));
     }
 }

@@ -7,6 +7,9 @@ import FrameComponent from "./FrameComponet";
 const WriteBoard = () => {
     const [title, setTitle] = useState("");
     const [selectedDogBreed, setSelectedDogBreed] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const [content, setContent] = useState("");
+    const [boardType, setBoardType] = useState("");
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -15,9 +18,16 @@ const WriteBoard = () => {
     const handleDogBreedSelected = (bread) => {
         setSelectedDogBreed(bread)
     }
-    // -------------------------- FrameComponent --------------------------
-    const [selectedCategory, setSelectedCategory] = useState("");
 
+    const handleBoardTypeSelected = (board) => {
+        const boardTypeMap = {
+            "일상": "DAILY",
+            "정보": "INFO",
+            "질문": "QUESTION"
+        };
+        setBoardType(boardTypeMap[board] || "");
+    };
+    // -------------------------- FrameComponent --------------------------
     const handleCategorySelected = (category) => {
         setSelectedCategory(category);
     };
@@ -25,8 +35,6 @@ const WriteBoard = () => {
     const dogBreeds = ["리트리버", "시베리안 허스키", "푸들", "불독"];
 
     // -------------------------- QuillEditor --------------------------
-    const [content, setContent] = useState("");
-
     const handleContentChange = (value) => {
         setContent(value);
     };
@@ -35,14 +43,15 @@ const WriteBoard = () => {
         event.preventDefault();
 
         const postData = {
-            dailyCategory: selectedCategory,
-            dailyDogBreeds: selectedDogBreed,
-            dailyTitle: title,
-            dailyContent: content,
+            boardCategory: selectedCategory,
+            boardDogBreeds: selectedDogBreed,
+            boardTitle: title,
+            boardContent: content,
+            boardType: boardType
         };
 
         try {
-            const response = await fetch('http://localhost:8080/api/writeBoard', {
+            const response = await fetch('http://localhost:8080/api/boardWrite', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -62,6 +71,12 @@ const WriteBoard = () => {
 
     return (
         <form className="writeboard" onSubmit={handleSubmit}>
+            <FrameComponent
+                prop="게시판"
+                onSelect={handleBoardTypeSelected}
+                arrowDown2="/arrow-down.svg"
+                options={["일상","질문", "정보"]}
+            />
             <FrameComponent
                 prop="카테고리"
                 onSelect={handleCategorySelected}

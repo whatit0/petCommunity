@@ -58,7 +58,7 @@ public class SecurityConfig {
                 // 경로별 인가 작업
                 .authorizeHttpRequests(auth -> auth
                         // 모든 권한 허용 (permitAll)
-                        .requestMatchers("/", "/api/register", "/api/login", "/api/check-userId").permitAll()
+                        .requestMatchers("/", "/api/register", "/api/login", "/api/check-userId", "/api/boardWrite").permitAll()
                         // USER 권한이 있어야 접근 가능
                         .requestMatchers("/api/userInfo", "/api/userUpdate", "/api/userDelete").hasRole("USER")
                         .requestMatchers("/api/admin/login").hasRole("ADMIN")

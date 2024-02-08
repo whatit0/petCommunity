@@ -1,9 +1,9 @@
 package com.example.petcommunity.service.board.impl;
 
-import com.example.petcommunity.dto.board.DailyBoardDTO;
-import com.example.petcommunity.entity.board.DailyBoardEntity;
+import com.example.petcommunity.dto.board.BoardDTO;
+import com.example.petcommunity.entity.board.BoardEntity;
 import com.example.petcommunity.entity.member.MemberEntity;
-import com.example.petcommunity.repository.board.DailyBoardRepository;
+import com.example.petcommunity.repository.board.BoardRepository;
 import com.example.petcommunity.repository.member.MemberRepository;
 import com.example.petcommunity.service.board.BoardService;
 import jakarta.transaction.Transactional;
@@ -20,13 +20,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
 
-    private final DailyBoardRepository dailyBoardRepository;
+    private final BoardRepository BoardRepository;
     private final MemberRepository memberRepository;
 
     @Override
     @Transactional
-    public void saveBoard(DailyBoardDTO dailyBoardDTO) throws IllegalArgumentException{
-        if (!StringUtils.hasText(dailyBoardDTO.getDailyTitle())) {
+    public void saveBoard(BoardDTO dailyBoardDTO) throws IllegalArgumentException{
+        if (!StringUtils.hasText(dailyBoardDTO.getBoardTitle())) {
             throw new IllegalArgumentException("게시글 제목은 필수입니다.");
         }
 
@@ -38,14 +38,14 @@ public class BoardServiceImpl implements BoardService {
         }
         MemberEntity memberEntity = optionalMemberEntity.get();
 
-        DailyBoardEntity dailyBoardEntity = DailyBoardEntity.builder()
-                .dailyTitle(dailyBoardDTO.getDailyTitle())
-                .dailyContent(dailyBoardDTO.getDailyContent())
-                .dailyCategory(dailyBoardDTO.getDailyCategory())
-                .dailyDogBreed(dailyBoardDTO.getDailyDogBreed())
+        BoardEntity dailyBoardEntity = BoardEntity.builder()
+                .boardTitle(dailyBoardDTO.getBoardTitle())
+                .boardContent(dailyBoardDTO.getBoardContent())
+                .boardCategory(dailyBoardDTO.getBoardCategory())
+                .boardDogBreed(dailyBoardDTO.getBoardDogBreed())
                 .userNo(memberEntity)
                 .build();
 
-        dailyBoardRepository.save(dailyBoardEntity);
+        BoardRepository.save(dailyBoardEntity);
     }
 }

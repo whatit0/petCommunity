@@ -46,7 +46,6 @@
     justify-content: flex-start;
 }
 .dropdown-content {
-    display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
@@ -62,7 +61,7 @@
     display: block;
 }
 
-.category-frame:hover .dropdown-content {
+.category-frame .dropdown-content {
     display: block;
 }
 
