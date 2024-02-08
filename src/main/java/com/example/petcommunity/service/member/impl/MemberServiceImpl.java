@@ -3,6 +3,7 @@ package com.example.petcommunity.service.member.impl;
 import com.example.petcommunity.dto.member.MemberDTO;
 import com.example.petcommunity.entity.member.MemberEntity;
 import com.example.petcommunity.repository.member.MemberRepository;
+import com.example.petcommunity.role.UserRole;
 import com.example.petcommunity.security.jwt.JwtToken;
 import com.example.petcommunity.security.jwt.JwtTokenProvider;
 import com.example.petcommunity.service.member.MemberService;
@@ -22,12 +23,12 @@ public class MemberServiceImpl implements MemberService {
     private final AuthenticationManager authenticationManager;
     @Override
     public void memberSingUp(MemberDTO memberDTO) {
-        // 비밀번호 인코딩
         String encodedPassword = passwordEncoder.encode(memberDTO.getUserPwd());
         memberDTO.setUserPwd(encodedPassword);
 
-        // DTO -> Entity 변환 및 저장
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
+        memberEntity.setUserRole(UserRole.USER); // 여기에서 권한 설정
+
         memberRepository.save(memberEntity);
     }
 

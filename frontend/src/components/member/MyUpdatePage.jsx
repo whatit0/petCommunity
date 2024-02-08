@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import '../style/MemberPage.css';
-import { useAuth } from '../../AuthContext';
+import {useAuth} from '../../AuthContext';
 
 export default function MyUpdatePage() {
     const [userId, setUserId] = useState('');
@@ -19,7 +19,7 @@ export default function MyUpdatePage() {
     const [userTelValid, setUserTelValid] = useState(null);
 
     const [notAllow, setNotAllow] = useState(true);
-    const { setIsLoggedIn } = useAuth();
+    const {setIsLoggedIn} = useAuth();
 
 
     const handleUserId = (e) => {
@@ -98,9 +98,10 @@ export default function MyUpdatePage() {
                 console.error("사용자 정보 불러오기 오류", error);
             }
         };
-        fetchUserData();
+        fetchUserData().catch(error => {
+            console.error("사용자 정보 불러오기 중 오류 발생", error);
+        });
     }, []);
-
 
 
     const updateSubmit = async (event) => {

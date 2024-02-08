@@ -3,6 +3,7 @@ import '../style/MemberPage.css';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from '../../AuthContext';
+import {jwtDecode} from 'jwt-decode';
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
@@ -36,28 +37,26 @@ export default function LoginPage() {
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        setUserIdError('');
-        setUserPwdError('');
-
         if (!notAllow) {
             try {
                 const response = await axios.post('http://localhost:8080/api/login', {
                     userId,
-                    userPwd,
+                    userPwd
                 });
                 if (response.data && response.data.accessToken) {
+                    const decodedToken = jwtDecode(response.data.accessToken);
                     localStorage.setItem('userToken', response.data.accessToken);
                     setIsLoggedIn(true);
-                    navigate('/');
+                    if (decodedToken.auth.includes('ROLE_ADMIN')) {
+                        navigate('/admin/page'); // 관리자 페이지로 리다이렉션
+                    } else {
+                        navigate('/'); // 일반 사용자 페이지 혹은 홈으로 리다이렉션
+                    }
                 }
             } catch (error) {
-                if (error.response) {
-                    const errorMessage = error.response.data.message || "아이디와 비밀번호를 올바르게 입력하세요.";
-                    setUserIdError(errorMessage);
-                    setUserPwdError(errorMessage);
-                } else {
-                    console.error("서버로부터 응답을 받을 수 없습니다.", error);
-                }
+                const errorMessage = error.response?.data.message || "아이디와 비밀번호를 올바르게 입력하세요.";
+                setUserIdError(errorMessage);
+                setUserPwdError(errorMessage);
             }
         }
     };

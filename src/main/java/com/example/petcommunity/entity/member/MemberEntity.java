@@ -1,6 +1,7 @@
 package com.example.petcommunity.entity.member;
 
 import com.example.petcommunity.dto.member.MemberDTO;
+import com.example.petcommunity.role.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,7 +26,7 @@ public class MemberEntity {
     @Column(name = "user_no")
     private int userNo;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", unique = true)
     private String userId;
 
     @Column(name = "user_pwd")
@@ -48,6 +49,10 @@ public class MemberEntity {
 
     @Column(name = "user_addr")
     private String userAddress;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role")
+    private UserRole userRole;
 
     @CreationTimestamp
     @Column(name = "user_created", updatable = false)
