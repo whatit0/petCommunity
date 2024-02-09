@@ -1,21 +1,16 @@
-import React, {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
-import {useAuth} from '../../AuthContext';
-import '../style/Header.css';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../AuthContext';
+import '../style/Header.css'; // 경로가 프로젝트 구조에 맞게 수정되었는지 확인하세요.
 
 function AdminHeader() {
     const navigate = useNavigate();
-    const {setIsLoggedIn} = useAuth();
-    const [showDropdown, setShowDropdown] = useState(false);
+    const { setIsLoggedIn } = useAuth();
 
     const handleLogout = () => {
         localStorage.removeItem('userToken'); // 토큰 삭제
         setIsLoggedIn(false);
         navigate('/');
-    };
-
-    const toggleDropdown = () => {
-        setShowDropdown(!showDropdown);
     };
 
     return (
@@ -27,16 +22,13 @@ function AdminHeader() {
             </div>
             <nav className="navigation">
                 <Link to="/">Home</Link>
-                <Link to="/user/community">공지사항 관리</Link>
+                <Link to="/user/community">공지사항</Link>
                 <Link to="/user/community">커뮤니티 관리</Link>
                 <div className="dropdown">
-                    <button onClick={toggleDropdown} className="dropbtn">회원 관리</button>
-                    {showDropdown && (
-                        <div className="dropdown-content">
-                            <Link to="/profile/user/update" className="dropdown-item">회원수정</Link>
-                            <Link to="/profile/user/delete" className="dropdown-item">회원탈퇴</Link>
-                        </div>
-                    )}
+                    <button className="dropBtn">회원 관리</button>
+                    <div className="dropdown-content">
+                        <Link to="/profile/user/update" className="dropdown-item">회원목록</Link>
+                    </div>
                 </div>
             </nav>
             <div className="header-links">
