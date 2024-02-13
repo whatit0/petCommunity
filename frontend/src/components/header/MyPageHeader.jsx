@@ -7,9 +7,11 @@ function MyPageHeader() {
     const navigate = useNavigate();
     const {setIsLoggedIn} = useAuth();
     const [showDropdown, setShowDropdown] = useState(false);
+    const userNo = localStorage.getItem('userNo');
 
     const handleLogout = () => {
-        localStorage.removeItem('userToken'); // 토큰 삭제
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userNo');
         setIsLoggedIn(false);
         navigate('/');
     };
@@ -33,8 +35,8 @@ function MyPageHeader() {
                     <button onClick={toggleDropdown} className="dropbtn">마이페이지</button>
                     {showDropdown && (
                         <div className="dropdown-content">
-                            <Link to="/profile/update" className="dropdown-item">회원수정</Link>
-                            <Link to="/profile/delete" className="dropdown-item">회원탈퇴</Link>
+                            <Link to={`/profile/update/${userNo}`} className="dropdown-item">회원수정</Link>
+                            <Link to={`/profile/delete/${userNo}`} className="dropdown-item">회원탈퇴</Link>
                         </div>
                     )}
                 </div>

@@ -1,0 +1,61 @@
+/* MemberList.css 내용을 다음과 같이 수정합니다. */
+
+.board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.info-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.info-table th, .info-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.info-table th {
+    background-color: #f2f2f2;
+}
+
+.info-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.update-button {
+    background-color: skyblue;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #e65a5a;
+}
+
+.title-container {
+    display: flex;
+    align-items: baseline;
+}
+
+.member-count {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: normal;
+}
