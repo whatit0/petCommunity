@@ -6,8 +6,11 @@ import com.example.petcommunity.entity.member.MemberEntity;
 import com.example.petcommunity.repository.board.BoardRepository;
 import com.example.petcommunity.repository.member.MemberRepository;
 import com.example.petcommunity.service.board.impl.BoardServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -20,6 +23,7 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 public class BoardServiceTest {
@@ -33,13 +37,21 @@ public class BoardServiceTest {
     @InjectMocks
     private BoardServiceImpl boardService;
 
-    @Test
-    public void saveBoardTest() {
+    @Captor
+    private ArgumentCaptor<BoardEntity> boardEntityCaptor;
+
+    @BeforeEach
+    public void setUp() {
         // 가짜 Authentication 객체 설정
         Authentication authentication = new UsernamePasswordAuthenticationToken("user", null);
         SecurityContext securityContext = mock(SecurityContext.class);
         when(securityContext.getAuthentication()).thenReturn(authentication);
         SecurityContextHolder.setContext(securityContext);
+    }
+
+    @Test
+    public void saveBoardTest() {
+
 
         // MemberEntity 가짜 객체 반환 설정
         MemberEntity fakeMemberEntity = new MemberEntity();
@@ -54,6 +66,12 @@ public class BoardServiceTest {
 
         boardService.saveBoard(boardDTO);
 
-        verify(BoardRepository).save(any(BoardEntity.class));
+        verify(BoardRepository).save(boardEntityCaptor.capture());
+        BoardEntity capturedBoardEntity = boardEntityCaptor.getValue();
+
+        assertEquals(boardDTO.getBoardTitle(), capturedBoardEntity.getBoardTitle());
+        assertEquals(boardDTO.getBoardContent(), capturedBoardEntity.getBoardContent());
+        assertEquals(boardDTO.getBoardCategory(), capturedBoardEntity.getBoardCategory());
+        assertEquals(boardDTO.getBoardDogBreed(), capturedBoardEntity.getBoardDogBreed());
     }
 }
