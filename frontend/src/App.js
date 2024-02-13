@@ -6,12 +6,13 @@ import Header from './components/header/Header';
 import MyPageHeader from './components/header/MyPageHeader';
 import LoginPage from './components/member/LoginPage';
 import SignUpPage from './components/member/SignUpPage';
-import TotalBoard from './components/board/page/total/TotalBoard';
-import WriteBoard from "./components/board/page/write/WriteBoard";
 import MyUpdatePage from './components/member/MyUpdatePage';
 import MyDeletePage from './components/member/MyDeletePage';
 import AdminPage from "./components/admin/AdminPage";
 import AdminHeader from "./components/admin/AdminHeader";
+import AdminUserInfoList from "./components/admin/AdminUserInfoList";
+import TotalBoard from "./components/board/page/total/TotalBoard";
+import WriteBoard from "./components/board/page/write/WriteBoard";
 
 function App() {
     return (
@@ -24,15 +25,15 @@ function App() {
                         {/* 사용자 라우트 */}
                         <Route path="/login" element={<WithHeader><LoginPage/></WithHeader>}/>
                         <Route path="/signup" element={<WithHeader><SignUpPage/></WithHeader>}/>
-                        <Route path="/profile/update" element={<WithHeader><MyUpdatePage/></WithHeader>}/>
-                        <Route path="/profile/delete" element={<WithHeader><MyDeletePage/></WithHeader>}/>
-                        <Route path="/community" element={<WithHeader><TotalBoard/></WithHeader>} />
-                        <Route path="/write" element={<WithHeader><WriteBoard/></WithHeader>} />
+                        <Route path="/profile/update/:userNo" element={<WithHeader><MyUpdatePage/></WithHeader>} />
+                        <Route path="/profile/delete/:userNo" element={<WithHeader><MyDeletePage/></WithHeader>}/>
+                        <Route path="/community" element={<WithHeader><TotalBoard /></WithHeader>} />
+                        <Route path="/write" element={<WithHeader><WriteBoard /></WithHeader>} />
                         {/* 관리자 라우트 */}
-                        <Route path="/admin/page" element={<AdminPage />} />
+                        <Route path="/admin/page" element={<AdminPage/>}/>
+                        <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
                     </Routes>
-                </div>
-            </BrowserRouter>
+            </div>
         </AuthProvider>
     );
 }

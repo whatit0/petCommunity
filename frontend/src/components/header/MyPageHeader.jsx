@@ -1,16 +1,23 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../AuthContext';
-import '../style/Header.css'; // 경로가 프로젝트 구조에 맞게 수정되었는지 확인하세요.
+import React, {useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {useAuth} from '../../AuthContext';
+import '../style/Header.css';
 
 function MyPageHeader() {
     const navigate = useNavigate();
-    const { setIsLoggedIn } = useAuth();
+    const {setIsLoggedIn} = useAuth();
+    const [showDropdown, setShowDropdown] = useState(false);
+    const userNo = localStorage.getItem('userNo');
 
     const handleLogout = () => {
-        localStorage.removeItem('userToken'); // 토큰 삭제
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userNo');
         setIsLoggedIn(false);
         navigate('/');
+    };
+
+    const toggleDropdown = () => {
+        setShowDropdown(!showDropdown);
     };
 
     return (
@@ -25,11 +32,13 @@ function MyPageHeader() {
                 <Link to="/community">공지사항</Link>
                 <Link to="/community">커뮤니티</Link>
                 <div className="dropdown">
-                    <button className="dropBtn">마이페이지</button>
-                    <div className="dropdown-content">
-                        <Link to="/profile/update" className="dropdown-item">회원수정</Link>
-                        <Link to="/profile/delete" className="dropdown-item">회원탈퇴</Link>
-                    </div>
+                    <button onClick={toggleDropdown} className="dropbtn">마이페이지</button>
+                    {showDropdown && (
+                        <div className="dropdown-content">
+                            <Link to={`/profile/update/${userNo}`} className="dropdown-item">회원수정</Link>
+                            <Link to={`/profile/delete/${userNo}`} className="dropdown-item">회원탈퇴</Link>
+                        </div>
+                    )}
                 </div>
             </nav>
             <div className="header-links">
