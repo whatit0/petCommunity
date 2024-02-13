@@ -3,15 +3,13 @@ import {Link, useNavigate} from 'react-router-dom';
 import {useAuth} from '../../AuthContext';
 import '../style/Header.css';
 
-function MyPageHeader() {
+function AdminHeader() {
     const navigate = useNavigate();
     const {setIsLoggedIn} = useAuth();
     const [showDropdown, setShowDropdown] = useState(false);
-    const userNo = localStorage.getItem('userNo');
 
     const handleLogout = () => {
-        localStorage.removeItem('userToken');
-        localStorage.removeItem('userNo');
+        localStorage.removeItem('userToken'); // 토큰 삭제
         setIsLoggedIn(false);
         navigate('/');
     };
@@ -29,14 +27,13 @@ function MyPageHeader() {
             </div>
             <nav className="navigation">
                 <Link to="/">Home</Link>
-                <Link to="/community">공지사항</Link>
-                <Link to="/community">커뮤니티</Link>
+                <Link to="/admin/community">공지사항 관리</Link>
+                <Link to="/admin/community">커뮤니티 관리</Link>
                 <div className="dropdown">
-                    <button onClick={toggleDropdown} className="dropbtn">마이페이지</button>
+                    <button onClick={toggleDropdown} className="dropbtn">회원 관리</button>
                     {showDropdown && (
                         <div className="dropdown-content">
-                            <Link to={`/profile/update/${userNo}`} className="dropdown-item">회원수정</Link>
-                            <Link to={`/profile/delete/${userNo}`} className="dropdown-item">회원탈퇴</Link>
+                            <Link to="/admin/user/list" className="dropdown-item">회원목록</Link>
                         </div>
                     )}
                 </div>
@@ -48,4 +45,4 @@ function MyPageHeader() {
     );
 }
 
-export default MyPageHeader;
+export default AdminHeader;
