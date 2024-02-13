@@ -19,6 +19,7 @@ import HealthMain from "./components/health/HealthMain";
 import PetCalorie from "./components/health/PetCalorie";
 import PetBmi from "./components/health/PetBmi";
 import PetAge from "./components/health/PetAge";
+import PetHospital from "./components/health/PetHospital";
 
 function App() {
 
@@ -59,6 +60,8 @@ function App() {
                         <Route path="/calorie" element={<PetCalorie/>} />
                         <Route path="/bmi" element={<PetBmi/>} />
                         <Route path="/age" element={<PetAge/>} />
+                        <Route path="/hospital" element={<PetHospital/>} />
+
 
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/signup" element={<SignUpPage />} />
