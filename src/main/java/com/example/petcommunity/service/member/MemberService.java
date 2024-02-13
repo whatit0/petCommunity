@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface MemberService {
     void memberSingUp(MemberDTO memberDTO);
-
     JwtToken memberLogin(MemberDTO memberDTO);
 }
 

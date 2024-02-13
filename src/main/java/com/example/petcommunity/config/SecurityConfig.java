@@ -58,10 +58,11 @@ public class SecurityConfig {
                 // 경로별 인가 작업
                 .authorizeHttpRequests(auth -> auth
                         // 모든 권한 허용 (permitAll)
-                        .requestMatchers("/", "/api/register", "/api/login", "/api/check-userId", "/api/boardWrite").permitAll()
-                        // USER 권한이 있어야 접근 가능
-                        .requestMatchers("/api/userInfo", "/api/userUpdate", "/api/userDelete").hasRole("USER")
-                        .requestMatchers("/api/admin/login").hasRole("ADMIN")
+                        .requestMatchers("/", "/api/register", "/api/login", "/api/check-userId").permitAll()
+                        // USER, ADMIN 권한이 있어야 접근 가능
+                        .requestMatchers("/api/user/info/{userNo}", "/api/user/update", "/api/user/delete").hasAnyRole("USER", "ADMIN")
+                        // ADMIN 권한이 있어야 접근 가능
+                        .requestMatchers("/api/user/list").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -73,10 +74,9 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:3000")); // React 앱의 URL
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
