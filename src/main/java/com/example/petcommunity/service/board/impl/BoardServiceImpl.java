@@ -42,7 +42,7 @@ public class BoardServiceImpl implements BoardService {
                 .boardTitle(dailyBoardDTO.getBoardTitle())
                 .boardContent(dailyBoardDTO.getBoardContent())
                 .boardCategory(dailyBoardDTO.getBoardCategory())
-                .boardDogBreed(dailyBoardDTO.getBoardDogBreed())
+                .boardDogBreeds(dailyBoardDTO.getBoardDogBreeds())
                 .userNo(memberEntity)
                 .build();
 

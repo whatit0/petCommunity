@@ -26,6 +26,7 @@ public class BoardEntity {
     @Column(name = "board_title")
     private String boardTitle;
 
+    @Lob
     @Column(name = "board_content")
     private String boardContent;
 
@@ -36,8 +37,8 @@ public class BoardEntity {
     @Column(name = "board_category") // 개, 고양이, 기타소동물
     private String boardCategory;
 
-    @Column(name = "board_dogbreed")
-    private String boardDogBreed;
+    @Column(name = "board_dogbreeds")
+    private String boardDogBreeds;
 
     @Column(name = "board_cnt")
     private int boardCnt;

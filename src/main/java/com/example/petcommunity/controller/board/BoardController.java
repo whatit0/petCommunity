@@ -15,6 +15,7 @@ public class BoardController {
 
     @PostMapping("/api/boardWrite")
     public ResponseEntity<?> boardWrite(@RequestBody BoardDTO boardDTO) {
+        System.out.println(boardDTO.toString());
         boardService.saveBoard(boardDTO);
         return ResponseEntity.ok("Success");
     }

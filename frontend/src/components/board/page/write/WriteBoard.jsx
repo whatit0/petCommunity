@@ -35,8 +35,8 @@ const WriteBoard = () => {
     const dogBreeds = ["리트리버", "시베리안 허스키", "푸들", "불독"];
 
     // -------------------------- QuillEditor --------------------------
-    const handleContentChange = (value) => {
-        setContent(value);
+    const handleContentChange = (html) => {
+        setContent(html);
     };
 
     const handleSubmit = async (event) => {
@@ -49,8 +49,9 @@ const WriteBoard = () => {
             boardContent: content,
             boardType: boardType
         };
-
+         // 테스트
         try {
+            console.log(JSON.stringify(postData));
             const token = localStorage.getItem('userToken');
             const response = await fetch('http://localhost:8080/api/boardWrite', {
                 method: 'POST',

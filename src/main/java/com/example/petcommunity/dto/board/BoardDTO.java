@@ -13,7 +13,7 @@ public class BoardDTO {
     private String boardTitle;
     private String boardContent;
     private String boardCategory;
-    private String boardDogBreed;
+    private String boardDogBreeds;
     private BoardType boardType;
 
     public enum BoardType {
