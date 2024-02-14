@@ -30,7 +30,7 @@ public class AdminMemberListServiceImpl implements AdminMemberListService {
             MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
             memberDTOList.add(memberDTO);
         }
-        // 모든 회원 정보가 담긴 DTO 리스트를 반환합니다.
+        // 모든 회원 정보가 담긴 DTO 리스트를 반환
         return memberDTOList;
     }
 }

@@ -11,8 +11,6 @@ import MyDeletePage from './components/member/MyDeletePage';
 import AdminPage from "./components/admin/AdminPage";
 import AdminHeader from "./components/admin/AdminHeader";
 import AdminUserInfoList from "./components/admin/AdminUserInfoList";
-import WriteBoard from "./components/board/page/write/WriteBoard";
-import TotalBoard from "./components/board/page/total/TotalBoard";
 import PetHospital from "./components/health/PetHospital";
 
 function App() {
@@ -28,8 +26,6 @@ function App() {
                         <Route path="/signup" element={<WithHeader><SignUpPage/></WithHeader>}/>
                         <Route path="/profile/update/:userNo" element={<WithHeader><MyUpdatePage/></WithHeader>} />
                         <Route path="/profile/delete/:userNo" element={<WithHeader><MyDeletePage/></WithHeader>}/>
-                        <Route path="/community" element={<WithHeader><TotalBoard /></WithHeader>}/>
-                        <Route path="/write" element={<WithHeader><WriteBoard /></WithHeader>} />
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
