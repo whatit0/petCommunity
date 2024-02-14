@@ -32,7 +32,7 @@ function MyPageHeader() {
                 <Link to="/community">공지사항</Link>
                 <Link to="/community">커뮤니티</Link>
                 <div className="dropdown">
-                    <button onClick={toggleDropdown} className="dropbtn">마이페이지</button>
+                    <button onClick={toggleDropdown} className="dropBtn">마이페이지</button>
                     {showDropdown && (
                         <div className="dropdown-content">
                             <Link to={`/profile/update/${userNo}`} className="dropdown-item">회원수정</Link>
