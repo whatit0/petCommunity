@@ -13,6 +13,7 @@ import AdminHeader from "./components/admin/AdminHeader";
 import AdminUserInfoList from "./components/admin/AdminUserInfoList";
 import WriteBoard from "./components/board/page/write/WriteBoard";
 import TotalBoard from "./components/board/page/total/TotalBoard";
+import ShowBoard from "./components/board/page/comment/ShowBoard";
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                         <Route path="/profile/delete/:userNo" element={<WithHeader><MyDeletePage/></WithHeader>}/>
                         <Route path="/community" element={<WithHeader><TotalBoard /></WithHeader>}/>
                         <Route path="/write" element={<WithHeader><WriteBoard /></WithHeader>} />
+                        <Route path="/showboard" element={<WithHeader><ShowBoard /></WithHeader>} />
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>

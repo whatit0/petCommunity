@@ -26,8 +26,7 @@ public class BoardEntity {
     @Column(name = "board_title")
     private String boardTitle;
 
-    @Lob
-    @Column(name = "board_content")
+    @Column(name = "board_content", columnDefinition = "LONGTEXT")
     private String boardContent;
 
     @Enumerated(EnumType.STRING)
