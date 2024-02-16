@@ -1,12 +1,12 @@
-import FrameParent from "../components/FrameParent";
-import FrameG from "../components/FrameG";
+import FrameComponent1 from "./components/FrameComponent1";
+import FrameComponent from "./components/FrameComponent";
 import "./ShowBoard.css";
 
 const ShowBoard = () => {
     return (
         <div className="showboard">
-            <FrameParent />
-            <FrameG />
+            <FrameComponent1 />
+            <FrameComponent />
         </div>
     );
 };

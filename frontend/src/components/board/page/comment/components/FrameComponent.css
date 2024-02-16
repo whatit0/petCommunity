@@ -1,61 +1,127 @@
-.vuesaxlineardislike-icon,
-.vuesaxlinearlike-icon {
-    height: 24px;
-    width: 24px;
-    position: relative;
-    min-height: 24px;
-}
-.number-frames {
-    width: 88px;
+.div2 {
+    position: absolute;
+    top: 6px;
+    left: 23px;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--gap-xl);
+    align-items: center;
+    width: 58px;
+    height: 14px;
 }
-.div4,
-.div5 {
-    align-self: stretch;
-    width: 24px;
+.circle-user-icon {
+    width: 19px;
+    height: 18px;
     position: relative;
-    display: inline-block;
-    flex-shrink: 0;
 }
-.container-frame {
+.div3 {
+    width: 45.4px;
+    position: relative;
+    line-height: 14.79px;
+    display: inline-block;
+}
+.like-button {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 47px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-9xs);
+    font-size: var(--font-size-2xs);
+    color: var(--color-dimgray-100);
+}
+.vuesaxlinearlike-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+.div4 {
     align-self: stretch;
     flex: 1;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--gap-xl);
+    position: relative;
 }
-.vue-sax-linear-icons {
-    width: 92px;
-    height: 55px;
+.vuesaxlinearlike-parent {
+    align-self: stretch;
+    width: 24px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: var(--gap-xs);
 }
-.content-text-icon {
+.vuesaxlineardislike-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+.div5 {
+    align-self: stretch;
     flex: 1;
     position: relative;
-    max-width: 100%;
-    overflow: hidden;
-    max-height: 100%;
 }
-.text-label {
+.vuesaxlineardislike-parent,
+.wrapper {
     align-self: stretch;
-    height: 17px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.wrapper {
+    flex: 1;
+    flex-direction: row;
+    padding: 0 0 0 var(--padding-9xs);
+}
+.vuesaxlineardislike-parent {
+    width: 28px;
+    flex-direction: column;
+    gap: var(--gap-xs);
+}
+.vector-y {
+    position: absolute;
+    top: 0;
+    left: 364px;
+    width: 92px;
+    height: 55px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: flex-start;
-    padding: 0 0 var(--padding-mid);
+    justify-content: space-between;
+    gap: var(--gap-xl);
+    font-size: var(--font-size-3xs);
+}
+.user-circle {
+    height: 55px;
+    width: 456px;
+    position: relative;
+    max-width: 100%;
+}
+.user-circle-wrapper {
+    width: 626px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 var(--padding-xl);
     box-sizing: border-box;
     max-width: 100%;
+}
+.frame-container,
+.frame-inner {
+    align-self: stretch;
+    max-width: 100%;
+}
+.frame-inner {
+    position: relative;
+    overflow: hidden;
+    max-height: 100%;
+}
+.frame-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-4xl);
 }
 .div6,
 .h31 {
@@ -71,14 +137,14 @@
     align-self: stretch;
     flex: 1;
 }
-.comment-frame1,
-.comment-text,
-.number-frame {
+.comment-frame,
+.comment-frame-wrapper,
+.container {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
 }
-.comment-text {
+.container {
     align-self: stretch;
     width: 24px;
     flex-direction: column;
@@ -86,20 +152,21 @@
     box-sizing: border-box;
     font-size: var(--font-size-3xs);
 }
-.comment-frame1,
-.number-frame {
+.comment-frame,
+.comment-frame-wrapper {
     flex-direction: row;
 }
-.comment-frame1 {
+.comment-frame {
     align-self: stretch;
     gap: var(--gap-7xs);
 }
-.number-frame {
+.comment-frame-wrapper {
+    width: 806px;
     height: 22px;
-    padding: 0 var(--padding-8xs);
-    box-sizing: border-box;
+    max-width: 100%;
+    font-size: var(--font-size-base);
 }
-.frame-inner {
+.rectangle-div {
     width: 816px;
     height: 107px;
     position: relative;
@@ -161,7 +228,7 @@
     font-size: var(--font-size-2xs);
     color: var(--color-dimgray-200);
 }
-.rectangle-div,
+.frame-child1,
 .rectangle-group {
     align-self: stretch;
     background-color: var(--color-white);
@@ -178,7 +245,7 @@
     var(--padding-3xs);
     max-width: 100%;
 }
-.rectangle-div {
+.frame-child1 {
     height: 104px;
     position: relative;
     display: none;
@@ -193,7 +260,7 @@
     position: relative;
     z-index: 1;
 }
-.reply-content-frame {
+.circle-user-parent {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -224,19 +291,19 @@
     line-height: 14.79px;
     z-index: 1;
 }
-.comment-frame2,
-.comment-input {
+.frame,
+.user-profile-parent {
     display: flex;
     align-items: flex-start;
 }
-.comment-input {
+.frame {
     flex-direction: column;
     justify-content: flex-start;
     padding: var(--padding-8xs) 0 0;
     font-size: var(--font-size-2xs);
     color: var(--color-dimgray-100);
 }
-.comment-frame2 {
+.user-profile-parent {
     width: 757px;
     flex-direction: row;
     justify-content: space-between;
@@ -282,37 +349,48 @@
     position: relative;
     z-index: 2;
 }
+.like-parent,
 .like1 {
     flex: 1;
+    flex-direction: row;
+}
+.like1 {
     border-radius: var(--br-3xs);
     background-color: var(--color-silver);
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
     padding: var(--padding-8xs) var(--padding-12xs) var(--padding-7xs);
     white-space: nowrap;
     z-index: 1;
 }
-.container-likes,
-.frame-like-dislike {
+.like-parent {
+    gap: var(--gap-6xl);
+}
+.frame-div,
+.frame-group,
+.frame-wrapper,
+.like-parent,
+.rectangle-container {
     display: flex;
-    flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
 }
-.container-likes {
-    flex: 1;
-    gap: var(--gap-6xl);
-}
-.frame-like-dislike {
+.frame-wrapper {
     width: 259px;
+    flex-direction: row;
     padding: 0 var(--padding-32xl);
     box-sizing: border-box;
     margin-top: -5px;
     text-align: center;
     font-size: var(--font-size-2xs);
     color: var(--color-dimgray-200);
+}
+.frame-div,
+.frame-group,
+.rectangle-container {
+    flex-direction: column;
+    max-width: 100%;
 }
 .rectangle-container {
     align-self: stretch;
@@ -322,44 +400,31 @@
     font-size: var(--font-size-smi);
     color: var(--color-black);
 }
-.comment-frame,
-.frame-g,
-.input-frame,
-.rectangle-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    max-width: 100%;
-}
-.input-frame {
-    align-self: stretch;
+.frame-div,
+.frame-group {
+    width: 816px;
     gap: var(--gap-2xl);
     font-size: var(--font-size-sm);
     color: var(--color-dimgray-100);
 }
-.comment-frame,
-.frame-g {
-    width: 816px;
-    gap: var(--gap-20xl);
-    font-size: var(--font-size-base);
-}
-.frame-g {
+.frame-group {
     width: 986px;
     align-items: center;
-    gap: var(--gap-4xl);
+    gap: var(--gap-20xl);
     text-align: left;
-    font-size: var(--font-size-3xs);
+    font-size: var(--font-size-smi);
     color: var(--color-black);
     font-family: var(--font-inter);
 }
+@media screen and (max-width: 725px) {
+    .frame-group {
+        gap: var(--gap-20xl);
+    }
+}
 @media screen and (max-width: 450px) {
-    .frame-like-dislike {
+    .frame-wrapper {
         padding-left: var(--padding-xl);
         padding-right: var(--padding-xl);
         box-sizing: border-box;
-    }
-    .comment-frame {
-        gap: var(--gap-20xl);
     }
 }
