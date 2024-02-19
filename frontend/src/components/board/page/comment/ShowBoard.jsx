@@ -1,10 +1,10 @@
 import FrameComponent1 from "./components/FrameComponent1";
 import FrameComponent from "./components/FrameComponent";
-import "./ShowBoard.css";
+import styles from "./ShowBoard.module.css";
 
 const ShowBoard = () => {
     return (
-        <div className="showboard">
+        <div className={styles.showboard}>
             <FrameComponent1 />
             <FrameComponent />
         </div>

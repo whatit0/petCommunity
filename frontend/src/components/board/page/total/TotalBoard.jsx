@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import QAGroup from "../qa/QAGroup";
 import DailyGroup from "../daily/DailyGroup";
 import InfoGroup from "../info/InfoGroup";
-import WriteBoard from "../write/WriteBoard";
 import styles from "./TotalBoard.module.css";
 
 const TotalBoard = () => {
@@ -50,20 +49,11 @@ const TotalBoard = () => {
             </div>
             <div className={styles.qAGroupParent}>
                 {selectedTap === 'all' && <><QAGroup/><DailyGroup/><InfoGroup/></>}
+
                 {selectedTap === 'qa' && <QAGroup/>}
                 {selectedTap === 'daily' && <DailyGroup/>}
+
                 {selectedTap === 'info' && <InfoGroup/>}
-                <div className={styles.reasonUnknown}>
-                    <div className={styles.div3}>
-                        이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
-                        이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
-                        이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
-                        이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
-                        이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
-                        이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
-                        이유는 ....
-                    </div>
-                </div>
             </div>
         </div>
     );

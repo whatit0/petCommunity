@@ -1,14 +1,15 @@
 import styles from "./QAGroup.module.css";
+import React from "react";
 
 const QAGroup = () => {
     return (
         <div className={styles.qAGroup}>
-            <div className={styles.qAGroupChild} />
+            <div className={styles.qAGroupChild}/>
             <div className={styles.infoBox}>
                 <div className={styles.qaParent}>
                     <div className={styles.qa}>{`Q&A`}</div>
                     <div className={styles.rectangleParent}>
-                        <div className={styles.frameChild} />
+                        <div className={styles.frameChild}/>
                         <img
                             className={styles.frameItem}
                             loading="eager"
@@ -20,6 +21,15 @@ const QAGroup = () => {
                 </div>
                 <div className={styles.div1}>
                     저희 집 강아지가 3일동안 밥을 안먹고있습니다.
+                </div>
+                <div className={styles.contentdiv}>
+                    이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
+                    이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
+                    이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
+                    이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
+                    이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
+                    이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
+                    이유는 ....
                 </div>
             </div>
             <div className={styles.qAGroupInner}>

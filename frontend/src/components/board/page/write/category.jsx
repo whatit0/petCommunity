@@ -1,26 +1,21 @@
 import {useEffect, useMemo, useRef, useState} from "react";
-import "./FrameComponet.css"
+import styles from "./category.module.css";
 
-const FrameComponent = ({
-                            prop,
-                            arrowDown2,
-                            onSelect,
-                            options,
-                        }) => {
+const Category = ({ prop, arrowDown2, onSelect, options }) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedOption, setSelectedOption] = useState("카테고리를 선택해주세요.");
-    const dropdownRef = useRef(null)
+    const dropdownRef = useRef(null);
 
-    const toggleDropdown = () => setShowDropdown((prev) => !prev);
+    const toggleDropdown = () => setShowDropdown(prev => !prev);
 
-    const handleSelectOption = (option) => {
+    const handleSelectOption = option => {
         setSelectedOption(option);
-        if(onSelect) onSelect(option);
+        if (onSelect) onSelect(option);
         setShowDropdown(false);
-    }
+    };
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = event => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setShowDropdown(false);
             }
@@ -33,18 +28,18 @@ const FrameComponent = ({
     }, []);
 
     return (
-        <div className="frame-board1" ref={dropdownRef}>
-            <div className="category-frame">
-                <div className="div2">{prop}</div>
-                <div className="search1" >
-                    <div className="main-frame">
-                        <div className="div3" onClick={toggleDropdown}>
+        <div className={styles["frame-board1"]} ref={dropdownRef}>
+            <div className={styles["category-frame"]}>
+                <div className={styles.div2}>{prop}</div>
+                <div className={styles.search1}>
+                    <div className={styles["main-frame"]}>
+                        <div className={styles.div3} onClick={toggleDropdown}>
                             {selectedOption}
                         </div>
                         {showDropdown && (
-                            <div className="dropdown-content">
+                            <div className={styles["dropdown-content"]}>
                                 {options.map((option, index) => (
-                                    <div key={index} className="dropdown-item"
+                                    <div key={index} className={styles["dropdown-item"]}
                                          onClick={() => handleSelectOption(option)}>
                                         {option}
                                     </div>
@@ -52,11 +47,11 @@ const FrameComponent = ({
                             </div>
                         )}
                     </div>
-                    <img className="arrow-down-2-icon" alt="" src={arrowDown2}/>
+                    <img className={styles["arrow-down-2-icon"]} alt="" src={arrowDown2} />
                 </div>
             </div>
         </div>
     );
 };
 
-export default FrameComponent;
+export default Category;

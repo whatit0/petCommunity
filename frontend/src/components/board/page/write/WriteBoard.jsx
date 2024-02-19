@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import "./style.css";
+import styles from "./WriteBoard.module.css";
 import QuillEditor from "./QuillEditor";
 import {CustomToolbar} from "./CustomToolbar";
-import FrameComponent from "./FrameComponet";
+import FrameComponent from "./category";
 
 const WriteBoard = () => {
     const [title, setTitle] = useState("");
@@ -73,7 +73,7 @@ const WriteBoard = () => {
     };
 
     return (
-        <form className="writeboard" onSubmit={handleSubmit}>
+        <form className={styles.writeboard} onSubmit={handleSubmit}>
             <FrameComponent
                 prop="게시판"
                 onSelect={handleBoardTypeSelected}
@@ -95,25 +95,25 @@ const WriteBoard = () => {
                 />
             )}
 
-            <div className="frame-board">
-                <div className="div">글 작성</div>
-                <div className="input-frame">
-                    <div className="search">
+            <div className={styles["frame-board"]}>
+                <div className={styles.div}>글 작성</div>
+                <div className={styles["input-frame"]}>
+                    <div className={styles.search}>
                         <input
-                            className="input"
+                            className={styles.input}
                             placeholder="제목을 입력해주세요."
                             type="text"
                             value={title}
                             onChange={handleTitleChange}
                         />
                     </div>
-                    <button type="submit" className="vector-parent">
-                        <img className="frame-child" alt="" src="/inputBox.png"/>
-                        <img className="edit-icon" alt="" src="/edit.svg"/>
-                        <div className="div1">글 등록</div>
+                    <button type="submit" className={styles["vector-parent"]}>
+                        <img className={styles["frame-child"]} alt="" src="/inputBox.png"/>
+                        <img className={styles["edit-icon"]} alt="" src="/edit.svg"/>
+                        <div className={styles.div1}>글 등록</div>
                     </button>
                 </div>
-                <div className="quill-editor-container">
+                <div className={styles["quill-editor-container"]}>
                     <CustomToolbar/>
                     <QuillEditor onChange={handleContentChange}/>
                 </div>

@@ -57,8 +57,17 @@
     text-align: left;
     z-index: 1;
 }
+.contentdiv {
+    align-self: stretch;
+    max-width: 100%;
+    position: relative;
+    text-align: left;
+    font-size: var(--font-size-3xs-9);
+    color: var(--color-dimgray-100);
+    font-family: var(--font-inter);
+}
 .infoBox {
-    width: 389px;
+    width: 648px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -92,6 +101,7 @@
     position: relative;
     z-index: 1;
 }
+
 .chatting2Icon {
     height: 13.8px;
     width: 13.8px;
@@ -101,17 +111,6 @@
     flex: 1;
     line-height: 14.79px;
     flex-shrink: 0;
-}
-.reasonUnknown {
-    align-self: stretch;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 0 var(--padding-12xs) 0 var(--padding-5xs);
-    box-sizing: border-box;
-    max-width: 100%;
-    margin-top: -82px;
 }
 .chatting2Parent {
     width: 64px;

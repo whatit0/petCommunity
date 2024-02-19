@@ -11,6 +11,9 @@
     display: inline-block;
     z-index: 1;
 }
+.div3:hover {
+    color: #9e30f4;
+}
 .main-frame {
     flex: 1;
     display: flex;
@@ -59,6 +62,10 @@
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+}
+.dropdown-content .dropdown-item:hover {
+    color: #9e30f4;
+    background-color: #f1f1f1;
 }
 
 .category-frame .dropdown-content {
