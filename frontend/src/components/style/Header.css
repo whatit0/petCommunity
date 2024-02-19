@@ -74,7 +74,7 @@
     display: inline-block;
 }
 
-.dropbtn {
+.dropBtn {
     background-color: transparent;
     color: #262626;
     padding: 10px 15px;
@@ -86,7 +86,7 @@
     transition: color 0.3s ease;
 }
 
-.dropbtn:hover,
+.dropBtn:hover,
 .navigation a:hover {
     color: #9e30f4;
 }

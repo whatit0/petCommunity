@@ -30,7 +30,7 @@ function AdminHeader() {
                 <Link to="/admin/community">공지사항 관리</Link>
                 <Link to="/admin/community">커뮤니티 관리</Link>
                 <div className="dropdown">
-                    <button onClick={toggleDropdown} className="dropbtn">회원 관리</button>
+                    <button onClick={toggleDropdown} className="dropBtn">회원 관리</button>
                     {showDropdown && (
                         <div className="dropdown-content">
                             <Link to="/admin/user/list" className="dropdown-item">회원목록</Link>

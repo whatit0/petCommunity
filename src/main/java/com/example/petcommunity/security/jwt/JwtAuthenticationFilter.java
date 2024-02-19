@@ -9,9 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -35,33 +33,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             log.debug("Token: {}", token);
 
             if (token != null && jwtTokenProvider.validateToken(token)) {
-                // 토큰에서 userId 추출(아니면 userId가 null 값으로 발생한다!)
-                String userId = jwtTokenProvider.getUserIdFromToken(token);
-                log.debug("Authenticated userId: {}", userId);
-
+                // 토큰이 유효한 경우, 인증 정보 설정
                 Authentication authentication = jwtTokenProvider.getAuthentication(token);
-                log.debug("Authentication: {}", authentication);
-
-                // Authentication 객체에 UserDetails 대신 userId를 직접 principal 로 설정
-                Authentication customAuthentication =
-                        new UsernamePasswordAuthenticationToken(userId, null, authentication.getAuthorities());
-
-                SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
-                securityContext.setAuthentication(customAuthentication);
-                SecurityContextHolder.setContext(securityContext);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            } else {
+                // 토큰이 없거나 유효하지 않은 경우, SecurityContext 인증 정보를 null 설정
+                SecurityContextHolder.clearContext();
             }
         } catch (ExpiredJwtException e) {
-            log.info("Expired JWT Token", e);
+            log.info("Expired JWT Token : {}", e.getMessage());
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "토큰이 만료되었습니다.");
-            return;
         } catch (JwtException e) {
-            log.info("Invalid JWT Token", e);
+            log.info("Invalid JWT Token : {}", e.getMessage());
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "유효하지 않은 토큰입니다.");
-            return;
         } catch (Exception e) {
-            log.error("Authentication error", e);
+            log.error("Authentication error : {}", e.getMessage());
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "인증 처리 중 오류가 발생했습니다.");
-            return;
         }
         filterChain.doFilter(request, response);
     }

@@ -12,7 +12,7 @@ function AdminUserInfoList() {
         const fetchAndSetMembers = async () => {
             try {
                 const token = localStorage.getItem('userToken');
-                const response = await axios.get('/api/user/list', {
+                const response = await axios.get('http://localhost:8080/api/user/list', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
