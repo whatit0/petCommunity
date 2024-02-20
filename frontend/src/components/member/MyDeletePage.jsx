@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import '../style/MemberPage.css';
+import {useAuth} from '../../AuthContext';
+import {useParams} from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
 
 export default function MyUpdatePage() {
     const [userId, setUserId] = useState('');
@@ -18,7 +21,8 @@ export default function MyUpdatePage() {
     const [userTelValid, setUserTelValid] = useState(null);
 
     const [notAllow, setNotAllow] = useState(true);
-
+    const {userNo} = useParams();
+    const {setIsLoggedIn} = useAuth();
 
 
     const handleUserId = (e) => {
@@ -74,44 +78,41 @@ export default function MyUpdatePage() {
     }, [userIdValid, userPwdValid, userNameValid, userTelValid]);
 
     useEffect(() => {
-        // 사용자 정보를 가져오는 함수
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/userInfo', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('userToken')}`
-                    }
-                });
+                const token = localStorage.getItem('userToken');
+                const config = {
+                    headers: {'Authorization': `Bearer ${token}`}
+                };
+                const response = await axios.get(`http://localhost:8080/api/user/info/${userNo}`, config);
                 const userData = response.data;
                 setUserId(userData.userId);
-                setUserName(userData.userName)
-                setUserTel(userData.userTel)
-                setUserNickname(userData.userNickname)
-                setUserAge(userData.userAge)
-                setUserGender(userData.userGender)
-                setUserAddress(userData.userAddress)
+                setUserName(userData.userName);
+                setUserTel(userData.userTel);
+                setUserNickname(userData.userNickname);
+                setUserAge(userData.userAge);
+                setUserGender(userData.userGender);
+                setUserAddress(userData.userAddress);
             } catch (error) {
                 console.error("사용자 정보 불러오기 오류", error);
             }
         };
-        fetchUserData().catch(error => {
-            console.error("사용자 정보 불러오기 중 오류 발생", error);
-        });
-    }, []);
+        fetchUserData().catch(console.error);
+    }, [userNo]);
 
 
-    const updateSubmit = async (event) => {
+    const deleteSubmit = async (event) => {
         event.preventDefault();
         if (!notAllow) {
             try {
-                // JWT 토큰을 요청 헤더에 포함
                 const token = localStorage.getItem('userToken');
                 const config = {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                await axios.post('http://localhost:8080/api/userDelete', {
+                await axios.post('http://localhost:8080/api/user/delete', {
+                    userId,
                     userPwd,
                     userName,
                     userTel,
@@ -120,18 +121,36 @@ export default function MyUpdatePage() {
                     userGender,
                     userAddress
                 }, config);
+                // 관리자 여부를 확인
+                if (token) {
+                    const decodedToken = jwtDecode(token);
+                    const isAdmin = decodedToken["auth"].includes('ROLE_ADMIN');
 
-                window.location.href = '/LoginPage.jsx';
+                    if (isAdmin) {
+                        // 관리자인 경우 회원 목록 페이지로 리다이렉션
+                        alert('회원 삭제가 정상적으로 완료되었습니다. 회원 목록 페이지로 이동합니다.');
+                        window.location.href = '/admin/user/list';
+                    } else {
+                        // 일반 사용자인 경우 로그인 페이지로 리다이렉션
+                        localStorage.removeItem('userToken');
+                        setIsLoggedIn(false);
+                        alert('그 동안 이용해 주셔서 감사합니다.');
+                        window.location.href = '/login';
+                    }
+                } else {
+                    // 토큰이 없는 경우 로그인 페이지로 리다이렉션
+                    alert('세션이 만료되었습니다. 다시 로그인해 주세요.');
+                    window.location.href = '/login';
+                }
             } catch (error) {
-                console.error("회원수정 오류", error);
+                alert('회원 정보 수정에 실패했습니다.');
             }
         }
     };
 
-
     return (
         <div className="page">
-            <form onSubmit={updateSubmit}>
+            <form onSubmit={deleteSubmit}>
                 <div className="titleWrap">회원탈퇴</div>
                 <div className="contentWrap">
                     <div className="inputTitle">아이디</div>
@@ -140,7 +159,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userId"
                             value={userId}
-                            placeholder="abcd1234"
+                            readOnly
                             onChange={handleUserId}/>
                     </div>
                     <div className="errorMessageWrap">
@@ -152,6 +171,7 @@ export default function MyUpdatePage() {
                     <div className="inputWrap">
                         <input
                             className="input"
+                            type="password"
                             name="userPwd"
                             value={userPwd}
                             placeholder="영문, 숫자, 특수문자 포함 8자 이상"
@@ -170,7 +190,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userName"
                             value={userName}
-                            placeholder="이름을 입력해주세요."
+                            readOnly
                             onChange={handleUserName}/>
                     </div>
                     <div className="errorMessageWrap">
@@ -186,7 +206,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userNickname"
                             value={userNickname}
-                            placeholder="닉네임을 입력해주세요."
+                            readOnly
                             onChange={handleUserNickname}/>
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">나이</div>
@@ -195,7 +215,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userAge"
                             value={userAge}
-                            placeholder="나이를 입력해주세요."
+                            readOnly
                             onChange={handleUserAge}/>
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">성별</div>
@@ -204,7 +224,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userGender"
                             value={userGender}
-                            placeholder="성별을 입력해주세요."
+                            readOnly
                             onChange={handleUserGender}/>
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">전화번호</div>
@@ -213,7 +233,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userTel"
                             value={userTel}
-                            placeholder="전화번호를 입력해주세요."
+                            readOnly
                             onChange={handleUserTel}/>
                     </div>
                     <div className="errorMessageWrap">
@@ -229,11 +249,11 @@ export default function MyUpdatePage() {
                             className="input"
                             name="user_address"
                             value={userAddress}
-                            placeholder="주소를 입력해주세요."
+                            readOnly
                             onChange={handleUserAddress}/>
                     </div>
                     <div>
-                        <button type="submit" disabled={notAllow} className="bottomButton">확인
+                        <button type="submit" disabled={notAllow} className="bottomButton">회원 탈퇴
                         </button>
                     </div>
                 </div>

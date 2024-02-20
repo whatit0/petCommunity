@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import '../style/MemberPage.css';
 
@@ -12,30 +12,58 @@ export default function LoginPage() {
     const [userGender, setUserGender] = useState('');
     const [userAddress, setUserAddress] = useState('');
 
-    const [userIdValid, setUserIdValid] = useState(false);
+    const [userIdValid, setUserIdValid] = useState(null);
     const [userPwdValid, setUserPwdValid] = useState(false);
     const [userNameValid, setUserNameValid] = useState(false);
+    const [userGenderValid, setUserGenderValid] = useState(false);
     const [userTelValid, setUserTelValid] = useState(false);
+    const [userIdMessage, setUserIdMessage] = useState('');
 
     const [notAllow, setNotAllow] = useState(true);
+    let debounceCheck; // 디바운싱 타이머 변수
 
+    useEffect(() => {
+        return () => {
+            clearTimeout(debounceCheck); // 컴포넌트 언마운트 시 타이머 초기화
+        };
+    }, [debounceCheck]);
 
     const handleUserId = (e) => {
         const newId = e.target.value;
         setUserId(newId);
         const regex = /^[a-z]+[a-z0-9]{5,19}$/g;
-        if(regex.test(newId)) {
-            setUserIdValid(true);
+
+        if (regex.test(newId)) {
+            clearTimeout(debounceCheck); // 이전 타이머 초기화
+            debounceCheck = setTimeout(async () => {
+                // 디바운싱 타이머 설정
+                try {
+                    const response = await axios.get(`http://localhost:8080/api/check-userId?userId=${newId}`);
+                    if (response.data === true) {
+                        setUserIdValid(true);
+                        setUserIdMessage("사용 가능한 아이디입니다.");
+                    } else {
+                        setUserIdValid(false);
+                        setUserIdMessage("이미 사용 중인 아이디입니다.");
+                    }
+                } catch (error) {
+                    console.error("아이디 중복 에러", error);
+                    setUserIdValid(false);
+                    setUserIdMessage("아이디 중복 검사에 실패했습니다.");
+                }
+            }, 500); // 0.5초 대기
         } else {
             setUserIdValid(false);
+            setUserIdMessage("올바른 아이디를 입력해주세요.");
         }
-    }
+    };
+
 
     const handleUserPwd = (e) => {
         const newPassword = e.target.value;
         setUserPwd(newPassword);
         const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@%*#^?&\\()\-_=+]).{8,16}$/;
-        if(regex.test(newPassword)) {
+        if (regex.test(newPassword)) {
             setUserPwdValid(true);
         } else {
             setUserPwdValid(false);
@@ -46,18 +74,27 @@ export default function LoginPage() {
         const newName = e.target.value;
         setUserName(newName);
         const regex = /^[가-힣]+$/;
-        if(regex.test(newName)) {
+        if (regex.test(newName)) {
             setUserNameValid(true);
         } else {
             setUserNameValid(false);
         }
     }
+    const handleUserGender = (e) => {
+        const newGender = e.target.value;
+        setUserGender(newGender);
+        if (newGender === '남자' || newGender === '여자') {
+            setUserGenderValid(true);
+        } else {
+            setUserGenderValid(false);
+        }
+    }
 
     const handleUserTel = (e) => {
-        const newTel = e.target.value;
+        const newTel = e.target.value.replace(/-/g, '');
         setUserTel(newTel);
-        const regex = /^01[0-9]-[0-9]{3,4}-[0-9]{4}$/;
-        if(regex.test(newTel)) {
+        const regex = /^01[01789][1-9]\d{6,7}$/;
+        if (regex.test(newTel)) {
             setUserTelValid(true);
         } else {
             setUserTelValid(false);
@@ -66,16 +103,15 @@ export default function LoginPage() {
 
     const handleUserNickname = (e) => setUserNickname(e.target.value);
     const handleUserAge = (e) => setUserAge(e.target.value);
-    const handleUserGender = (e) => setUserGender(e.target.value);
     const handleUserAddress = (e) => setUserAddress(e.target.value);
 
     useEffect(() => {
-        if(userIdValid && userPwdValid && userNameValid && userTelValid) {
+        if (userIdValid && userPwdValid && userNameValid && userGenderValid && userTelValid) {
             setNotAllow(false);
             return;
         }
         setNotAllow(true);
-    }, [userIdValid, userPwdValid, userNameValid, userTelValid]);
+    }, [userIdValid, userPwdValid, userNameValid, userGenderValid, userTelValid]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -114,17 +150,16 @@ export default function LoginPage() {
                             onChange={handleUserId}/>
                     </div>
                     <div className="errorMessageWrap">
-                        {
-                            !userIdValid && userId.length > 0 && (
-                                <div>올바른 아이디를 입력해주세요.</div>
-                            )
-                        }
+                        {userIdMessage && (
+                            <div className={`message ${userIdValid ? 'valid' : 'error'}`}>{userIdMessage}</div>
+                        )}
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">비밀번호</div>
                     <div className="inputWrap">
                         <input
                             className="input"
                             name="userPwd"
+                            type="password"
                             value={userPwd}
                             placeholder="영문, 숫자, 특수문자 포함 8자 이상"
                             onChange={handleUserPwd}/>
@@ -178,6 +213,13 @@ export default function LoginPage() {
                             value={userGender}
                             placeholder="성별을 입력해주세요."
                             onChange={handleUserGender}/>
+                    </div>
+                    <div className="errorMessageWrap">
+                        {
+                            !userGenderValid && userGender.length > 0 && (
+                                <div>성별은 남자 혹은 여자로 입력해주세요.</div>
+                            )
+                        }
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">전화번호</div>
                     <div className="inputWrap">

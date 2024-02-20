@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import '../style/MemberPage.css';
+import {useAuth} from '../../AuthContext';
+import { useParams } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
 
 export default function MyUpdatePage() {
     const [userId, setUserId] = useState('');
@@ -18,6 +21,8 @@ export default function MyUpdatePage() {
     const [userTelValid, setUserTelValid] = useState(null);
 
     const [notAllow, setNotAllow] = useState(true);
+    const { userNo } = useParams();
+    const {setIsLoggedIn} = useAuth();
 
 
 
@@ -74,47 +79,40 @@ export default function MyUpdatePage() {
     }, [userIdValid, userPwdValid, userNameValid, userTelValid]);
 
     useEffect(() => {
-        // 사용자 정보를 가져오는 함수
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/userInfo', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('userToken')}`
-                    }
-                });
+                const token = localStorage.getItem('userToken');
+                const config = {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                };
+                const response = await axios.get(`http://localhost:8080/api/user/info/${userNo}`, config);
                 const userData = response.data;
                 setUserId(userData.userId);
-                setUserName(userData.userName)
-                setUserTel(userData.userTel)
-                setUserNickname(userData.userNickname)
-                setUserAge(userData.userAge)
-                setUserGender(userData.userGender)
-                setUserAddress(userData.userAddress)
+                setUserName(userData.userName);
+                setUserTel(userData.userTel);
+                setUserNickname(userData.userNickname);
+                setUserAge(userData.userAge);
+                setUserGender(userData.userGender);
+                setUserAddress(userData.userAddress);
             } catch (error) {
                 console.error("사용자 정보 불러오기 오류", error);
             }
         };
-        fetchUserData().catch(error => {
-            console.error("사용자 정보 불러오기 중 오류 발생", error);
-        });
-    }, []);
+        fetchUserData().catch(console.error);
+    }, [userNo]);
 
 
     const updateSubmit = async (event) => {
         event.preventDefault();
         if (!notAllow) {
             try {
-                const token = localStorage.getItem('userToken'); // 로컬 스토리지에서 토큰 가져오기
-                console.log('Sending token:', token); // 콘솔에 보낼 토큰 출력하여 확인
+                const token = localStorage.getItem('userToken');
                 const config = {
                     headers: {
-                        'Authorization': `Bearer ${token}` // 요청 헤더에 토큰 포함
+                        'Authorization': `Bearer ${token}`
                     }
                 };
-                // 현재 업데이트 하려는 사용자의 ID를 로그로 출력
-                console.log('Updating user:', userId);
-                debugger;
-                await axios.post('http://localhost:8080/api/userUpdate', {
+                await axios.patch('http://localhost:8080/api/user/update', {
                     userId,
                     userPwd,
                     userName,
@@ -124,13 +122,32 @@ export default function MyUpdatePage() {
                     userGender,
                     userAddress
                 }, config);
-                window.location.href = '/login';
+                // 관리자 여부를 확인
+                if (token) {
+                    const decodedToken = jwtDecode(token);
+                    const isAdmin = decodedToken["auth"].includes('ROLE_ADMIN');
+
+                    if (isAdmin) {
+                        // 관리자인 경우 회원 목록 페이지로 리다이렉션
+                        alert('회원 정보가 수정되었습니다. 회원 목록 페이지로 이동합니다.');
+                        window.location.href = '/admin/user/list';
+                    } else {
+                        // 일반 사용자인 경우 로그인 페이지로 리다이렉션
+                        localStorage.removeItem('userToken');
+                        setIsLoggedIn(false);
+                        alert('회원 정보가 수정되었습니다. 다시 로그인해 주세요.');
+                        window.location.href = '/login';
+                    }
+                } else {
+                    // 토큰이 없는 경우 로그인 페이지로 리다이렉션
+                    alert('세션이 만료되었습니다. 다시 로그인해 주세요.');
+                    window.location.href = '/login';
+                }
             } catch (error) {
-                console.error("회원수정 오류", error);
+                alert('회원 정보 수정에 실패했습니다.');
             }
         }
     };
-
 
     return (
         <div className="page">
@@ -143,7 +160,7 @@ export default function MyUpdatePage() {
                             className="input"
                             name="userId"
                             value={userId}
-                            placeholder="abcd1234"
+                            readOnly
                             onChange={handleUserId}/>
                     </div>
                     <div className="errorMessageWrap">
@@ -155,6 +172,7 @@ export default function MyUpdatePage() {
                     <div className="inputWrap">
                         <input
                             className="input"
+                            type="password"
                             name="userPwd"
                             value={userPwd}
                             placeholder="영문, 숫자, 특수문자 포함 8자 이상"
@@ -236,7 +254,7 @@ export default function MyUpdatePage() {
                             onChange={handleUserAddress}/>
                     </div>
                     <div>
-                        <button type="submit" disabled={notAllow} className="bottomButton">확인
+                        <button type="submit" disabled={notAllow} className="bottomButton">회원 수정
                         </button>
                     </div>
                 </div>

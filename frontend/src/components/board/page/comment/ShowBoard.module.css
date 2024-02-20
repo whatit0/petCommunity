@@ -1,0 +1,29 @@
+.showboard {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-white);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 47px var(--padding-xl) 120px;
+    box-sizing: border-box;
+    gap: 254px 125px;
+    letter-spacing: normal;
+}
+@media screen and (max-width: 1025px) {
+    .showboard {
+        gap: 254px 125px;
+    }
+}
+@media screen and (max-width: 725px) {
+    .showboard {
+        gap: 254px 125px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .showboard {
+        gap: 254px 125px;
+    }
+}

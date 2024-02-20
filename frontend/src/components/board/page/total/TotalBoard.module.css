@@ -1,0 +1,234 @@
+.div,
+.div1,
+.div2,
+.qa {
+    height: 25px;
+    flex: 1;
+    position: relative;
+    line-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div:hover {
+    cursor: pointer;
+    color: var(--color-black);
+}
+.selectedTab {
+    color: var(--color-black);
+    font-size: var(--font-size-selected);
+    font-weight: 700;
+}
+.parent {
+    margin: 0;
+    width: 307px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-10xl);
+    text-align: center;
+    font-size: var(--font-size-base);
+    color: var(--color-dimgray-100);
+    font-family: var(--font-inter);
+}
+.searchChild {
+    height: 52px;
+    width: 648px;
+    position: relative;
+    border-radius: var(--br-sm);
+    background-color: var(--color-whitesmoke);
+    border: 1px solid var(--color-darkgray-100);
+    box-sizing: border-box;
+    display: none;
+    max-width: 100%;
+}
+.input,
+.search2Icon {
+    position: relative;
+    z-index: 1;
+}
+.search2Icon {
+    height: 29px;
+    width: 27px;
+}
+.input {
+    width: calc(100% - 71px);
+    border: 0;
+    outline: 0;
+    font-family: var(--font-poppins);
+    font-size: 15px;
+    background-color: transparent;
+    height: 22px;
+    flex: 1;
+    letter-spacing: 0.03em;
+    color: #797979;
+    text-align: left;
+    display: inline-block;
+    min-width: 250px;
+    max-width: calc(100% - 31px);
+}
+.search {
+    align-self: stretch;
+    border-radius: var(--br-sm);
+    background-color: var(--color-whitesmoke);
+    border: 1px solid var(--color-darkgray-100);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-xs) 34px var(--padding-2xs) 10px;
+    gap: 4px;
+    max-width: 100%;
+}
+.checkboxOn {
+    margin: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: var(--br-9xs);
+}
+.checkboxOn,
+.useAsThe {
+    position: relative;
+}
+.checkboxOnParent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+}
+.checkboxOn1 {
+    margin: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: var(--br-9xs);
+    border: 1.5px solid gray;
+    box-sizing: border-box;
+}
+.checkboxOn1,
+.useAsThe1 {
+    position: relative;
+}
+.checkboxOnGroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+    color: var(--disabled-button);
+}
+.frameParent {
+    flex-direction: row;
+    gap: var(--gap-lgi);
+}
+.checkboxPair,
+.frameParent,
+.frameSearch {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.checkboxPair {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 100%;
+}
+.frameSearch {
+    width: 648px;
+    flex-direction: column;
+    gap: 38px;
+    max-width: 100%;
+}
+.div3 {
+    flex: 1;
+    position: relative;
+    line-height: 14.79px;
+    white-space: pre-wrap;
+    display: inline-block;
+    max-width: 100%;
+    z-index: 1;
+}
+.divWrite,
+.editIcon {
+    position: relative;
+    z-index: 1;
+}
+.editIcon {
+    height: 20.2px;
+    width: 20.2px;
+}
+.divWrtie {
+    font-size: 12px;
+    font-family: var(--font-inter);
+    text-align: center;
+}
+.vectorParent {
+    cursor: pointer;
+    border: 0;
+    padding: 7px 11px 5px var(--padding-7xs);
+    background-color: var(--color-gainsboro);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--color-black);
+    gap: 6px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.reasonUnknown {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-12xs) 0 var(--padding-5xs);
+    box-sizing: border-box;
+    max-width: 100%;
+    margin-top: -82px;
+}
+.desktop2,
+.qAGroupParent {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.qAGroupParent {
+    width: 648px;
+    align-items: flex-start;
+    min-height: 152px;
+    max-width: 100%;
+    flex-shrink: 0;
+    font-size: var(--font-size-3xs-9);
+    color: var(--color-dimgray-100);
+    font-family: var(--font-inter);
+}
+.desktop2 {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-white);
+    overflow: hidden;
+    align-items: center;
+    padding: 36px var(--padding-xl) 616px;
+    box-sizing: border-box;
+    gap: 50px;
+    letter-spacing: normal;
+    text-align: left;
+    font-size: var(--font-size-smi);
+    color: var(--primary);
+    font-family: var(--font-nunito-sans);
+}
+@media screen and (max-width: 700px) {
+    .frameSearch {
+        gap: var(--gap-lgi);
+    }
+    .desktop2 {
+        gap: var(--gap-6xl);
+    }
+}

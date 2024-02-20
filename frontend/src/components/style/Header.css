@@ -74,7 +74,7 @@
     display: inline-block;
 }
 
-.dropbtn {
+.dropBtn {
     background-color: transparent;
     color: #262626;
     padding: 10px 15px;
@@ -86,7 +86,7 @@
     transition: color 0.3s ease;
 }
 
-.dropbtn:hover,
+.dropBtn:hover,
 .navigation a:hover {
     color: #9e30f4;
 }
@@ -96,7 +96,7 @@
     position: absolute;
     background-color: #fff;
     min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 

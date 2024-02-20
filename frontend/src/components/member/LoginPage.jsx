@@ -1,46 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import '../style/MemberPage.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../AuthContext';
+import {useNavigate} from 'react-router-dom';
+import {useAuth} from '../../AuthContext';
+import {jwtDecode} from 'jwt-decode';
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
-    const [userPwd, setUserPwd] =  useState('');
+    const [userPwd, setUserPwd] = useState('');
     const [userIdValid, setUserIdValid] = useState(false);
     const [userPwdValid, setUserPwdValid] = useState(false);
     const [notAllow, setNotAllow] = useState(true);
+    const [userIdError, setUserIdError] = useState('');
+    const [userPwdError, setUserPwdError] = useState('');
 
     const navigate = useNavigate();
-    const { setIsLoggedIn } = useAuth();
+    const {setIsLoggedIn} = useAuth();
 
     const handleUserId = (e) => {
         const newId = e.target.value;
         setUserId(newId);
         const regex = /^[a-z]+[a-z0-9]{5,19}$/g;
-        if(regex.test(newId)) {
-            setUserIdValid(true);
-        } else {
-            setUserIdValid(false);
-        }
+        setUserIdValid(regex.test(newId));
     }
 
     const handleUserPwd = (e) => {
         const newPassword = e.target.value;
         setUserPwd(newPassword);
         const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@%*#^?&\\()\-_=+]).{8,16}$/;
-        if(regex.test(newPassword)) {
-            setUserPwdValid(true);
-        } else {
-            setUserPwdValid(false);
-        }
+        setUserPwdValid(regex.test(newPassword));
     }
 
     useEffect(() => {
         setNotAllow(!(userIdValid && userPwdValid));
     }, [userIdValid, userPwdValid]);
-
-
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -48,18 +41,23 @@ export default function LoginPage() {
             try {
                 const response = await axios.post('http://localhost:8080/api/login', {
                     userId,
-                    userPwd,
+                    userPwd
                 });
-                if (response.data && response.data.accessToken) {
-                    localStorage.setItem('userToken', response.data.accessToken);
-                    console.log('Stored token:', localStorage.getItem('userToken'));
+                if (response.data && response.data["accessToken"]) {
+                    const decodedToken = jwtDecode(response.data["accessToken"]);
+                    localStorage.setItem('userToken', response.data["accessToken"]);
+                    localStorage.setItem('userNo', decodedToken["userNo"]);
                     setIsLoggedIn(true);
-                    navigate('/');
-                } else {
-                    console.error('accessToken 반환되지 않았습니다.', response.data);
+                    if (decodedToken["auth"].includes('ROLE_ADMIN')) {
+                        navigate('/admin/page'); // 관리자 페이지로 리다이렉션
+                    } else {
+                        navigate('/'); // 일반 사용자 페이지 리다이렉션
+                    }
                 }
             } catch (error) {
-                console.error("로그인 실패", error);
+                const errorMessage = error.response?.data.message || "아이디와 비밀번호를 올바르게 입력하세요.";
+                setUserIdError(errorMessage);
+                setUserPwdError(errorMessage);
             }
         }
     };
@@ -86,11 +84,17 @@ export default function LoginPage() {
                                 <div>올바른 아이디를 입력해주세요.</div>
                             )
                         }
+                        {
+                            userIdError && (
+                                <div>{userIdError}</div>
+                            )
+                        }
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">비밀번호</div>
                     <div className="inputWrap">
                         <input
                             className="input"
+                            type="password"
                             name="userPwd"
                             value={userPwd}
                             placeholder="영문, 숫자, 특수문자 포함 8자 이상"
@@ -100,6 +104,11 @@ export default function LoginPage() {
                         {
                             !userPwdValid && userPwd.length > 0 && (
                                 <div>올바른 비밀번호를 입력해주세요.</div>
+                            )
+                        }
+                        {
+                            userPwdError && (
+                                <div>{userPwdError}</div>
                             )
                         }
                     </div>
