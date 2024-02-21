@@ -45,6 +45,9 @@ public class BoardEntity {
     @Column(name = "board_like")
     private int boardLike;
 
+    @Column(name = "board_unlike")
+    private int boardunLike;
+
     @CreationTimestamp
     @Column(name = "board_date", updatable = false)
     private LocalDateTime boardDate;
@@ -54,7 +57,7 @@ public class BoardEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_no")
-    private MemberEntity userNo;
+    private MemberEntity user;
 }
 
 enum BoardType {

@@ -15,6 +15,9 @@ public class BoardDTO {
     private String boardCategory;
     private String boardDogBreeds;
     private BoardType boardType;
+    private int boardCnt;
+    private int Like;
+    private int unLike;
 
     public enum BoardType {
         DAILY,
