@@ -14,6 +14,7 @@ import AdminUserInfoList from "./components/admin/AdminUserInfoList";
 import WriteBoard from "./components/board/page/write/WriteBoard";
 import TotalBoard from "./components/board/page/total/TotalBoard";
 import PetHospital from "./components/health/PetHospital";
+import SeoulPetHospital from "./components/health/SeoulPetHospital";
 
 function App() {
     return (
@@ -35,6 +36,7 @@ function App() {
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
                         {/* 건강 라우트 */}
                         <Route path="/hospital" element={<WithHeader><PetHospital/></WithHeader>}/>
+                        <Route path="/seoul" element={<WithHeader><SeoulPetHospital/></WithHeader>}/>
                     </Routes>
                 </div>
             </BrowserRouter>

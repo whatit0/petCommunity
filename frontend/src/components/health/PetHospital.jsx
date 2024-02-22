@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Container as MapDiv, NaverMap, Marker, useNavermaps } from 'react-naver-maps';
+import { useNavermaps } from 'react-naver-maps';
 
 const PetHospital = () => {
     const mapElement = useRef(null);
@@ -13,19 +13,17 @@ const PetHospital = () => {
                 const pSize = 1000;
                 const totalSize = 2810;
                 const totalPages = Math.ceil(totalSize / pSize);
-
                 const markers = [];
 
                 for (let pageIndex = 1; pageIndex <= totalPages; pageIndex++) {
                     const apiUrl = `https://openapi.gg.go.kr/Animalhosptl?KEY=${apiKey}&Type=${type}&pIndex=${pageIndex}&pSize=${pSize}`;
                     const response = await fetch(apiUrl);
                     const data = await response.json();
-
+                    console.log('aaaaaa',data)
                     if (!data.Animalhosptl || !Array.isArray(data.Animalhosptl[1].row)) {
                         console.error(`데이터 형식이 잘못되었거나 누락되었습니다 - 페이지 ${pageIndex}:`, data);
                         continue;
                     }
-
                     const locations = data.Animalhosptl[1].row.map(item => ({
                         lat: parseFloat(item.REFINE_WGS84_LAT),
                         lng: parseFloat(item.REFINE_WGS84_LOGT),
