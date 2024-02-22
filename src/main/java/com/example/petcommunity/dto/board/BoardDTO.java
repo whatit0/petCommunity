@@ -3,6 +3,9 @@ package com.example.petcommunity.dto.board;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,6 +21,12 @@ public class BoardDTO {
     private int boardCnt;
     private int Like;
     private int unLike;
+    private LocalDateTime boardDate;
+    private String boardUpload;
+    private String userName;
+
+    private List<CommentDTO> comments;
+    private int commentCount;
 
     public enum BoardType {
         DAILY,

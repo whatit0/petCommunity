@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import QAGroup from "../qa/QAGroup";
 import DailyGroup from "../daily/DailyGroup";
@@ -11,6 +11,15 @@ const TotalBoard = () => {
     const getTabClassName = (tabName) => {
         return selectedTap === tabName ? `${styles.div} ${styles.selectedTab}` : styles.div;
     };
+
+    const [boards, setBoards] = useState([]);
+
+    useEffect(() => {
+        fetch('api/boards')
+            .then(response => response.json())
+            .then(data => setBoards(data))
+            .catch(error => console.error('fetching Error : ', error));
+    }, []);
 
     return (
         <div className={styles.desktop2}>
@@ -48,12 +57,13 @@ const TotalBoard = () => {
                 </div>
             </div>
             <div className={styles.qAGroupParent}>
-                {selectedTap === 'all' && <><QAGroup/><DailyGroup/><InfoGroup/></>}
+                {selectedTap === 'all' && boards.map((board) =>
+                    <QAGroup key={board.boardNo} board={board} />
+                )}
+                {selectedTap === 'qa' && <QAGroup boardType={"qa"}/>}
+                {selectedTap === 'daily' && <QAGroup boardType={"daily"}/>}
 
-                {selectedTap === 'qa' && <QAGroup/>}
-                {selectedTap === 'daily' && <DailyGroup/>}
-
-                {selectedTap === 'info' && <InfoGroup/>}
+                {selectedTap === 'info' && <QAGroup boardType={"info"}/>}
             </div>
         </div>
     );

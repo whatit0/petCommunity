@@ -1,9 +1,17 @@
 import styles from "./QAGroup.module.css";
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
-const QAGroup = () => {
+const QAGroup = ({board}) => {
+
+    const navigate = useNavigate();
+
+    const handleBoardClick = (boardNo) => {
+        navigate(`/board/${boardNo}`);
+    }
+
     return (
-        <div className={styles.qAGroup}>
+        <div className={styles.qAGroup} onClick={() => handleBoardClick(board.boardNo)}>
             <div className={styles.qAGroupChild}/>
             <div className={styles.infoBox}>
                 <div className={styles.qaParent}>
@@ -20,7 +28,7 @@ const QAGroup = () => {
                     </div>
                 </div>
                 <div className={styles.div1}>
-                    저희 집 강아지가 3일동안 밥을 안먹고있습니다.
+                    {board.boardTitle}
                 </div>
                 <div className={styles.contentdiv}>
                     이유는 나도 모릅니다. 이유는 나도 모릅니다. 이유는 나도 모릅니다.
