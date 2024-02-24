@@ -1,0 +1,83 @@
+.main-content {
+    padding: 20px;
+    margin-top: 70px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    right: -20px;
+}
+
+.search-bar input {
+    padding: 15px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 35%;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #ffab00;
+}
+
+.search-bar button {
+    padding: 15px;
+    border-radius: 25px;
+    border: none;
+    background-color: #ffab00;
+    color: white;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #e09d00;
+}
+
+.recommendation-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.recommendation-title {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 120px;
+    font-size: 24px;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding-left: 260px;
+}
+
+.card {
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-right: 200px;
+}
+
+.card h3 {
+    margin: 0 0 10px 0;
+}
+
+.card p {
+    margin: 0;
+    color: gray;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
