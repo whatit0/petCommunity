@@ -50,6 +50,7 @@ public class BoardServiceImpl implements BoardService {
                 .boardContent(dailyBoardDTO.getBoardContent())
                 .boardCategory(dailyBoardDTO.getBoardCategory())
                 .boardDogBreeds(dailyBoardDTO.getBoardDogBreeds())
+                .boardType(dailyBoardDTO.getBoardType())
                 .user(memberEntity)
                 .build();
 
@@ -65,6 +66,7 @@ public class BoardServiceImpl implements BoardService {
                     BoardDTO dto = convertToBoardDTO(board);
                     int commentCount = commentRepository.countByBoard(board);
                     dto.setBoardCnt(commentCount);
+                    dto.setUserName(board.getUser().getUserName());
                     return dto;
                 })
                 .collect(Collectors.toList());

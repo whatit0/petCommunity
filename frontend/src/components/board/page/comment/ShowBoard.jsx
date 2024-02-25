@@ -11,7 +11,7 @@ const ShowBoard = () => {
     useEffect(() => {
         const fetchBoardData = async () => {
             try {
-                const response = await fetch(`/api/board/${boardNo}`);
+                const response = await fetch(`http://localhost:8080/api/board/${boardNo}`);
                 const data = await response.json();
                 setBoardData(data);
             } catch (e) {
@@ -24,7 +24,7 @@ const ShowBoard = () => {
     if(!boardData) return <div>Loading...</div>
     return (
         <div className={styles.showboard}>
-            <FrameComponent1 board1={boardData} />
+            <FrameComponent1 board={boardData} />
             <FrameComponent comments={boardData.comments}/>
         </div>
     );

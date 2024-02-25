@@ -59,9 +59,3 @@ public class BoardEntity {
     @JoinColumn(name = "user_no")
     private MemberEntity user;
 }
-
-enum BoardType {
-    DAILY,
-    QUESTION,
-    INFO
-}

@@ -2,7 +2,7 @@ package com.example.petcommunity.dto.board;
 
 
 import lombok.*;
-
+import com.example.petcommunity.entity.board.BoardType;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,8 +19,8 @@ public class BoardDTO {
     private String boardDogBreeds;
     private BoardType boardType;
     private int boardCnt;
-    private int Like;
-    private int unLike;
+    private int boardLike;
+    private int boardunLike;
     private LocalDateTime boardDate;
     private String boardUpload;
     private String userName;
@@ -28,9 +28,4 @@ public class BoardDTO {
     private List<CommentDTO> comments;
     private int commentCount;
 
-    public enum BoardType {
-        DAILY,
-        QUESTION,
-        INFO
-    }
 }
