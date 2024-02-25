@@ -63,6 +63,7 @@ public class SecurityConfig {
                                 "/api/boards",
                                 "/api/boardWrite",
                                 "/api/board/{boardNo}").permitAll()
+                        .requestMatchers("/", "/api/register", "/api/login", "/api/check-userId", "/api/calorie", "/api/age").permitAll()
                         // USER, ADMIN 권한이 있어야 접근 가능
                         .requestMatchers("/api/user/info/{userNo}", "/api/user/update", "/api/user/delete").hasAnyRole("USER", "ADMIN")
                         // ADMIN 권한이 있어야 접근 가능

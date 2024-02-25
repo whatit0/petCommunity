@@ -15,6 +15,10 @@ import WriteBoard from "./components/board/page/write/WriteBoard";
 import TotalBoard from "./components/board/page/total/TotalBoard";
 import ShowBoard from "./components/board/page/comment/ShowBoard";
 import PetHospital from "./components/health/PetHospital";
+import HealthMain from "./components/health/HealthMain";
+import PetCalorie from "./components/health/PetCalorie";
+import PetAge from "./components/health/PetAge";
+import PetBmi from "./components/health/PetBmi";
 
 function App() {
     return (
@@ -37,6 +41,10 @@ function App() {
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
                         {/* 건강 라우트 */}
                         <Route path="/hospital" element={<WithHeader><PetHospital/></WithHeader>}/>
+                        <Route path="/health" element={<WithHeader><HealthMain/></WithHeader>}/>
+                        <Route path="/calorie" element={<WithHeader><PetCalorie/></WithHeader>}/>
+                        <Route path="/bmi" element={<WithHeader><PetBmi/></WithHeader>}/>
+                        <Route path="/age" element={<WithHeader><PetAge/></WithHeader>}/>
                     </Routes>
                 </div>
             </BrowserRouter>

@@ -7,6 +7,7 @@ function MyPageHeader() {
     const navigate = useNavigate();
     const {setIsLoggedIn} = useAuth();
     const [showDropdown, setShowDropdown] = useState(false);
+    const [showServiceDropdown, setShowServiceDropdown] = useState(false);
     const userNo = localStorage.getItem('userNo');
 
     const handleLogout = () => {
@@ -20,6 +21,10 @@ function MyPageHeader() {
         setShowDropdown(!showDropdown);
     };
 
+    const toggleServiceDropdown = () => {
+        setShowServiceDropdown(!showServiceDropdown)
+    };
+
     return (
         <header className="header">
             <div className="logo">
@@ -29,7 +34,15 @@ function MyPageHeader() {
             </div>
             <nav className="navigation">
                 <Link to="/">Home</Link>
-                <Link to="/community">공지사항</Link>
+                <div className="dropdown">
+                    <button onClick={toggleServiceDropdown} className="dropBtn">서비스</button>
+                    {showServiceDropdown && (
+                        <div className="dropdown-content">
+                            <Link to="/service/intro1" className="dropdown-item">건강계산기</Link>
+                            <Link to="/service/intro2" className="dropdown-item">미아서비스</Link>
+                        </div>
+                    )}
+                </div>
                 <Link to="/community">커뮤니티</Link>
                 <div className="dropdown">
                     <button onClick={toggleDropdown} className="dropBtn">마이페이지</button>
@@ -40,6 +53,7 @@ function MyPageHeader() {
                         </div>
                     )}
                 </div>
+                <Link to="/community">공지사항</Link>
             </nav>
             <div className="header-links">
                 <button onClick={handleLogout} className="btn-signup">로그아웃</button>
