@@ -36,10 +36,10 @@ const PetBmi = () => {
         setCatClicked(true);
     };
 
+    // bmi 사진 클릭 시
     const handleDogBmiClick = (index) => {
         setSelectedDogImage(index);
     };
-
     const handleCatBmiClick = (index) => {
         setSelectedCatImage(index);
     };

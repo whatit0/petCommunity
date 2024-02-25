@@ -11,6 +11,7 @@ const PetAge = () => {
     const [catClicked, setCatClicked] = useState(false);
 
 
+    // 계산식
     const handleCalculation = async () => {
         setLoading(true);
         const requestData = { petType, years, months, size: petType === 'dog' ? size : undefined };
@@ -25,7 +26,6 @@ const PetAge = () => {
             const data = await response.json();
             setHumanAge(data.humanMonths === 0 ? `${data.humanYears}살` : `${data.humanYears}살 ${data.humanMonths}개월`);
         } else {
-            // 에러 처리
             console.error('Error fetching data:', response.statusText);
         }
         setLoading(false); // 로딩 종료
