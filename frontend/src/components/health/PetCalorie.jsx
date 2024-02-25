@@ -4,7 +4,6 @@ const PetCalorie = () => {
     const [petType, setPetType] = useState('dog');
     const [weight, setWeight] = useState('');
     const [condition, setCondition] = useState('');
-    const [loading, setLoading] = useState(false);
     // 강아지 RER과 칼로리 상태
     const [dogRer, setDogRer] = useState(null);
     const [dogCalorie, setDogCalorie] = useState(null);
@@ -23,8 +22,6 @@ const PetCalorie = () => {
             weight,
             condition
         };
-
-        setLoading(true);
         try {
             const response = await fetch('http://localhost:8080/api/calorie', {
                 method: 'POST',
@@ -33,13 +30,10 @@ const PetCalorie = () => {
                 },
                 body: JSON.stringify(requestData),
             });
-
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
-
             const data = await response.json();
-
             if (petType === 'dog') {
                 setDogRer(parseFloat(data.dogRer.toFixed(2)));
                 setDogCalorie(parseFloat(data.dogCalorie.toFixed(2)));
@@ -50,12 +44,10 @@ const PetCalorie = () => {
             setIsCalculated(true);
         } catch (error) {
             console.error("There was an error!", error);
-        } finally {
-            setLoading(false);
         }
     };
 
-    // 초기화
+    // 다른 동물 클릭 시 반대편 초기화
     const resetStates = () => {
         setDogCalorie(null);
         setDogRer(null);
@@ -107,12 +99,12 @@ const PetCalorie = () => {
                             <div className='fptxwn'>
                                 <div className={`bQTTNz ${dogClicked ? 'clicked' : ''}`}>
                                     <img src='/images/dog.png' className='fdIoQm'
-                                         onClick={handleDogClick} disabled={loading}/>
+                                         onClick={handleDogClick}/>
                                     <p className='iOsWVx'>강아지</p>
                                 </div>
                                 <div className={`bQTTNz ${catClicked ? 'clicked' : ''}`}>
                                     <img src='/images/cat.png' className='fdIoQm'
-                                    onClick={handleCatClick} disabled={loading}/>
+                                    onClick={handleCatClick}/>
                                     <p className='iOsWVx'>고양이</p>
                                 </div>
                             </div>
@@ -128,7 +120,6 @@ const PetCalorie = () => {
                                     placeholder="몸무게 (소수점 둘째자리까지 입력가능)"
                                     value={weight}
                                     onChange={(e) => setWeight(e.target.value)}
-                                    disabled={loading}
                                     step="0.01"
                                     style={{width:'300px', marginRight:'5px'}}
                                     className='hwqdEQ'
@@ -146,7 +137,6 @@ const PetCalorie = () => {
                                 <select className='select'
                                     value={condition}
                                     onChange={(e) => setCondition(e.target.value)}
-                                    disabled={loading}
                                 >
                                     <option value="">반려동물 상태 선택</option>
                                     {petType === 'dog' ? (
@@ -180,7 +170,7 @@ const PetCalorie = () => {
                         </div>
                     </div>
                     <div className='jBEMOy'>
-                        <button onClick={calculateResult} disabled={loading} className='dDNoAf'>결과보기</button>
+                        <button onClick={calculateResult} className='dDNoAf'>결과보기</button>
                     </div>
                 </div>
             </div>
