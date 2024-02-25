@@ -1,0 +1,607 @@
+.kPZNmC {
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    margin: 0px auto;
+    max-width: 620px;
+    position: relative;
+    height: 400px;
+}
+.kPZNmC2 {
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    margin: 0px auto;
+    max-width: 700px;
+    position: relative;
+    height: 400px;
+}
+.kwyvZj {
+    padding-top: 93px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
+
+.fTYTfl {
+    margin: 0px;
+    white-space: nowrap;
+    color: rgb(9, 9, 9);
+    font-size: 38px;
+    line-height: 1.315em;
+    font-family: LINESeedKR-Bd;
+    margin: 0px;
+ }
+
+.jSXtyK {
+    font-size: 16px;
+    margin: 0px;
+    white-space: nowrap;
+    color: rgb(134, 134, 136);
+}
+
+.hDpDs {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 80px 0px 110px;
+}
+
+@media only screen and (max-width: 961px)
+.tNmRB {
+    max-width: 500px;
+    flex-wrap: wrap;
+}
+ .tNmRB {
+     width: 100%;
+     display: flex;
+     -webkit-box-pack: center;
+     justify-content: center;
+ }
+
+@media only screen and (max-width: 961px)
+ .cHSJLy {
+     margin-bottom: 20px;
+ }
+.cHSJLy {
+    padding: 32px 30px;
+    margin-right: 20px;
+    background-color: rgb(254, 250, 238);
+    width: 220px;
+    height: 300px;
+    border-radius: 14px;
+    position: relative;
+    z-index: 1;
+    box-shadow: rgba(222, 222, 224, 0.65) 0px 30px 20px -10px;
+    box-sizing: border-box;
+}
+
+.htuSpd {
+    color: rgb(9, 9, 9);
+    font-size: 28px;
+    line-height: 1.35em;
+    font-family: LINESeedKR-Bd;
+    margin: 0px;
+}
+
+.ezEwqp {
+    color: rgb(78, 127, 28);
+    font-size: inherit;
+    line-height: inherit;
+    white-space: nowrap;
+}
+
+.hhJxgO {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background-color: rgb(78, 127, 28);
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    border: none;
+    outline: none;
+    font-family: LINESeedKR-Bd;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 961px)
+ .iSougt {
+     margin-bottom: 20px;
+ }
+ .iSougt {
+     padding: 32px 30px;
+     margin-right: 20px;
+     background-color: rgb(247, 244, 255);
+     width: 220px;
+     height: 300px;
+     border-radius: 14px;
+     position: relative;
+     z-index: 1;
+     box-shadow: rgba(222, 222, 224, 0.65) 0px 30px 20px -10px;
+     box-sizing: border-box;
+ }
+.jqoyYi {
+    color: rgb(88, 67, 190);
+    font-size: inherit;
+    line-height: inherit;
+    white-space: nowrap;
+}
+.dbqfBJ {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background-color: rgb(88, 67, 190);
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    border: none;
+    outline: none;
+    font-family: LINESeedKR-Bd;
+}
+
+@media only screen and (max-width: 961px)
+ .izDjXA {
+     margin-bottom: 20px;
+ }
+ .izDjXA {
+     padding: 32px 30px;
+     margin-right: 20px;
+     background-color: rgb(236, 246, 255);
+     width: 220px;
+     height: 300px;
+     border-radius: 14px;
+     position: relative;
+     z-index: 1;
+     box-shadow: rgba(222, 222, 224, 0.65) 0px 30px 20px -10px;
+     box-sizing: border-box;
+ }
+.dVfrqK {
+    color: rgb(59, 116, 200);
+    font-size: inherit;
+    line-height: inherit;
+    white-space: nowrap;
+}
+.cBoJJF {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background-color: rgb(59, 116, 200);
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    border: none;
+    outline: none;
+    font-family: LINESeedKR-Bd;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.dXDVfN1 {
+    width: 350px;
+    height: 330px;
+}
+.dXDVfN2 {
+    width: 350px;
+    height: 350px;
+}
+.dXDVfN {
+    width: 400px;
+    height: 400px;
+}
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+ .jtRxxS {
+     color: rgb(242, 152, 51);
+     font-size: inherit;
+     line-height: inherit;
+     white-space: nowrap;
+ }
+
+/*bmi 페이지 하단 부분*/
+.fNKwjb {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 80px 0px;
+    background-color: rgb(246, 247, 248);
+}
+.hRbrmk {
+    padding: 60px 50px;
+    width: 620px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 14px;
+    box-sizing: border-box;
+    box-shadow: rgba(222, 222, 224, 0.65) 0px 12px 25px -20px;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
+.kYCTRC {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 32px;
+}
+.gJPmZJ {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.YylJn {
+    width: 160px;
+    font-weight: bold;
+    padding: 10px 0px;
+    white-space: pre-line;
+    font-family: LINESeedKR-Bd;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: -0.32px;
+}
+.fptxwn {
+    display: flex;
+    /*flex-wrap: wrap;*/
+    max-width: 360px;
+}
+.fptxwn1 {
+    display: flex;
+    flex-wrap: wrap;
+    /*max-width: 360px;*/
+    margin-right: -130px;
+}
+
+.bQTTNz {
+    border-radius: 10px;
+    background-color: rgb(246, 247, 248);
+    border: 5px solid rgb(246, 247, 248);
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-direction: column;
+    width: 170px;
+    height: 150px;
+    box-sizing: border-box;
+    color: rgb(207, 206, 206);
+    margin-right: 20px;
+    cursor: pointer;
+}
+.bQTTNz.clicked {
+    border: 3px solid #7401DF; /* 테두리 스타일 및 색상을 적절히 조절하세요 */
+    border-radius: 15px; /* 테두리 모서리를 조절하세요 */
+}
+
+.fdIoQm {
+    width: 110px;
+    height: 110px;
+    background: transparent;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+}
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+.iOsWVx {
+    text-align: center;
+    font-weight: bold;
+    font-family: LINESeedKR-Bd;
+    margin: 0px;
+    color: inherit;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.jBEMOy {
+    margin: 60px 70px 0px;
+}
+.dDNoAf {
+    width: 100%;
+    height: 48px;
+    border-radius: 14px;
+    border: none;
+    outline: none;
+    font-family: LINESeedKR-Bd;
+    color: rgb(9, 9, 9);
+    background-color: rgb(252, 209, 30);
+}
+.keZySM {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    background-color: rgb(236, 246, 255);
+    border-radius: 14px;
+    width: 620px;
+    padding: 50px 40px;
+    box-shadow: rgba(222, 222, 224, 0.65) 0px 12px 25px -20px;
+    color: rgb(134, 134, 136);
+    line-height: 1.75em;
+    box-sizing: border-box;
+}
+
+/*칼로리 페이지 부분*/
+.fNKwjb {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 80px 0px;
+    background-color: rgb(246, 247, 248);
+}
+.gtlVxb {
+    width: 100%;
+    max-width: 360px;
+    text-align: right;
+    height: 48px;
+    border-radius: 14px;
+    background-color: rgb(246, 247, 248);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+}
+.hwqdEQ {
+    color: rgb(9, 9, 9);
+    font-family: LINESeedKR-Bd;
+    height: 26px;
+    font-size: 14px;
+    outline: none;
+    border: none;
+    width: 100%;
+    background-color: rgb(246, 247, 248);
+    box-sizing: border-box;
+    text-align: right;
+}
+.exYVIV {
+    padding-right: 21px;
+    width: 21px;
+    height: 26px;
+    text-align: right;
+}
+.gFqYOF {
+    width: 26px;
+    height: 26px;
+    font-family: LINESeedKR-Bd;
+    font-size: 14px;
+    line-height: 1.86;
+    color: rgb(9, 9, 9);
+}
+.bsdMAp {
+    position: relative;
+    font-family: LINESeedKR-Bd;
+    font-size: 14px;
+    width: 100%;
+    max-width: 360px;
+}
+.jBEMOy {
+    margin: 60px 70px 0px;
+}
+.dDNoAf {
+    width: 100%;
+    height: 48px;
+    border-radius: 14px;
+    border: none;
+    outline: none;
+    font-family: LINESeedKR-Bd;
+    color: rgb(9, 9, 9);
+    background-color: rgb(252, 209, 30);
+}
+.goPBwY {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 80px;
+}
+.keJchx {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    background-color: rgb(247, 244, 255);
+    border-radius: 14px;
+    width: 620px;
+    padding: 50px 40px;
+    box-shadow: rgba(222, 222, 224, 0.65) 0px 12px 25px -20px;
+    color: rgb(134, 134, 136);
+    line-height: 1.75em;
+    box-sizing: border-box;
+}
+.kcKeYA {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    margin-bottom: 30px;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.jmelwH {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.jmelwH:last-child {
+    margin-left: 60px;
+}
+.gzlObi {
+    color: rgb(9, 9, 9);
+    font-size: 16px;
+    line-height: 1.416em;
+    font-family: LINESeedKR-Bd;
+    margin: 0px;
+}
+.gzlObi1{
+    color: rgb(9, 9, 9);
+    font-size: 20px;
+    line-height: 1.416em;
+    font-family: LINESeedKR-Bd;
+    margin: 0px;
+}
+.bOhfPC {
+    font-size: 28px;
+    line-height: 38px;
+    color: rgb(88, 67, 190);
+    white-space: nowrap;
+    font-family: LINESeedKR-Bd;
+}
+.kbToWE {
+    text-align: center;
+    margin-top: 8px;
+    white-space: pre-line;
+}
+.select{
+    /*width: 200px;*/
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+.select2{
+    /*width: 200px;*/
+    margin-left: 10px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.select:focus{
+    border: 1px solid #9B51E0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 3px solid #F8E4FF;
+    border-radius: 10px;
+}
+.xlDoj {
+    border-radius: 10px;
+    background-color: rgb(246, 247, 248);
+    border: 5px solid rgb(246, 247, 248);
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-direction: column;
+    width: 110px;
+    height: 110px;
+    box-sizing: border-box;
+    color: rgb(207, 206, 206);
+    margin-right: 15px;
+    cursor: pointer;
+}
+.xlDoj.selected  {
+    border: 2px solid #7401DF; /* 테두리 스타일 및 색상을 적절히 조절하세요 */
+    border-radius: 15px; /* 테두리 모서리를 조절하세요 */
+}
+.xlDojContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px
+}
+
+/*나이 부분*/
+.hiJHbI {
+    display: flex;
+    flex-direction: row;
+}
+.hiJHbI > div {
+    margin-right: 16px;
+}
+ .dlenDA {
+     display: flex;
+     -webkit-box-align: center;
+     align-items: center;
+ }
+.hhwLgv {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(207, 206, 206);
+    min-width: 70px;
+    padding: 0px;
+    margin: 0px;
+    font-family: JalnanOTF;
+    font-size: 14px;
+    line-height: 1.86;
+}
+.cnfVR {
+    padding: 3px 0px;
+    background-color: rgb(246, 247, 248);
+    margin: 0px 10px 0px 0px;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 14px;
+    outline: none;
+}
+.kZWmnH {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    background-color: rgb(255, 243, 229);
+    border-radius: 14px;
+    width: 620px;
+    padding: 50px 40px;
+    box-shadow: rgba(222, 222, 224, 0.65) 0px 12px 25px -20px;
+    color: rgb(134, 134, 136);
+    line-height: 1.75em;
+    box-sizing: border-box;
+}
+.bmcAog {
+    font-size: 28px;
+    line-height: 38px;
+    color: rgb(242, 152, 51);
+}
+.kZWmnH p {
+    margin: 0px;
+}
+ .amJMX {
+     color: rgb(134, 134, 136);
+     font-size: 16px;
+     line-height: 1.75em;
+     font-family: "Apple SD Gothic Neo";
+ }
+
