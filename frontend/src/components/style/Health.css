@@ -336,6 +336,7 @@ p {
     font-family: LINESeedKR-Bd;
     color: rgb(9, 9, 9);
     background-color: rgb(252, 209, 30);
+    cursor: pointer;
 }
 .keZySM {
     text-align: center;
