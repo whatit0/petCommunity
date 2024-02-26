@@ -8,16 +8,18 @@ const ShowBoard = () => {
     const {boardNo} = useParams();
     const [boardData, setBoardData] = useState(null);
 
+
+    const fetchBoardData = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/board/${boardNo}`);
+            const data = await response.json();
+            setBoardData(data);
+        } catch (e) {
+            console.error('board data ERROR : ', e);
+        }
+    };
+
     useEffect(() => {
-        const fetchBoardData = async () => {
-            try {
-                const response = await fetch(`http://localhost:8080/api/board/${boardNo}`);
-                const data = await response.json();
-                setBoardData(data);
-            } catch (e) {
-                console.error('board data ERROR : ', e);
-            }
-        };
         fetchBoardData();
     }, [boardNo]);
 
@@ -25,7 +27,7 @@ const ShowBoard = () => {
     return (
         <div className={styles.showboard}>
             <FrameComponent1 board={boardData} />
-            <FrameComponent comments={boardData.comments}/>
+            <FrameComponent comments={boardData.comments} boardNo={boardNo} fetchBoardData={fetchBoardData}/>
         </div>
     );
 };

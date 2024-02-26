@@ -15,4 +15,5 @@ public class CommentDTO {
     private int commentLike;
     private int commentunLike;
     private String userName;
+    private int boardNo;
 }

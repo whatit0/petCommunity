@@ -10,25 +10,26 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST}, allowCredentials = "true")
 public class BoardController {
 
     private final BoardServiceImpl boardService;
 
-    @PostMapping("/api/boardWrite")
+    @PostMapping("/boardWrite")
     public ResponseEntity<?> boardWrite(@RequestBody BoardDTO boardDTO) {
         System.out.println(boardDTO.toString());
         boardService.saveBoard(boardDTO);
         return ResponseEntity.ok("Success");
     }
 
-    @GetMapping("/api/boards")
+    @GetMapping("/boards")
     public ResponseEntity<List<BoardDTO>> getAllBoards() {
         List<BoardDTO> boards = boardService.getAllBoards();
         return ResponseEntity.ok(boards);
     }
 
-    @GetMapping("/api/board/{boardNo}")
+    @GetMapping("/board/{boardNo}")
     public ResponseEntity<BoardDTO> getBoardDetail(@PathVariable int boardNo) {
         BoardDTO boardDTO = boardService.getBoardDetail(boardNo);
         return ResponseEntity.ok(boardDTO);

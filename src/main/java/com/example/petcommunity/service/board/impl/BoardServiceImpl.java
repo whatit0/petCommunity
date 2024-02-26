@@ -65,7 +65,7 @@ public class BoardServiceImpl implements BoardService {
                 .map(board -> {
                     BoardDTO dto = convertToBoardDTO(board);
                     int commentCount = commentRepository.countByBoard(board);
-                    dto.setBoardCnt(commentCount);
+                    dto.setCommentCount(commentCount);
                     dto.setUserName(board.getUser().getUserName());
                     return dto;
                 })
@@ -87,6 +87,7 @@ public class BoardServiceImpl implements BoardService {
                 .map(this::convertToCommentDTO)
                 .collect(Collectors.toList());
         boardDTO.setComments(commentDTOs);
+        boardDTO.setUserName(board.getUser().getUserName());
         return boardDTO;
     }
 

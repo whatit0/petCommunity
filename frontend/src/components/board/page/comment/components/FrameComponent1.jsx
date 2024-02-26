@@ -13,27 +13,43 @@ const getImgByCategory = (type) => {
             return "/nonePet.svg";
     }
 }
-const getCategoryByType = (type) => {
-    switch (type) {
+const getCategoryByType = (boardCategory, boardDogBreeds) => {
+    switch (boardCategory) {
         case '개':
-            return board.boardDogBreeds;
+            return boardDogBreeds;
         default:
-            return type;
+            return boardCategory;
     }
 }
+
+const timeCalculator = (time) => {
+    const boardDate = new Date(time);
+    const now = new Date();
+    const seconds = Math.floor((now - boardDate) / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+
+    if(seconds < 60) return "방금 전";
+    else if (minutes < 60) return `${minutes}분 전`;
+    else if (hours < 24) return `${hours}시간 전`;
+    else if (days < 7) return `${days}일 전`;
+    else return `${weeks}주 전`;
+};
 
 const FrameComponent1 = ({board}) => {
     return (
         <div className={styles['frame-parent']}>
             <div className={styles['f-r-a-m-e-wrapper']}>
                 <div className={styles['f-r-a-m-e']}>
-                    <button className={styles['rectangle-parent']}>
+                    <div className={styles['rectangle-parent']}>
                         <div className={styles['frame-child']}/>
                         <img className={styles['frame-item']}
                              alt=""
                              src={getImgByCategory(board.boardCategory)}/>
-                        <div className={styles.div}>{getCategoryByType(board.boardCategory)}</div>
-                    </button>
+                        <div className={styles.div}>{getCategoryByType(board.boardCategory, board.boardDogBreeds)}</div>
+                    </div>
                     <h3 className={styles.h3}>{board.boardTitle}</h3>
                 </div>
             </div>
@@ -59,7 +75,7 @@ const FrameComponent1 = ({board}) => {
                                 alt=""
                                 src="/circleuser.svg"
                             />
-                            <div className={styles.div3}>날짜</div>
+                            <div className={styles.div3}>{timeCalculator(board.boardDate)}</div>
                         </div>
                         <div className={styles['vector-y']}>
                             <div className={styles['vuesaxlinearlike-parent']}>
