@@ -1,13 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
 import MessageHeader from "./MessageHeader";
 import MessageForm from "./MessageForm";
-import {child, onChildAdded, off, ref as dbRef, onChildRemoved} from "firebase/database";
-import {db} from '../../../firebase';
+import {child, onChildAdded, off, ref as dbRef, onChildRemoved, getDatabase, get} from "firebase/database";
+import app, {db} from '../../../firebase';
 import {useDispatch, useSelector} from "react-redux";
 import Message from "./Message";
 import message from "./Message";
 import {setUserPosts} from "../../../store/chatRoomSlice";
 import Skeleton from "../../../Skeleton";
+import {getAuth} from "firebase/auth";
 
 const MainPanel = () => {
 
@@ -26,6 +27,32 @@ const MainPanel = () => {
 
     const messageEndRef = useRef(null);
     const dispatch = useDispatch();
+
+    const auth = getAuth(app);
+    const [userInfo, setUserInfo] = useState(null);
+
+    // useEffect를 사용하여 컴포넌트가 마운트될 때 한 번만 사용자 정보를 가져오도록 변경
+    useEffect(() => {
+        const user = auth.currentUser;
+
+        if (user) {
+            // 사용자의 UID를 기반으로 Realtime Database에서 사용자 정보 가져오기
+            const userRef = dbRef(getDatabase(), `users/${user.uid}`);
+
+            // 한 번만 데이터를 읽어오기
+            get(userRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    setUserInfo(userData);
+                    console.log(userData)
+                } else {
+                    console.log('사용자 정보가 존재하지 않습니다.');
+                }
+            }).catch((error) => {
+                console.error('데이터를 가져오는 중에 오류 발생:', error);
+            });
+        }
+    }, [auth.currentUser]); // auth.currentUser가 변경될 때마다 실행
 
     useEffect(() => {
         messageEndRef.current.scrollIntoView({behavior:'smooth'});

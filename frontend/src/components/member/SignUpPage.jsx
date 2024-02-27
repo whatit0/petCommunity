@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import '../style/MemberPage.css';
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
+import { set, ref } from 'firebase/database';
+import app, { db } from '../../components/chat/firebase';
+import { setUser } from "../../components/chat/store/userSlice";
+import { useDispatch } from 'react-redux';
+import {displayName} from "react-quill";
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
@@ -11,6 +17,7 @@ export default function LoginPage() {
     const [userAge, setUserAge] = useState('');
     const [userGender, setUserGender] = useState('');
     const [userAddress, setUserAddress] = useState('');
+    const [email, setEmail] = useState('');
 
     const [userIdValid, setUserIdValid] = useState(null);
     const [userPwdValid, setUserPwdValid] = useState(false);
@@ -18,6 +25,8 @@ export default function LoginPage() {
     const [userGenderValid, setUserGenderValid] = useState(false);
     const [userTelValid, setUserTelValid] = useState(false);
     const [userIdMessage, setUserIdMessage] = useState('');
+
+    const dispatch = useDispatch();
 
     const [notAllow, setNotAllow] = useState(true);
     let debounceCheck; // 디바운싱 타이머 변수
@@ -104,6 +113,7 @@ export default function LoginPage() {
     const handleUserNickname = (e) => setUserNickname(e.target.value);
     const handleUserAge = (e) => setUserAge(e.target.value);
     const handleUserAddress = (e) => setUserAddress(e.target.value);
+    const handleEmail = (e) => setEmail(e.target.value);
 
     useEffect(() => {
         if (userIdValid && userPwdValid && userNameValid && userGenderValid && userTelValid) {
@@ -113,6 +123,8 @@ export default function LoginPage() {
         setNotAllow(true);
     }, [userIdValid, userPwdValid, userNameValid, userGenderValid, userTelValid]);
 
+    const auth = getAuth(app);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!notAllow) {
@@ -121,12 +133,50 @@ export default function LoginPage() {
                     userId,
                     userPwd,
                     userName,
+                    email,
                     userTel,
                     userNickname,
                     userAge,
                     userGender,
                     userAddress
                 });
+
+                // Firebase에 유저 등록
+                const firebaseResponse = await createUserWithEmailAndPassword(auth, email, userPwd);
+
+                // Firebase에서 유저 정보 가져오기
+                const user = firebaseResponse.user;
+
+                // 추가적인 유저 정보를 Firebase에 저장
+                const userRef = ref(db, `users/${user.uid}`);
+                await set(userRef, {
+                    userId: userId,
+                    name: userName,
+                    userNickname: userNickname,
+                    password: userPwd,
+                    email: email,
+                    displayName: userNickname
+                });
+
+                // 사용자 정보를 Redux 스토어에 저장
+                const userData = {
+                    uid: firebaseResponse.user.uid,
+                    displayName: firebaseResponse.user.displayName,
+                    photoURL: firebaseResponse.user.photoURL,
+                    userNickname: userNickname
+                }
+                // userNickname 정보를 추가하여 setUser 액션 호출
+                dispatch(setUser(userData));
+
+                // 사용자 정보를 Firebase에서 가져와서 업데이트
+                const authUser = getAuth().currentUser;
+                dispatch(setUser({
+                    uid: authUser.uid,
+                    displayName: authUser.displayName,
+                    photoURL: authUser.photoURL,
+                    userNickname: userNickname
+                }));
+
                 window.location.href = '/login';
             } catch (error) {
                 console.error("회원가입 오류", error);
@@ -186,6 +236,16 @@ export default function LoginPage() {
                                 <div>올바른 이름을 입력해주세요.</div>
                             )
                         }
+                    </div>
+                    <div style={{marginTop: "26px"}} className="inputTitle">이메일</div>
+                    <div className="inputWrap">
+                        <input
+                            className="input"
+                            name="email"
+                            type='email'
+                            value={email}
+                            placeholder="이름을 입력해주세요."
+                            onChange={handleEmail}/>
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">닉네임</div>
                     <div className="inputWrap">

@@ -4,7 +4,7 @@ const initialState= {
     currentUser: {
         uid: '',
         photoURL: '',
-        displayName: ''
+        displayName: '',
     }
 }
 
