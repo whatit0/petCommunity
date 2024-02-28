@@ -17,7 +17,7 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ## ❄️ Project Architecture
 
-![아키텍쳐](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/9f91a18a-d715-47dc-b589-3bc3b529bf9d)
+![image](https://github.com/Imadeveloperrr/petCommunity/assets/117841714/418903c1-922c-40c3-87b4-8b777abc6aab)
 
 ## 🛠 Backend Tech Stack
 
