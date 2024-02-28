@@ -159,6 +159,10 @@
     position: relative;
     z-index: 1;
 }
+.divWrite:hover {
+    color: #9e30f4;
+    font-weight: bold;
+}
 .editIcon {
     height: 20.2px;
     width: 20.2px;

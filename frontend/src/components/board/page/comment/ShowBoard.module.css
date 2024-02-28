@@ -9,21 +9,21 @@
     justify-content: flex-start;
     padding: 47px var(--padding-xl) 120px;
     box-sizing: border-box;
-    gap: 254px 125px;
+    gap: 50px 125px;
     letter-spacing: normal;
 }
 @media screen and (max-width: 1025px) {
     .showboard {
-        gap: 254px 125px;
+        gap: 50px 125px;
     }
 }
 @media screen and (max-width: 725px) {
     .showboard {
-        gap: 254px 125px;
+        gap: 50px 125px;
     }
 }
 @media screen and (max-width: 450px) {
     .showboard {
-        gap: 254px 125px;
+        gap: 50px 125px;
     }
 }

@@ -57,12 +57,31 @@ public class SecurityConfig {
                 )
                 // 경로별 인가 작업
                 .authorizeHttpRequests(auth -> auth
+
                         // 모든 권한 허용 (permitAll)
-                        .requestMatchers("/", "/api/register", "/api/login", "/api/check-userId").permitAll()
-                        // USER, ADMIN 권한이 있어야 접근 가능
-                        .requestMatchers("/api/user/info/{userNo}", "/api/user/update", "/api/user/delete").hasAnyRole("USER", "ADMIN")
-                        // ADMIN 권한이 있어야 접근 가능
+                        .requestMatchers(
+                                "/",
+                                "/api/register",
+                                "/api/login",
+                                "/api/check-userId",
+                                "/api/boards",
+                                "/api/boardWrite",
+                                "/api/board/{boardNo}",
+                                "/api/comment",
+                                "/api/calorie",
+                                "/api/age"
+                        ).permitAll()
+
+                        // USER, ADMIN 권한이 있어야 접근 가능한 경로
+                        .requestMatchers(
+                                "/api/user/info/{userNo}",
+                                "/api/user/update",
+                                "/api/user/delete"
+                        ).hasAnyRole("USER", "ADMIN")
+
+                        // ADMIN 권한이 있어야 접근 가능한 경로
                         .requestMatchers("/api/user/list").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

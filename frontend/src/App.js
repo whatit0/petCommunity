@@ -15,6 +15,10 @@ import WriteBoard from "./components/board/page/write/WriteBoard";
 import TotalBoard from "./components/board/page/total/TotalBoard";
 import ShowBoard from "./components/board/page/comment/ShowBoard";
 import PetHospital from "./components/health/PetHospital";
+import HealthMain from "./components/health/HealthMain";
+import PetCalorie from "./components/health/PetCalorie";
+import PetAge from "./components/health/PetAge";
+import PetBmi from "./components/health/PetBmi";
 
 function App() {
     return (
@@ -31,12 +35,16 @@ function App() {
                         <Route path="/profile/delete/:userNo" element={<WithHeader><MyDeletePage/></WithHeader>}/>
                         <Route path="/community" element={<WithHeader><TotalBoard /></WithHeader>}/>
                         <Route path="/write" element={<WithHeader><WriteBoard /></WithHeader>} />
-                        <Route path="/showboard" element={<WithHeader><ShowBoard /></WithHeader>} />
+                        <Route path="/showboard/:boardNo" element={<WithHeader><ShowBoard /></WithHeader>} />
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
                         {/* 건강 라우트 */}
                         <Route path="/hospital" element={<WithHeader><PetHospital/></WithHeader>}/>
+                        <Route path="/health" element={<WithHeader><HealthMain/></WithHeader>}/>
+                        <Route path="/calorie" element={<WithHeader><PetCalorie/></WithHeader>}/>
+                        <Route path="/bmi" element={<WithHeader><PetBmi/></WithHeader>}/>
+                        <Route path="/age" element={<WithHeader><PetAge/></WithHeader>}/>
                     </Routes>
                 </div>
             </BrowserRouter>

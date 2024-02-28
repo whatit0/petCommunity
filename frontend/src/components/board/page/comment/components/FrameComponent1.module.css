@@ -23,10 +23,9 @@
     text-align: center;
 }
 .rectangle-parent {
-    cursor: pointer;
     border: 0;
     padding: var(--padding-9xs) var(--padding-3xs) var(--padding-11xs)
-    var(--padding-9xs);
+    10px;
     background-color: var(--color-gainsboro);
     align-self: stretch;
     border-radius: 32.22px;
@@ -34,13 +33,11 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-}
-.rectangle-parent:hover {
-    background-color: var(--color-silver);
+    width: 100%;
 }
 .h3 {
     margin: 0;
-    width: 74px;
+    width: 100%;
     position: relative;
     font-size: inherit;
     font-weight: 400;
@@ -49,12 +46,12 @@
     align-items: center;
 }
 .f-r-a-m-e {
-    width: 77px;
+    width: 115px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-start;
-    gap: var(--gap-3xs);
+    gap: 30px;
 }
 .f-r-a-m-e-wrapper {
     width: 247px;
@@ -62,7 +59,7 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
-    padding: 0 var(--padding-xl) var(--padding-mid);
+    padding: 0 var(--padding-xl) 0;
     box-sizing: border-box;
 }
 .div1,
@@ -88,6 +85,7 @@
     max-width: 100%;
 }
 .content-frame {
+    margin-top: 20px;
     width: 809px;
     flex-direction: row;
     justify-content: center;
@@ -95,7 +93,7 @@
     box-sizing: border-box;
     flex-shrink: 0;
     font-size: var(--font-size-sm);
-    color: var(--color-dimgray-100);
+    color: var(--color-black);
 }
 .frame-parent {
     width: 986px;
@@ -107,6 +105,136 @@
     color: var(--color-black);
     font-family: var(--font-inter);
 }
+
+.frame-container,
+.frame-inner {
+    align-self: stretch;
+    max-width: 100%;
+}
+.frame-inner {
+    position: relative;
+    overflow: hidden;
+    max-height: 100%;
+}
+.frame-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-4xl);
+}
+.user-circle {
+    height: 55px;
+    width: 456px;
+    position: relative;
+    max-width: 100%;
+}
+.user-circle-wrapper {
+    width: 626px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 var(--padding-xl);
+    box-sizing: border-box;
+    max-width: 100%;
+}
+.div2 {
+    position: absolute;
+    top: 6px;
+    left: 23px;
+    display: flex;
+    align-items: center;
+    width: 58px;
+    height: 14px;
+}
+.like-button {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 47px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-9xs);
+    font-size: var(--font-size-2xs);
+    color: var(--color-dimgray-100);
+}
+.circle-user-icon {
+    width: 19px;
+    height: 18px;
+    position: relative;
+}
+.div3 {
+    width: 45.4px;
+    position: relative;
+    line-height: 14.79px;
+    display: inline-block;
+}
+.vector-y {
+    position: absolute;
+    top: 0;
+    left: 364px;
+    width: 92px;
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap-xl);
+    font-size: var(--font-size-3xs);
+}
+.vuesaxlinearlike-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+.vuesaxlinearlike-icon:hover {
+    cursor: pointer;
+}
+.vuesaxlineardislike-icon:hover {
+    cursor: pointer;
+}
+.div4 {
+    margin-left: 5px;
+    align-self: stretch;
+    flex: 1;
+    position: relative;
+}
+.vuesaxlinearlike-parent {
+    align-self: stretch;
+    width: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-xs);
+}
+.vuesaxlineardislike-parent {
+    align-self: stretch;
+    width: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-xs);
+}
+.vuesaxlineardislike-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+.div5 {
+    margin-left: 8px;
+    align-self: stretch;
+    flex: 1;
+    position: relative;
+}
+
+
 @media screen and (max-width: 725px) {
     .frame-parent {
         gap: var(--gap-12xl);
