@@ -33,10 +33,11 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
+    width: 100%;
 }
 .h3 {
     margin: 0;
-    width: 74px;
+    width: 100%;
     position: relative;
     font-size: inherit;
     font-weight: 400;
@@ -92,7 +93,7 @@
     box-sizing: border-box;
     flex-shrink: 0;
     font-size: var(--font-size-sm);
-    color: var(--color-dimgray-100);
+    color: var(--color-black);
 }
 .frame-parent {
     width: 986px;

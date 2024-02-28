@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from "./FrameComponent1.module.css";
+import DOMPurify from 'dompurify';
+import axios from "axios";
 
 const getImgByCategory = (type) => {
     switch (type) {
@@ -39,6 +41,50 @@ const timeCalculator = (time) => {
 };
 
 const FrameComponent1 = ({board}) => {
+    const cleanHTML = DOMPurify.sanitize(board.boardContent);
+    const contentRef = useRef(null);
+    const [likeCount, setLikeCount] = useState(board.boardLike);
+    const [dislikeCount, setDislikeCount] = useState(board.boardunLike);
+    const [userLiked, setUserLiked] = useState(null);
+
+    const toggleLikeDislike = async (isLikeAction) => {
+        try {
+            const response = await axios.post('/api/likes/', {
+                boardId: board.boardNo,
+                isLikeAction: isLikeAction
+            });
+            if (isLikeAction) {
+                if(userLiked) {
+                    setLikeCount(likeCount - 1);
+                } else {
+                    setLikeCount(likeCount + 1);
+                    if (userLiked === false) {
+                        setDislikeCount(dislikeCount - 1);
+                    }
+                }
+            } else {
+                if (userLiked === false) {
+                    setDislikeCount(dislikeCount - 1);
+                } else {
+                    setDislikeCount(dislikeCount + 1);
+                    if (userLiked) {
+                        setLikeCount(likeCount - 1);
+                    }
+                }
+            }
+            setUserLiked(isLikeAction ? !userLiked : null);
+        } catch (error) {
+            console.error('좋아요/싫어요 Action Failed : ', error);
+        }
+    };
+
+        useEffect(() => {
+            if (contentRef.current) {
+                const currentHeight = contentRef.current.scrollHeight;
+                contentRef.current.style.height = `${currentHeight}px`;
+            }
+        }, [cleanHTML]);
+
     return (
         <div className={styles['frame-parent']}>
             <div className={styles['f-r-a-m-e-wrapper']}>
@@ -59,8 +105,8 @@ const FrameComponent1 = ({board}) => {
                 alt=""
                 src="/vector5.svg"
             />
-            <div className={styles['content-frame']}>
-                <div className={styles.div1}>글 내용</div>
+            <div className={styles['content-frame']} ref={contentRef}>
+                <div className={styles.div1} dangerouslySetInnerHTML={{__html: cleanHTML}}></div>
             </div>
 
 
@@ -84,8 +130,9 @@ const FrameComponent1 = ({board}) => {
                                     loading="eager"
                                     alt=""
                                     src="/like.svg"
+                                    onClick={() => toggleLikeDislike(true)}
                                 />
-                                <div className={styles.div4}>{board.boardLike}</div>
+                                <div className={styles.div4}>{likeCount}</div>
                             </div>
                             <div className={styles['vuesaxlineardislike-parent']}>
                                 <img
@@ -93,8 +140,9 @@ const FrameComponent1 = ({board}) => {
                                     loading="eager"
                                     alt=""
                                     src="/dislike.svg"
+                                    onClick={() => toggleLikeDislike(false)}
                                 />
-                                <div className={styles.div5}>{board.boardunLike}</div>
+                                <div className={styles.div5}>{dislikeCount}</div>
                             </div>
                         </div>
                     </div>
