@@ -1,5 +1,6 @@
 package com.example.petcommunity.service.board.impl;
 
+import com.example.petcommunity.dto.board.LikeDTO;
 import com.example.petcommunity.entity.board.BoardEntity;
 import com.example.petcommunity.entity.board.UserBoardLike;
 import com.example.petcommunity.entity.member.MemberEntity;
@@ -27,12 +28,9 @@ public class LikeServiceImpl implements LikeService {
     @Autowired
     private UserBoardLikeRepository userBoardLikeRepository;
     @Override
-    public void toggleLike(int boardId, boolean isLikeAction) {
-
-
-        BoardEntity board = boardRepository.findById(boardId)
+    public LikeDTO toggleLike(LikeDTO likedto) {
+        BoardEntity board = boardRepository.findById(likedto.getBoardNo())
                 .orElseThrow(() -> new IllegalArgumentException("게시물을 찾을 수 없습니다."));
-
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByUserId(authentication.getName());
@@ -41,36 +39,48 @@ public class LikeServiceImpl implements LikeService {
 
         Optional<UserBoardLike> userBoardLikeOpt = userBoardLikeRepository.findByUserAndBoard(user, board);
 
-        if (userBoardLikeOpt.isPresent()) {
-            UserBoardLike userBoardLike = userBoardLikeOpt.get();
-            // 현재 상태와 반대로 설정
-            if (isLikeAction) {
-                boolean currentLikeStatus = userBoardLike.getIsLiked() != null && userBoardLike.getIsLiked();
-                userBoardLike.setIsLiked(!currentLikeStatus);
-                if (currentLikeStatus) {
-                    board.setBoardLike(board.getBoardLike() - 1); // 좋아요 취소
-                } else {
-                    board.setBoardLike(board.getBoardLike() + 1); // 좋아요
+        if (userBoardLikeOpt.isPresent()) { // 데이터가 있다면
+            UserBoardLike userBoardLike = userBoardLikeOpt.get(); // userBoardLike에 get
+
+            if (userBoardLike.getIsLiked() != null) {
+                if (userBoardLike.getIsLiked() == likedto.isLikeAction()) { // dto랑 db랑 같다면
+                    // 같은 액션을 다시 수행하면 상태를 취소
+                    userBoardLike.setIsLiked(null);
+                    if (likedto.isLikeAction()) {
+                        board.setBoardLike(board.getBoardLike() - 1);
+                    } else {
+                        board.setBoardunLike(board.getBoardunLike() - 1);
+                    }
+                } else { // 액션이 서로 다르다면
+                    // 좋아요와 싫어요를 전환
+                    userBoardLike.setIsLiked(likedto.isLikeAction());
+                    if (likedto.isLikeAction()) {
+                        board.setBoardLike(board.getBoardLike() + 1);
+                        board.setBoardunLike(board.getBoardunLike() - 1);
+                    } else {
+                        board.setBoardLike(board.getBoardLike() - 1);
+                        board.setBoardunLike(board.getBoardunLike() + 1);
+                    }
                 }
             } else {
-                // 싫어요 로직 처리
-                boolean currentDislikeStatus = userBoardLike.getIsLiked() != null && !userBoardLike.getIsLiked();
-                userBoardLike.setIsLiked(currentDislikeStatus ? null : false);
-                if (currentDislikeStatus) {
-                    board.setBoardunLike(board.getBoardunLike() - 1); // 싫어요 취소
+                // 처음 상태 설정
+                userBoardLike.setIsLiked(likedto.isLikeAction());
+                if (likedto.isLikeAction()) {
+                    board.setBoardLike(board.getBoardLike() + 1);
                 } else {
-                    board.setBoardunLike(board.getBoardunLike() + 1); // 싫어요
+                    board.setBoardunLike(board.getBoardunLike() + 1);
                 }
             }
+            userBoardLikeRepository.save(userBoardLike);
         } else {
-
+            // 새 좋아요/싫어요 기록 생성
             UserBoardLike newUserBoardLike = new UserBoardLike();
             newUserBoardLike.setBoard(board);
             newUserBoardLike.setUser(user);
-            newUserBoardLike.setIsLiked(isLikeAction ? true : false);
+            newUserBoardLike.setIsLiked(likedto.isLikeAction());
             userBoardLikeRepository.save(newUserBoardLike);
 
-            if (isLikeAction) {
+            if (likedto.isLikeAction()) {
                 board.setBoardLike(board.getBoardLike() + 1);
             } else {
                 board.setBoardunLike(board.getBoardunLike() + 1);
@@ -78,5 +88,12 @@ public class LikeServiceImpl implements LikeService {
         }
 
         boardRepository.save(board);
+
+        return LikeDTO.builder()
+                .boardNo(board.getBoardNo())
+                .boardLike(board.getBoardLike())
+                .boardunLike(board.getBoardunLike())
+                .isLikeAction(likedto.isLikeAction())
+                .build();
     }
 }

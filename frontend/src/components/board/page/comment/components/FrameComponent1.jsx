@@ -48,31 +48,20 @@ const FrameComponent1 = ({board}) => {
     const [userLiked, setUserLiked] = useState(null);
 
     const toggleLikeDislike = async (isLikeAction) => {
+        const token = localStorage.getItem('userToken');
         try {
-            const response = await axios.post('/api/likes/', {
-                boardId: board.boardNo,
+            const response = await axios.post('http://localhost:8080/api/likes/toggle', {
+                boardNo: board.boardNo,
                 isLikeAction: isLikeAction
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
             });
-            if (isLikeAction) {
-                if(userLiked) {
-                    setLikeCount(likeCount - 1);
-                } else {
-                    setLikeCount(likeCount + 1);
-                    if (userLiked === false) {
-                        setDislikeCount(dislikeCount - 1);
-                    }
-                }
-            } else {
-                if (userLiked === false) {
-                    setDislikeCount(dislikeCount - 1);
-                } else {
-                    setDislikeCount(dislikeCount + 1);
-                    if (userLiked) {
-                        setLikeCount(likeCount - 1);
-                    }
-                }
-            }
-            setUserLiked(isLikeAction ? !userLiked : null);
+            setLikeCount(response.data.boardLike);
+            setDislikeCount(response.data.boardunLike);
+            //setUserLiked(response.data.isLikeAction);
         } catch (error) {
             console.error('좋아요/싫어요 Action Failed : ', error);
         }
