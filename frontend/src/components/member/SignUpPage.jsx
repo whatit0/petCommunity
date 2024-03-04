@@ -7,6 +7,8 @@ import app, { db } from '../../components/chat/firebase';
 import { setUser } from "../../components/chat/store/userSlice";
 import { useDispatch } from 'react-redux';
 import {displayName} from "react-quill";
+import { initializeApp } from 'firebase/app';
+import { getDatabase } from 'firebase/database';
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
@@ -133,7 +135,6 @@ export default function LoginPage() {
                     userId,
                     userPwd,
                     userName,
-                    email,
                     userTel,
                     userNickname,
                     userAge,
@@ -141,19 +142,20 @@ export default function LoginPage() {
                     userAddress
                 });
 
-                // Firebase에 유저 등록
-                const firebaseResponse = await createUserWithEmailAndPassword(auth, email, userPwd);
+                const Id = userId;
+                const email = `${Id}@domain.com`;
+                const password = userPwd;
 
-                // Firebase에서 유저 정보 가져오기
-                const user = firebaseResponse.user;
+                // 회원가입시 유저 아이디 뒤에 가상의 도메인 주소를 넣어 이메일 형식으로 파이어베이스 가입
+                const firebaseResponse = await createUserWithEmailAndPassword(auth, email, password)
 
                 // 추가적인 유저 정보를 Firebase에 저장
-                const userRef = ref(db, `users/${user.uid}`);
+                const userRef = ref(db, `users/${firebaseResponse.user.uid}`);
                 await set(userRef, {
-                    userId: userId,
+                    userId: Id,
                     name: userName,
                     userNickname: userNickname,
-                    password: userPwd,
+                    password: password,
                     email: email,
                     displayName: userNickname
                 });
@@ -167,6 +169,8 @@ export default function LoginPage() {
                 }
                 // userNickname 정보를 추가하여 setUser 액션 호출
                 dispatch(setUser(userData));
+
+                console.log('Redux 스토어로부터 사용자 정보 : ', userData)
 
                 // 사용자 정보를 Firebase에서 가져와서 업데이트
                 const authUser = getAuth().currentUser;
@@ -236,16 +240,6 @@ export default function LoginPage() {
                                 <div>올바른 이름을 입력해주세요.</div>
                             )
                         }
-                    </div>
-                    <div style={{marginTop: "26px"}} className="inputTitle">이메일</div>
-                    <div className="inputWrap">
-                        <input
-                            className="input"
-                            name="email"
-                            type='email'
-                            value={email}
-                            placeholder="이름을 입력해주세요."
-                            onChange={handleEmail}/>
                     </div>
                     <div style={{marginTop: "26px"}} className="inputTitle">닉네임</div>
                     <div className="inputWrap">

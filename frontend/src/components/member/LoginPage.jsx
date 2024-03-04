@@ -3,15 +3,14 @@ import '../style/MemberPage.css';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from '../../AuthContext';
-import { onAuthStateChanged, getAuth } from 'firebase/auth';
+import {onAuthStateChanged, getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import { useDispatch } from 'react-redux';
-import {clearUser, setUser} from "../chat/store/userSlice";
-import app, { db } from '../../components/chat/firebase';
 
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
     const [userPwd, setUserPwd] = useState('');
+    const [email, setEmail] = useState('');
     const [userIdValid, setUserIdValid] = useState(false);
     const [userPwdValid, setUserPwdValid] = useState(false);
     const [notAllow, setNotAllow] = useState(true);
@@ -37,6 +36,7 @@ export default function LoginPage() {
         setUserPwdValid(regex.test(newPassword));
     }
 
+
     useEffect(() => {
         setNotAllow(!(userIdValid && userPwdValid));
     }, [userIdValid, userPwdValid]);
@@ -52,42 +52,17 @@ export default function LoginPage() {
                     userId,
                     userPwd,
                 });
-                if (response.data && response.data.accessToken) {
-                    // Firebase Authentication에서 사용자 정보 가져오기
-                    const auth = getAuth(app);
+                const email = `${userId}@domain.com`;
+                const password = userPwd;
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log("로그인 성공:", user.uid);
 
-                    // 직접 Firebase에서 유저 정보 가져오기
-                    const authUser = auth.currentUser;
-
-                    auth.onAuthStateChanged((user) => {
-                        if (user) {
-                            // user 정보를 사용하여 로그인된 사용자의 정보를 업데이트
-                            console.log('Updated Auth User:', user);
-                        } else {
-                            // 사용자가 로그아웃된 경우
-                            console.log('User is logged out.');
-                        }
-                    });
-
-                    if (authUser) {
-                        // Redux 스토어에 사용자 정보 업데이트
-                        dispatch(setUser({
-                            uid: authUser.uid,
-                            displayName: authUser.displayName,
-                            photoURL: authUser.photoURL,
-                            // ... 기타 사용자 정보 필드 추가
-                        }));
-
-                        localStorage.setItem('userToken', response.data.accessToken);
-                        setIsLoggedIn(true);
-                        navigate('/chat');
-                        console.log('userId', userId)
-                        console.log('authUser', authUser)
-                    } else {
-                        // Redux 스토어에 사용자 정보 초기화
-                        dispatch(clearUser());
-                    }
-                }
+                    localStorage.setItem('userToken', response.data.accessToken);
+                    await signInWithEmailAndPassword(auth, email, userPwd);
+                    setIsLoggedIn(true);
+                    navigate('/chat');
+                    console.log(userId)
             } catch (error) {
                 if (error.response) {
                     const errorMessage = error.response.data.message || "아이디와 비밀번호를 올바르게 입력하세요.";
