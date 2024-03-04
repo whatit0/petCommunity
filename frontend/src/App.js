@@ -19,6 +19,7 @@ import HealthMain from "./components/health/HealthMain";
 import PetCalorie from "./components/health/PetCalorie";
 import PetAge from "./components/health/PetAge";
 import PetBmi from "./components/health/PetBmi";
+import ChatPage from "./components/chat/pages/ChatPage/ChatPage";
 
 function App() {
     return (
@@ -39,6 +40,8 @@ function App() {
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
+                        {/*채팅 라우트*/}
+                        <Route path="/chat" element={<WithHeader><ChatPage/></WithHeader>}/>
                         {/* 건강 라우트 */}
                         <Route path="/hospital" element={<WithHeader><PetHospital/></WithHeader>}/>
                         <Route path="/health" element={<WithHeader><HealthMain/></WithHeader>}/>
