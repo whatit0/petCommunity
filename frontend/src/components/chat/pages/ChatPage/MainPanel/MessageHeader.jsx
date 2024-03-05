@@ -99,6 +99,7 @@ const MessageHeader = ({handleSearchChange}) => {
             </Row>
             {!isPrivateChatRoom &&
             <div style={{display:'flex', justifyContent:'flex-end'}}>
+                <p>방장 : </p>&nbsp;&nbsp;
                 <Image
                     roundedCircle
                     src={currentChatRoom?.createdBy.image}

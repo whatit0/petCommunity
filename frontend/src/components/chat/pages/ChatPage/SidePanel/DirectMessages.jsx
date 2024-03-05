@@ -58,7 +58,7 @@ const DirectMessages = () => {
         users.map(user => (
             <li key={user.uid} style={{backgroundColor:user.uid === activeChatRoom ?"#ffffff45" : ""}}
             onClick={() => changeChatRoom(user)}>
-                # {user.name}
+                # {user.userNickname}
             </li>
         ))
 

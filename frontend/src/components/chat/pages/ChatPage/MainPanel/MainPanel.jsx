@@ -78,7 +78,6 @@ const MainPanel = () => {
                     name: DataSnapshot.val()
                 });
                 setTypingUsers(typingUsers);
-                console.log('typing users : ', typingUsers)
             }
         })
         onChildRemoved(child(typingRef, chatRoomId), DataSnapshot => {
@@ -153,8 +152,8 @@ const MainPanel = () => {
     const renderTypingUsers = (typingUsers) =>
         typingUsers.length > 0 &&
         typingUsers.map(user => (
-            <span key={user.id}>
-                {user.name}님이 채팅을 입력중입니다...
+            <span key={user.name.userUid}>
+                {user.name.userUid}님이 채팅을 입력중입니다...
             </span>
         ))
 
