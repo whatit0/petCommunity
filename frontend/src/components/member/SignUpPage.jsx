@@ -7,9 +7,6 @@ import app, { db } from '../../components/chat/firebase';
 import { setUser } from "../../components/chat/store/userSlice";
 import { useDispatch } from 'react-redux';
 import md5 from 'md5';
-import {displayName} from "react-quill";
-import { initializeApp } from 'firebase/app';
-import { getDatabase } from 'firebase/database';
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
@@ -169,10 +166,7 @@ export default function LoginPage() {
                     displayName: createdUser.user.displayName,
                     photoURL: createdUser.user.photoURL,
                 }
-                // userNickname 정보를 추가하여 setUser 액션 호출
                 dispatch(setUser(userData));
-                console.log('Redux 스토어로부터 사용자 정보 : ', userData)
-
                 window.location.href = '/login';
             } catch (error) {
                 console.error("회원가입 오류", error);

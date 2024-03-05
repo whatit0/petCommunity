@@ -116,16 +116,6 @@ const MessageHeader = ({handleSearchChange}) => {
                         </div>
                         <h6># {currentChatRoom?.description}</h6>
                     </div>
-                    {/*<Accordion>*/}
-                    {/*    <Accordion.Item eventKey='0'>*/}
-                    {/*        <Accordion.Header>채팅방 소개</Accordion.Header>*/}
-                    {/*        <Accordion.Collapse eventKey='0'>*/}
-                    {/*            <Accordion.Body>*/}
-                    {/*                {currentChatRoom?.description}*/}
-                    {/*            </Accordion.Body>*/}
-                    {/*        </Accordion.Collapse>*/}
-                    {/*    </Accordion.Item>*/}
-                    {/*</Accordion>*/}
                 </Col>
                 <Col>
                     <Accordion>

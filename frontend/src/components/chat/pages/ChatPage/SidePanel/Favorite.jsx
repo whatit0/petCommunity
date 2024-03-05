@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {FaRegSmileBeam} from "react-icons/fa";
 import {child, onChildAdded, ref, off, onChildRemoved} from "firebase/database";
 import {db} from '../../../firebase';
 import {useDispatch, useSelector} from "react-redux";

@@ -15,47 +15,9 @@ const UserPanel = () => {
     const auth = getAuth(app);
     const inputOpenImageRef = useRef(null);
     const navigate = useNavigate();
-    const [userInfo, setUserInfo] = useState(null);
+
     // Redux 스토어에서 currentUser 가져오기
     const { currentUser } = useSelector((state) => state.user);
-
-    // useEffect를 사용하여 컴포넌트가 마운트될 때 한 번만 사용자 정보를 가져오도록 변경
-    useEffect(() => {
-        // onAuthStateChanged 이벤트 리스너 등록
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // 사용자의 UID를 기반으로 Realtime Database에서 사용자 정보 가져오기
-                const uid = user.uid;
-                // Realtime Database에서 사용자 정보를 가져오기 위한 참조 생성
-                const userRef = dbRef(db, `users/${uid}`);
-
-                // 한 번만 데이터를 읽어오기
-                getDatabase(userRef)
-                    .then((snapshot) => {
-                        if (snapshot.exists()) {
-                            const userData = snapshot.val();
-                            const userNickname = userData.userNickname;
-                            console.log('사용자의 닉네임:', userNickname);
-                            // 가져온 사용자 정보를 state에 저장
-                            setUserInfo(userData);
-                            console.log('asdad',userData)
-                        } else {
-                            console.log('사용자 정보가 존재하지 않습니다.');
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('데이터를 가져오는 중에 오류 발생:', error);
-                    });
-            } else {
-                // 로그아웃 상태일 때, 사용자 정보 초기화
-                setUserInfo(null);
-            }
-        });
-        // 컴포넌트 언마운트 시 이벤트 리스너 해제
-        return () => unsubscribe();
-    }, [auth]); // currentUser가 변경될 때마다 실행
-
-
 
     const handleLogout = () => {
         signOut(auth)
@@ -110,9 +72,7 @@ const UserPanel = () => {
                     case 'storage/canceled':
                         // User canceled the upload
                         break;
-
                     // ...
-
                     case 'storage/unknown':
                         // Unknown error occurred, inspect error.serverResponse
                         break;
@@ -135,7 +95,6 @@ const UserPanel = () => {
             }
         );
     };
-    console.log(currentUser);
 
     return (
         <div>
@@ -147,7 +106,7 @@ const UserPanel = () => {
                 <Image src={currentUser.photoURL} roundedCircle style={{ width: 30, height: 30, marginTop: 3 }} />
                 <Dropdown>
                     <Dropdown.Toggle style={{ backgroundColor: 'transparent', border: 0 }}>
-                        {userInfo?.userNickname}
+                        {currentUser.displayName}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>

@@ -5,7 +5,6 @@ import {child, onChildAdded, off, ref as dbRef, onChildRemoved, getDatabase, get
 import app, {db} from '../../../firebase';
 import {useDispatch, useSelector} from "react-redux";
 import Message from "./Message";
-import message from "./Message";
 import {setUserPosts} from "../../../store/chatRoomSlice";
 import Skeleton from "../../../Skeleton";
 import {getAuth} from "firebase/auth";
@@ -29,7 +28,6 @@ const MainPanel = () => {
     const dispatch = useDispatch();
 
     const auth = getAuth(app);
-    const [userInfo, setUserInfo] = useState(null);
 
     // useEffect를 사용하여 컴포넌트가 마운트될 때 한 번만 사용자 정보를 가져오도록 변경
     useEffect(() => {
@@ -43,8 +41,7 @@ const MainPanel = () => {
             get(userRef).then((snapshot) => {
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
-                    setUserInfo(userData);
-                    console.log(userData)
+                    console.log('userData',userData)
                 } else {
                     console.log('사용자 정보가 존재하지 않습니다.');
                 }
@@ -88,7 +85,6 @@ const MainPanel = () => {
             }
         })
     }
-
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);

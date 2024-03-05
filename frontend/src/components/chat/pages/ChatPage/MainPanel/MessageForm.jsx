@@ -3,8 +3,6 @@ import {set, child, push, ref as dbRef, serverTimestamp, update, remove} from "f
 import {db, storage} from '../../../firebase';
 import {useSelector} from "react-redux";
 import {getDownloadURL, ref as strRef, uploadBytesResumable} from "firebase/storage";
-import {updateProfile} from "firebase/auth";
-import {setPhotoUrl} from "../../../store/userSlice";
 import {ProgressBar} from "react-bootstrap";
 
 const MessageForm = () => {

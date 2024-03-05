@@ -4,7 +4,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from '../../AuthContext';
 import {jwtDecode} from 'jwt-decode';
-import {onAuthStateChanged, getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -21,7 +21,6 @@ export default function LoginPage() {
     const {setIsLoggedIn} = useAuth();
 
     const auth = getAuth();
-    const dispatch = useDispatch();
 
     const handleUserId = (e) => {
         const newId = e.target.value;
@@ -56,10 +55,8 @@ export default function LoginPage() {
                     const password = userPwd;
                     const userCredential = await signInWithEmailAndPassword(auth, email, password);
                     const user = userCredential.user;
-                    console.log("로그인 성공:", user.uid);
-
-                    // currentUser를 콘솔에 출력하여 확인
                     console.log(currentUser);
+
                     localStorage.setItem('userToken', response.data["accessToken"]);
                     localStorage.setItem('userNo', decodedToken["userNo"]);
                     setIsLoggedIn(true);

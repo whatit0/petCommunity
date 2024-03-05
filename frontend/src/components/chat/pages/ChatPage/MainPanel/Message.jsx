@@ -3,7 +3,6 @@ import Image from "react-bootstrap/Image";
 import moment from "moment";
 
 const Message = ({message, user}) => {
-
     const timeFromNow = timestamp => moment(timestamp).fromNow()
     const isImage = message => {
         if(message.image){
