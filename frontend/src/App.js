@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {AuthProvider, useAuth} from './AuthContext';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { clearUser, setUser } from "./components/chat/store/userSlice";
+import app from "./components/chat/firebase";
 import IndexPage from './components/home/IndexPage';
 import Header from './components/header/Header';
 import MyPageHeader from './components/header/MyPageHeader';
@@ -22,6 +26,28 @@ import PetBmi from "./components/health/PetBmi";
 import ChatPage from "./components/chat/pages/ChatPage/ChatPage";
 
 function App() {
+    const dispatch = useDispatch();
+    const auth = getAuth(app);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userData = {
+                    uid: user.uid,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
+                }
+                dispatch(setUser(userData));
+            } else {
+                dispatch(clearUser());
+            }
+        });
+        return () => {
+            unsubscribe();
+        }
+    }, []);
+
+
     return (
         <AuthProvider>
             <BrowserRouter>

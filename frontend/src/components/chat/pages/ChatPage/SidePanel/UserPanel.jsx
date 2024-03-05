@@ -21,48 +21,41 @@ const UserPanel = () => {
 
     // useEffect를 사용하여 컴포넌트가 마운트될 때 한 번만 사용자 정보를 가져오도록 변경
     useEffect(() => {
-        // 현재 인증된 사용자 가져오기
-        const user = auth.currentUser;
-        if (user) {
-            // 사용자의 UID를 기반으로 Realtime Database에서 사용자 정보 가져오기
-            const uid = user.uid; // 사용자가 로그인한 경우에만 UID 가져오기
-
-            // Realtime Database에서 사용자 정보를 가져오기 위한 참조 생성
-            const userRef = dbRef(db, `users/${uid}`);
-
-            // 한 번만 데이터를 읽어오기
-            getDatabase(userRef)
-                .then((snapshot) => {
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        const userNickname = userData.userNickname;
-                        console.log('사용자의 닉네임:', userNickname);
-
-                        // 가져온 사용자 정보를 state에 저장
-                        setUserInfo(userData);
-                    } else {
-                        console.log('사용자 정보가 존재하지 않습니다.');
-                    }
-                })
-                .catch((error) => {
-                    console.error('데이터를 가져오는 중에 오류 발생:', error);
-                });
-        }
-    }, [auth]); // currentUser가 변경될 때마다 실행
-
-    // 로그인 상태 변화 감지 및 currentUser 업데이트
-    useEffect(() => {
+        // onAuthStateChanged 이벤트 리스너 등록
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                // 로그인 된 경우, Redux 스토어에 사용자 정보 업데이트
-                // 여기서 Redux 스토어에 업데이트하는 로직이 있는지 확인해야 합니다.
-                // dispatch(setCurrentUser(user));
+                // 사용자의 UID를 기반으로 Realtime Database에서 사용자 정보 가져오기
+                const uid = user.uid;
+                // Realtime Database에서 사용자 정보를 가져오기 위한 참조 생성
+                const userRef = dbRef(db, `users/${uid}`);
+
+                // 한 번만 데이터를 읽어오기
+                getDatabase(userRef)
+                    .then((snapshot) => {
+                        if (snapshot.exists()) {
+                            const userData = snapshot.val();
+                            const userNickname = userData.userNickname;
+                            console.log('사용자의 닉네임:', userNickname);
+                            // 가져온 사용자 정보를 state에 저장
+                            setUserInfo(userData);
+                            console.log('asdad',userData)
+                        } else {
+                            console.log('사용자 정보가 존재하지 않습니다.');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('데이터를 가져오는 중에 오류 발생:', error);
+                    });
             } else {
-                // 로그아웃 된 경우 등 필요한 처리 수행
+                // 로그아웃 상태일 때, 사용자 정보 초기화
+                setUserInfo(null);
             }
         });
-        return () => unsubscribe(); // 컴포넌트 언마운트 시 이벤트 리스너 해제
-    }, [auth]);
+        // 컴포넌트 언마운트 시 이벤트 리스너 해제
+        return () => unsubscribe();
+    }, [auth]); // currentUser가 변경될 때마다 실행
+
+
 
     const handleLogout = () => {
         signOut(auth)

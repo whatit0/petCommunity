@@ -6,6 +6,7 @@ import {useAuth} from '../../AuthContext';
 import {jwtDecode} from 'jwt-decode';
 import {onAuthStateChanged, getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
@@ -35,6 +36,7 @@ export default function LoginPage() {
         const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@%*#^?&\\()\-_=+]).{8,16}$/;
         setUserPwdValid(regex.test(newPassword));
     }
+    const currentUser = useSelector((state) => state.user.currentUser);
 
     useEffect(() => {
         setNotAllow(!(userIdValid && userPwdValid));
@@ -55,6 +57,9 @@ export default function LoginPage() {
                     const userCredential = await signInWithEmailAndPassword(auth, email, password);
                     const user = userCredential.user;
                     console.log("로그인 성공:", user.uid);
+
+                    // currentUser를 콘솔에 출력하여 확인
+                    console.log(currentUser);
                     localStorage.setItem('userToken', response.data["accessToken"]);
                     localStorage.setItem('userNo', decodedToken["userNo"]);
                     setIsLoggedIn(true);
