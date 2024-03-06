@@ -8,7 +8,8 @@ const TotalBoard = () => {
     const [boards, setBoards] = useState([]);
     const [sortBy, setSortBy] = useState('latest');
     const [searchText, setSearchText] = useState('');
-
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(0);
     const getTabClassName = (tabName) => {
         return selectedTap === tabName ? `${styles.div} ${styles.selectedTab}` : styles.div;
     };
