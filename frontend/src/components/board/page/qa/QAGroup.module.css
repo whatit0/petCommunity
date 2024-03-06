@@ -15,17 +15,12 @@
 .qa {
     z-index: 1;
 }
-.frameChild {
-    height: 17.7px;
-    width: 48.3px;
-    border-radius: 32.22px;
-    background-color: var(--color-gainsboro);
-    display: none;
-}
 .frameItem {
     height: 13.7px;
     width: 13.7px;
     min-height: 14px;
+    margin-right: 5px;
+    margin-left: 3px;
 }
 .div,
 .frameItem {
@@ -56,6 +51,10 @@
     font-size: var(--font-size-2xs-8);
     text-align: left;
     z-index: 1;
+}
+.infoBox:hover {
+    cursor: pointer;
+    font-weight: bold;
 }
 .contentdiv {
     align-self: stretch;

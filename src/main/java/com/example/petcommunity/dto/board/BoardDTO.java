@@ -2,6 +2,9 @@ package com.example.petcommunity.dto.board;
 
 
 import lombok.*;
+import com.example.petcommunity.entity.board.BoardType;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,10 +18,13 @@ public class BoardDTO {
     private String boardCategory;
     private String boardDogBreeds;
     private BoardType boardType;
+    private int boardLike;
+    private int boardunLike;
+    private LocalDateTime boardDate;
+    private String boardUpload;
+    private String userName;
 
-    public enum BoardType {
-        DAILY,
-        QUESTION,
-        INFO
-    }
+    private List<CommentDTO> comments;
+    private int commentCount;
+
 }

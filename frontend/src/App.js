@@ -35,7 +35,7 @@ function App() {
                         <Route path="/profile/delete/:userNo" element={<WithHeader><MyDeletePage/></WithHeader>}/>
                         <Route path="/community" element={<WithHeader><TotalBoard /></WithHeader>}/>
                         <Route path="/write" element={<WithHeader><WriteBoard /></WithHeader>} />
-                        <Route path="/showboard" element={<WithHeader><ShowBoard /></WithHeader>} />
+                        <Route path="/showboard/:boardNo" element={<WithHeader><ShowBoard /></WithHeader>} />
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
