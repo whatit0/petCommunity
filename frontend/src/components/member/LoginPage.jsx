@@ -4,6 +4,9 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from '../../AuthContext';
 import {jwtDecode} from 'jwt-decode';
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
@@ -16,6 +19,8 @@ export default function LoginPage() {
 
     const navigate = useNavigate();
     const {setIsLoggedIn} = useAuth();
+
+    const auth = getAuth();
 
     const handleUserId = (e) => {
         const newId = e.target.value;
@@ -30,6 +35,7 @@ export default function LoginPage() {
         const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@%*#^?&\\()\-_=+]).{8,16}$/;
         setUserPwdValid(regex.test(newPassword));
     }
+    const currentUser = useSelector((state) => state.user.currentUser);
 
     useEffect(() => {
         setNotAllow(!(userIdValid && userPwdValid));
@@ -45,6 +51,12 @@ export default function LoginPage() {
                 });
                 if (response.data && response.data["accessToken"]) {
                     const decodedToken = jwtDecode(response.data["accessToken"]);
+                    const email = `${userId}@domain.com`;
+                    const password = userPwd;
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    console.log(currentUser);
+
                     localStorage.setItem('userToken', response.data["accessToken"]);
                     localStorage.setItem('userNo', decodedToken["userNo"]);
                     setIsLoggedIn(true);

@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import '../style/MemberPage.css';
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
+import { set, ref } from 'firebase/database';
+import app, { db } from '../../components/chat/firebase';
+import { setUser } from "../../components/chat/store/userSlice";
+import { useDispatch } from 'react-redux';
+import md5 from 'md5';
 
 export default function LoginPage() {
     const [userId, setUserId] = useState('');
@@ -21,6 +27,9 @@ export default function LoginPage() {
 
     const [notAllow, setNotAllow] = useState(true);
     let debounceCheck; // 디바운싱 타이머 변수
+
+    const auth = getAuth(app);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         return () => {
@@ -113,6 +122,7 @@ export default function LoginPage() {
         setNotAllow(true);
     }, [userIdValid, userPwdValid, userNameValid, userGenderValid, userTelValid]);
 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!notAllow) {
@@ -127,6 +137,36 @@ export default function LoginPage() {
                     userGender,
                     userAddress
                 });
+                const Id = userId;
+                const email = `${Id}@domain.com`;
+                const password = userPwd;
+
+                // 회원가입시 유저 아이디 뒤에 가상의 도메인 주소를 넣어 이메일 형식으로 파이어베이스 가입
+                const createdUser = await createUserWithEmailAndPassword(auth, email, password)
+
+                // 사용자 프로필 업데이트
+                await updateProfile(createdUser.user, {
+                    displayName: userNickname,
+                    photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
+                });
+
+                // 추가적인 유저 정보를 Firebase에 저장
+                const userRef = ref(db, `users/${createdUser.user.uid}`);
+                await set(userRef, {
+                    uid: createdUser.user.uid,
+                    displayName: createdUser.user.displayName,
+                    userNickname: userNickname,
+                    password: password,
+                    email: email,
+                });
+
+                // 사용자 정보를 Redux 스토어에 저장
+                const userData = {
+                    uid: createdUser.user.uid,
+                    displayName: createdUser.user.displayName,
+                    photoURL: createdUser.user.photoURL,
+                }
+                dispatch(setUser(userData));
                 window.location.href = '/login';
             } catch (error) {
                 console.error("회원가입 오류", error);
