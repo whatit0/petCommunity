@@ -1,20 +1,43 @@
 .footer {
-    display: flex;
-    justify-content: center;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
     align-items: center;
     padding: 20px;
     background-color: #f8f9fa;
     bottom: 0;
     width: 100%;
+    /*height: 10px;*/
 }
 
 .footer a {
     margin: 0 10px;
     color: #333;
-    font-size: 24px;
+    font-size: 12px;
     text-decoration: none;
 }
 
 .footer a:hover {
     color: #666;
+}
+
+.name{
+    grid-gap: 1.5em;
+    gap: 1.5em;
+    padding: 0 27px;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0 12px;
+    display: flex;
+    margin: initial;
+}
+
+li {
+    font-size: 12px;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
 }
