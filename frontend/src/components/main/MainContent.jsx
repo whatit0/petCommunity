@@ -8,16 +8,7 @@ function MainContent() {
             <section className="recommendation-section">
                 <h2 className="recommendation-title">추천 컨텐츠</h2>
                 <div className="cards-container">
-                    <Card
-                        image="/logo512.png"
-                        title="동적으로 수정해야함"
-                        description="유광진"
-                    />
-                    <Card
-                        image="/logo512.png"
-                        title="동적으로 수정해야함"
-                        description="유광진"
-                    />
+
                 </div>
             </section>
         </main>
