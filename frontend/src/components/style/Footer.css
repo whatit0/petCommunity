@@ -7,10 +7,11 @@
     bottom: 0;
     width: 100%;
     /*height: 10px;*/
+    position: absolute;
 }
 
 .footer a {
-    margin: 0 10px;
+    margin: 0 5px;
     color: #333;
     font-size: 12px;
     text-decoration: none;
@@ -35,9 +36,16 @@
 
 li {
     font-size: 12px;
+    margin-right: 10px;
 }
 
 nav{
     display: flex;
     justify-content: space-between;
+}
+
+.notion {
+    width: 17px;
+    border-radius: 30%;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .15));
 }
