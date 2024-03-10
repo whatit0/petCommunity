@@ -6,7 +6,7 @@ const IndexPage = () => {
     return (
         <>
             <MainContent />
-            <Footer />
+            {/*<Footer />*/}
         </>
     );
 };

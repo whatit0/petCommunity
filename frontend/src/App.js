@@ -24,6 +24,7 @@ import PetCalorie from "./components/health/PetCalorie";
 import PetAge from "./components/health/PetAge";
 import PetBmi from "./components/health/PetBmi";
 import ChatPage from "./components/chat/pages/ChatPage/ChatPage";
+import Footer from "./components/footer/Footer";
 
 function App() {
     const dispatch = useDispatch();
@@ -86,6 +87,7 @@ function WithHeader({children}) {
         <>
             <AuthComponent/>
             {children}
+            <Footer/>
         </>
     );
 }
