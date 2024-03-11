@@ -89,6 +89,7 @@ function WithHeader({children}) {
         <>
             <AuthComponent/>
             {children}
+            <Footer/>
         </>
     );
 }

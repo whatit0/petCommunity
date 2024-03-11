@@ -19,13 +19,21 @@ function Header() {
                     <button onClick={toggleServiceDropdown} className="dropBtn">서비스</button>
                     {showServiceDropdown && (
                         <div className="dropdown-content">
-                            <Link to="/health" className="dropdown-item">건강계산기</Link>
-                            <Link to="/hospital" className="dropdown-item">지도</Link>
                             <Link to="/service/intro2" className="dropdown-item">미아서비스</Link>
+                            <Link to="/health" className="dropdown-item">건강계산기</Link>
+                            <Link to="/hospital" className="dropdown-item">동물병원</Link>
                         </div>
                     )}
                 </div>
-                <Link to="/community">커뮤니티</Link>
+                <div className="dropdown">
+                    <button onClick={toggleServiceDropdown} className="dropBtn">커뮤니티</button>
+                    {showServiceDropdown && (
+                        <div className="dropdown-content">
+                            <Link to="/community" className="dropdown-item">게시판</Link>
+                            <Link to="/chat" className="dropdown-item">채팅</Link>
+                        </div>
+                    )}
+                </div>
                 <Link to="/announcement">공지사항</Link>
             </nav>
             <div className="header-links">
