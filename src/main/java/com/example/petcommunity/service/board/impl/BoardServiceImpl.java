@@ -13,6 +13,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -58,18 +60,16 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardDTO> getAllBoards() {
-        List<BoardEntity> boardEntities = boardRepository.findAll();
+    public Page<BoardDTO> getAllBoards(Pageable pageable) {
+        Page<BoardEntity> boardEntities = boardRepository.findAll(pageable);
 
-        List<BoardDTO> boardDTOs = boardEntities.stream()
-                .map(board -> {
+        Page<BoardDTO> boardDTOs = boardEntities.map(board -> {
                     BoardDTO dto = convertToBoardDTO(board);
                     int commentCount = commentRepository.countByBoard(board);
                     dto.setCommentCount(commentCount);
                     dto.setUserName(board.getUser().getUserName());
                     return dto;
-                })
-                .collect(Collectors.toList());
+                });
 
         return boardDTOs;
     }
