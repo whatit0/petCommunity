@@ -9,19 +9,9 @@ const TotalBoard = () => {
     const [sortBy, setSortBy] = useState('latest');
     const [searchText, setSearchText] = useState('');
     const [page, setPage] = useState(0);
-    const [size, setSize] = useState(0);
+    const [pagingInfo, setPagingInfo] = useState({});
     const getTabClassName = (tabName) => {
         return selectedTap === tabName ? `${styles.div} ${styles.selectedTab}` : styles.div;
-    };
-
-    const sortBoards = (boards) => {
-        return boards.slice().sort((a, b) => {
-            if (sortBy === 'latest') {
-                return new Date(b.boardDate) - new Date(a.boardDate);
-            } else if (sortBy === 'popular') {
-                return b.boardLike - a.boardLike;
-            }
-        });
     };
 
     const sortAndFilterBoards = () => {
@@ -60,12 +50,29 @@ const TotalBoard = () => {
         setSearchText(e.target.value);
     };
 
+    const handleNextPage = () => {
+        setPage((prevPage) =>
+            prevPage + 1 < pagingInfo.totalPages ? prevPage + 1 : prevPage);
+    };
+    const handlePreviousPage = () => {
+        setPage((prevPage) =>
+            prevPage - 1 >= 0 ? prevPage -1 : prevPage);
+    };
+
         useEffect(() => {
-            fetch('http://localhost:8080/api/boards')
+            fetch(`http://localhost:8080/api/boards?page=${page}&size=10`)
                 .then(response => response.json())
-                .then(data => setBoards(data))
+                .then(data => {
+                    setBoards(data.content);
+                    setPagingInfo({
+                        totalPages: data.totalPages,
+                        totalElements: data.totalElements,
+                        currentPage: data.number,
+                        size: data.size,
+                    });
+                })
                 .catch(error => console.error('fetching Error : ', error));
-        }, []);
+        }, [page]);
 
     return (
         <div className={styles.desktop2}>
@@ -117,6 +124,12 @@ const TotalBoard = () => {
                 {sortAndFilterBoards().map((board) => (
                     <QAGroup key={board.boardNo} board={board} />
                 ))}
+            </div>
+
+            <div>
+                <button onClick={handlePreviousPage} disabled={page === 0}>이전</button>
+                <span>페이지 {page + 1} / {pagingInfo.totalPages}</span>
+                <button onClick={handleNextPage} disabled={page + 1 >= pagingInfo.totalPages}>다음</button>
             </div>
         </div>
     );

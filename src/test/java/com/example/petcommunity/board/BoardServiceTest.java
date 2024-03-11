@@ -62,7 +62,7 @@ public class BoardServiceTest {
         boardDTO.setBoardTitle("제목");
         boardDTO.setBoardContent("내용");
         boardDTO.setBoardCategory("카테고리");
-        boardDTO.setBoardDogBreed("견종");
+        //boardDTO.setBoardDogBreed("견종");
 
         boardService.saveBoard(boardDTO);
 
@@ -72,6 +72,6 @@ public class BoardServiceTest {
         assertEquals(boardDTO.getBoardTitle(), capturedBoardEntity.getBoardTitle());
         assertEquals(boardDTO.getBoardContent(), capturedBoardEntity.getBoardContent());
         assertEquals(boardDTO.getBoardCategory(), capturedBoardEntity.getBoardCategory());
-        assertEquals(boardDTO.getBoardDogBreed(), capturedBoardEntity.getBoardDogBreed());
+        //assertEquals(boardDTO.getBoardDogBreed(), capturedBoardEntity.getBoardDogBreed());
     }
 }

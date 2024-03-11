@@ -3,6 +3,7 @@ import styles from "./WriteBoard.module.css";
 import QuillEditor from "./QuillEditor";
 import {CustomToolbar} from "./CustomToolbar";
 import FrameComponent from "./category";
+import {useNavigate} from "react-router-dom";
 
 const WriteBoard = () => {
     const [title, setTitle] = useState("");
@@ -10,6 +11,7 @@ const WriteBoard = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [content, setContent] = useState("");
     const [boardType, setBoardType] = useState("");
+    const navigate = useNavigate();
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -63,6 +65,7 @@ const WriteBoard = () => {
             });
             if(response.ok) {
                 console.log("글이 성공적으로 등록되었습니다.");
+                navigate('/community');
             } else {
                 console.log("글 등록에 실패했습니다.");
             }

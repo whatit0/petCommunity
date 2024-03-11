@@ -24,6 +24,8 @@ import PetCalorie from "./components/health/PetCalorie";
 import PetAge from "./components/health/PetAge";
 import PetBmi from "./components/health/PetBmi";
 import ChatPage from "./components/chat/pages/ChatPage/ChatPage";
+import MissingMain from "./components/missing/MissingMain";
+import Footer from "./components/footer/Footer";
 
 function App() {
     const dispatch = useDispatch();
@@ -63,6 +65,7 @@ function App() {
                         <Route path="/community" element={<WithHeader><TotalBoard /></WithHeader>}/>
                         <Route path="/write" element={<WithHeader><WriteBoard /></WithHeader>} />
                         <Route path="/showboard/:boardNo" element={<WithHeader><ShowBoard /></WithHeader>} />
+                        <Route path="/missing" element={<WithHeader><MissingMain /></WithHeader>} />
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
