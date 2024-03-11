@@ -17,7 +17,8 @@ public class UserBoardLike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "like_no")
+    private Long likeNo;
 
     @ManyToOne
     @JoinColumn(name = "user_no")

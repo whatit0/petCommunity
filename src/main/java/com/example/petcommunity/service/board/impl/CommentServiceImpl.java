@@ -34,7 +34,6 @@ public class CommentServiceImpl implements CommentService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByUserId(authentication.getName());
-
         if (optionalMemberEntity.isEmpty()) {
             throw new IllegalArgumentException("사용자를 찾을 수 없습니다.");
         }

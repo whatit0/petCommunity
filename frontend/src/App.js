@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {AuthProvider, useAuth} from './AuthContext';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { clearUser, setUser } from "./components/chat/store/userSlice";
+import app from "./components/chat/firebase";
 import IndexPage from './components/home/IndexPage';
 import Header from './components/header/Header';
 import MyPageHeader from './components/header/MyPageHeader';
@@ -19,8 +23,33 @@ import HealthMain from "./components/health/HealthMain";
 import PetCalorie from "./components/health/PetCalorie";
 import PetAge from "./components/health/PetAge";
 import PetBmi from "./components/health/PetBmi";
+import ChatPage from "./components/chat/pages/ChatPage/ChatPage";
+import MissingMain from "./components/missing/MissingMain";
+import Footer from "./components/footer/Footer";
 
 function App() {
+    const dispatch = useDispatch();
+    const auth = getAuth(app);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userData = {
+                    uid: user.uid,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
+                }
+                dispatch(setUser(userData));
+            } else {
+                dispatch(clearUser());
+            }
+        });
+        return () => {
+            unsubscribe();
+        }
+    }, []);
+
+
     return (
         <AuthProvider>
             <BrowserRouter>
@@ -36,9 +65,12 @@ function App() {
                         <Route path="/community" element={<WithHeader><TotalBoard /></WithHeader>}/>
                         <Route path="/write" element={<WithHeader><WriteBoard /></WithHeader>} />
                         <Route path="/showboard/:boardNo" element={<WithHeader><ShowBoard /></WithHeader>} />
+                        <Route path="/missing" element={<WithHeader><MissingMain /></WithHeader>} />
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
+                        {/*채팅 라우트*/}
+                        <Route path="/chat" element={<WithHeader><ChatPage/></WithHeader>}/>
                         {/* 건강 라우트 */}
                         <Route path="/hospital" element={<WithHeader><PetHospital/></WithHeader>}/>
                         <Route path="/health" element={<WithHeader><HealthMain/></WithHeader>}/>
