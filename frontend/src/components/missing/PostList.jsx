@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styles from "./PostList.module.css"
-import MissingShow from "./conten;t/MissingShow";
-import MissingWrite from "./conten;t/MissingWrite";
+import MissingShow from "./content/MissingShow";
+import MissingWrite from "./content/MissingWrite";
 
 const PostList = () => {
 
