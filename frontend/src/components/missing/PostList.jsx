@@ -20,7 +20,18 @@ const PostList = () => {
                 {view === "show" ? <MissingShow /> : <MissingWrite />}
             </div>
             <nav className={styles['footer']}>
-                <button onClick={handleButtonClick}> 글 쓰 기 </button>
+                <div className={styles['footer-icon']} onClick={handleButtonClick}>
+                    <img className={styles['footer-img']} src="/home.svg" alt="HOME"/>
+                    <span color="darkGray"> 홈 </span>
+                </div>
+                <div className={styles['footer-icon']} onClick={handleButtonClick}>
+                    <img className={styles['footer-img']} src="/pencil.svg" alt="PENCIL"/>
+                    <span color="darkGray"> 글쓰기 </span>
+                </div>
+                <div className={styles['footer-icon']} onClick={handleButtonClick}>
+                    <img className={styles['footer-img']} src="/user.svg" alt="user"/>
+                    <span color="darkGray"> 내정보 </span>
+                </div>
             </nav>
         </div>
 

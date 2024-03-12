@@ -1,41 +1,51 @@
-
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 const MapContainer = ({ onLocationSelect }) => {
     const [map, setMap] = useState(null);
     const [marker, setMarker] = useState(null);
 
     useEffect(() => {
-        const mapOptions = {
-            center: new window.naver.maps.LatLng(37.5665, 126.9780),
-            zoom: 10
-        };
+        if (!map) { // 지도가 아직 생성되지 않았다면
+            const mapOptions = {
+                center: new window.naver.maps.LatLng(37.5665, 126.9780),
+                zoom: 10,
+            };
+            const newMap = new window.naver.maps.Map('map', mapOptions);
+            setMap(newMap);
+        }
 
-        const map = new window.naver.maps.Map('map', mapOptions);
-        setMap(map);
+        if (map) { // 지도가 생성된 후에 이벤트 리스너를 추가
+            const clickListener = window.naver.maps.Event.addListener(map, 'click', function (e) {
+                const lat = e.coord.lat();
+                const lng = e.coord.lng();
 
-        window.naver.maps.Event.addListener(map, 'click', function (e) {
-            const lat = e.coord.lat(); // 위도
-            const lng = e.coord.lng(); // 경도
+                if (marker) {
+                    marker.setMap(null);
+                }
+                const markerOption = {
+                    position: new window.naver.maps.LatLng(lat, lng),
+                    map: map,
+                    icon: {
+                        content: '<img src="/dog.svg" alt="마커 아이콘" style="width:30px; height:30px;"/>',
+                        size: new window.naver.maps.Size(33, 33),
+                        origin: new window.naver.maps.Point(0, 0),
+                        anchor: new window.naver.maps.Point(10, 10)
+                    }
+                };
+                const newMarker = new window.naver.maps.Marker(markerOption);
+                setMarker(newMarker);
 
-            // 기존 카머가 있다면 삭제
-            if (marker) {
-                marker.setMap(null);
-            }
-
-            //새 마커 생성 및 지도에 추가
-            const newMarker = new window.naver.maps.Marker({
-                position: new window.naver.maps.LatLng(lat, lng),
-                map: map
+                onLocationSelect({ lat, lng });
             });
-            setMarker(newMarker);
 
-            //선택된 위치의 좌표를 상위 컴포넌트로 전달
-            onLocationSelect({lat, lng});
-        });
-    }, [onLocationSelect, marker]);
-    return (
-        <div id="map" style={{ width: '100%', height: '100vh' }}></div>
-    );
+            // 클린업 함수에서 이벤트 리스너 제거
+            return () => {
+                window.naver.maps.Event.removeListener(clickListener);
+            };
+        }
+    }, [map, onLocationSelect, marker]); // 의존성 배열 수정
+
+    return <div id="map" style={{ width: '100%', height: '100vh' }}></div>;
 };
+
 export default MapContainer;
