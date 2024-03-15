@@ -12,7 +12,6 @@ import com.example.petcommunity.service.board.BoardService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -34,7 +33,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     @Transactional
-    public void saveBoard(BoardDTO dailyBoardDTO) throws IllegalArgumentException{
+    public void saveBoard(BoardDTO dailyBoardDTO) throws IllegalArgumentException {
         if (!StringUtils.hasText(dailyBoardDTO.getBoardTitle())) {
             throw new IllegalArgumentException("게시글 제목은 필수입니다.");
         }
@@ -64,12 +63,12 @@ public class BoardServiceImpl implements BoardService {
         Page<BoardEntity> boardEntities = boardRepository.findAll(pageable);
 
         Page<BoardDTO> boardDTOs = boardEntities.map(board -> {
-                    BoardDTO dto = convertToBoardDTO(board);
-                    int commentCount = commentRepository.countByBoard(board);
-                    dto.setCommentCount(commentCount);
-                    dto.setUserName(board.getUser().getUserName());
-                    return dto;
-                });
+            BoardDTO dto = convertToBoardDTO(board);
+            int commentCount = commentRepository.countByBoard(board);
+            dto.setCommentCount(commentCount);
+            dto.setUserName(board.getUser().getUserName());
+            return dto;
+        });
 
         return boardDTOs;
     }

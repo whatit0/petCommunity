@@ -54,32 +54,40 @@
 
 .cards-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center; /* 중앙 정렬을 원하면 'center'로 변경하세요 */
     flex-wrap: wrap;
-    gap: 50px;
-    padding-left: 260px;
+    gap: 200px; /* 카드 사이의 간격을 조정할 수 있습니다. */
+    padding-left: 15px; /* 필요하다면 이 값을 조정하세요. */
 }
 
 .card {
-    width: 300px;
+    width: 300px; /* 카드의 너비를 조정하세요. */
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
-    margin-right: 200px;
+    margin-bottom: 20px; /* 카드 사이의 수직 간격 */
 }
 
 .card h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin: 0 0 10px 0;
 }
 
 .card p {
-    margin: 0;
-    color: gray;
+    margin: 0 0 10px 0;
+    color: black;
+    font-weight: bold;
+}
+
+.card .author {
+    margin-bottom: 20px;
 }
 
 .card img {
     width: 100%;
     height: auto;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
