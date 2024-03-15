@@ -29,7 +29,7 @@ function MyPageHeader() {
         <header className="header">
             <div className="logo">
                 <Link to="/">
-                    <img src="/logo.jpg" alt="Logo"/>
+                    <img src="/logo.png" alt="Logo"/>
                 </Link>
             </div>
             <nav className="navigation">
@@ -38,7 +38,7 @@ function MyPageHeader() {
                     <button onClick={toggleServiceDropdown} className="dropBtn">서비스</button>
                     {showServiceDropdown && (
                         <div className="dropdown-content">
-                            <Link to="/service/intro2" className="dropdown-item">미아서비스</Link>
+                            <Link to="/missing" className="dropdown-item">미아서비스</Link>
                             <Link to="/health" className="dropdown-item">건강계산기</Link>
                             <Link to="/hospital" className="dropdown-item">동물병원</Link>
                         </div>
