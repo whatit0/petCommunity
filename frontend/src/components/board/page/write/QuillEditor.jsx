@@ -1,6 +1,9 @@
 import React, {useState, useMemo, useRef} from 'react'; // useState와 useMemo를 import
-import ReactQuill from 'react-quill'; // { Quill } 제거
+import ReactQuill, {Quill} from 'react-quill'; // { Quill } 제거
 import 'react-quill/dist/quill.snow.css';
+import ImageResize from 'quill-image-resize'
+
+Quill.register("modules/ImageResize", ImageResize);
 
 const formats = [
     'font',
@@ -19,6 +22,7 @@ const formats = [
     'background',
     'size',
     'h1',
+    'image',
 ];
 
 const QuillEditor = ({ onChange }) => { // 'export default function' 제거 및 정의 방식 변경
@@ -30,6 +34,10 @@ const QuillEditor = ({ onChange }) => { // 'export default function' 제거 및 
             toolbar: {
                 container: "#toolbar",
             },
+            ImageResize: {
+                parchment: Quill.import("parchment"),
+                modules: ["Resize", "DisplaySize"],
+            },
         };
     }, []);
 
@@ -39,6 +47,19 @@ const QuillEditor = ({ onChange }) => { // 'export default function' 제거 및 
             setValues(html);
             onChange(html);
         }
+    };
+
+    const imageHandler = () => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+        input.onchange = async () => {
+            const file = input.files[0];
+            const imageURL = await uploadImageToGoogleDrive(file);
+            const range = quillRef.current.getEditor().getSelection(true);
+            quillRef.current.getEditor().insertEmbed(range.index, 'image', imageURL);
+        };
     };
 
     return (
