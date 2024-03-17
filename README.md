@@ -23,6 +23,7 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 - Spring boot
 - MariaDB
+- firebase
 - Nginx
 - react
 - spring security + jwt token
@@ -51,7 +52,7 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ## 🛠 Frontend Tech Stack
 
-- react
+- React
 
 
 ## 🌧 Frontend Library
