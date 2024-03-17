@@ -3,6 +3,7 @@ package com.example.petcommunity.dto.board;
 
 import lombok.*;
 import com.example.petcommunity.entity.board.BoardType;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
