@@ -12,6 +12,7 @@
     font-size: 24px;
     color: #9e30f4;
     width: 100%;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 .content {
@@ -31,4 +32,22 @@
     box-shadow: rgba(0, 0, 0, 0.3) 0px -1px 8px;
     position: absolute;
     bottom: 0;
+}
+
+.footer-icon {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 52px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(118, 118, 118);
+    line-height: 160%;
+}
+
+.footer-img {
+    width: 24px;
+    height: 24px;
 }

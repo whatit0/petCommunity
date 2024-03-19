@@ -65,7 +65,7 @@ function App() {
                         <Route path="/community" element={<WithHeader><TotalBoard /></WithHeader>}/>
                         <Route path="/write" element={<WithHeader><WriteBoard /></WithHeader>} />
                         <Route path="/showboard/:boardNo" element={<WithHeader><ShowBoard /></WithHeader>} />
-                        <Route path="/missing" element={<WithHeader><MissingMain /></WithHeader>} />
+                        <Route path="/missing" element={<WithHeader showFooter={false}><MissingMain /></WithHeader>} />
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
@@ -84,12 +84,12 @@ function App() {
     );
 }
 
-function WithHeader({children}) {
+function WithHeader({children, showFooter = true}) {
     return (
         <>
             <AuthComponent/>
             {children}
-            <Footer/>
+            {showFooter && <Footer/>}
         </>
     );
 }
