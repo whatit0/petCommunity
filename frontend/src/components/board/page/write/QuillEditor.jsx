@@ -1,7 +1,9 @@
 import React, {useState, useMemo, useRef} from 'react'; // useState와 useMemo를 import
 import ReactQuill, {Quill} from 'react-quill'; // { Quill } 제거
+import { storage } from '../../../chat/firebase';
+import { getDownloadURL, ref as strRef, uploadBytesResumable } from "firebase/storage";
 import 'react-quill/dist/quill.snow.css';
-import ImageResize from 'quill-image-resize'
+import ImageResize from 'quill-image-resize';
 
 Quill.register("modules/ImageResize", ImageResize);
 
@@ -29,17 +31,34 @@ const QuillEditor = ({ onChange }) => { // 'export default function' 제거 및 
     const [values, setValues] = useState(""); // 초기값 설정 (예: 빈 문자열)
     const quillRef = useRef(null);
 
-    const modules = useMemo(() => {
-        return {
-            toolbar: {
-                container: "#toolbar",
-            },
-            ImageResize: {
-                parchment: Quill.import("parchment"),
-                modules: ["Resize", "DisplaySize"],
-            },
+    const imageHandler = () => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+        input.onchange = async () => {
+            const file = input.files[0];
+            if (!file) return;
+            const fileRef = strRef(storage, `images/board/${file.name}`);
+            const uploadTask = uploadBytesResumable(fileRef, file);
+
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // 업로드 진행 상황을 사용자에게 표시할 수 있음
+                },
+                (error) => {
+                    console.error("Image upload failed:", error);
+                    // 에러 처리 로직
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        const range = quillRef.current.getEditor().getSelection(true);
+                        quillRef.current.getEditor().insertEmbed(range.index, 'image', downloadURL);
+                    });
+                }
+            );
         };
-    }, []);
+    };
 
     const handleChange = (content, delta, source, editor) => {
         if (quillRef.current && quillRef.current.editor) {
@@ -49,18 +68,21 @@ const QuillEditor = ({ onChange }) => { // 'export default function' 제거 및 
         }
     };
 
-    const imageHandler = () => {
-        const input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-        input.click();
-        input.onchange = async () => {
-            const file = input.files[0];
-            const imageURL = await uploadImageToGoogleDrive(file);
-            const range = quillRef.current.getEditor().getSelection(true);
-            quillRef.current.getEditor().insertEmbed(range.index, 'image', imageURL);
+    const modules = useMemo(() => {
+        return {
+            toolbar: {
+                container: "#toolbar",
+                handlers: {
+                    'image': imageHandler,
+                }
+            },
+            ImageResize: {
+                parchment: Quill.import("parchment"),
+                modules: ["Resize", "DisplaySize"],
+            },
         };
-    };
+    }, []);
+
 
     return (
         <ReactQuill

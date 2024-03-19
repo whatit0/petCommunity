@@ -95,6 +95,10 @@
     font-size: var(--font-size-sm);
     color: var(--color-black);
 }
+.content-frame img {
+    max-width: 100%;
+    height: auto;
+}
 .frame-parent {
     width: 986px;
     flex-direction: column;
