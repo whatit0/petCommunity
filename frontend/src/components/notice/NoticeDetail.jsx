@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import "../../style/notice.css";
+import "../style/notice.css";
 
 function NoticeDetail() {
     const location = useLocation();

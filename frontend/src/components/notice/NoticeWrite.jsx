@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import "../../style/notice.css";
+import "../style/notice.css";
 import { useNavigate } from "react-router-dom";
 import {getDownloadURL, ref as strRef, uploadBytesResumable} from "firebase/storage";
-import {db, storage} from "../../chat/firebase";
+import {db, storage} from "../chat/firebase";
 import {child, push, ref as dbRef, set} from "firebase/database";
 
 function NoticeWrite() {
