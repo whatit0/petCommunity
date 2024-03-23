@@ -69,7 +69,10 @@ public class SecurityConfig {
                                 "/api/board/{boardNo}",
                                 "/api/comment",
                                 "/api/calorie",
-                                "/api/age"
+                                "/api/age",
+                                "/api/notices",
+                                "/api/noticeWrite",
+                                "/api/noticeDetail/{noticeNo}"
                         ).permitAll()
 
                         // USER, ADMIN 권한이 있어야 접근 가능한 경로

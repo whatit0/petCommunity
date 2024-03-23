@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Pagination from "react-js-pagination";
 import { Link, useNavigate } from 'react-router-dom';
-import "../../style/notice.css";
+import "../style/notice.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../style/bootstrap.css';
+import '../style/bootstrap.css';
 import {jwtDecode} from "jwt-decode";
 
 function NoticeList() {
