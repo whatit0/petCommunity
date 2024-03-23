@@ -34,7 +34,7 @@ function Header() {
                         </div>
                     )}
                 </div>
-                <Link to="/announcement">공지사항</Link>
+                <Link to="/notice">공지사항</Link>
             </nav>
             <div className="header-links">
                 <Link to="/login" className="btn-login">로그인</Link>

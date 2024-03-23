@@ -27,7 +27,7 @@ function AdminHeader() {
             </div>
             <nav className="navigation">
                 <Link to="/">Home</Link>
-                <Link to="/admin/community">공지사항 관리</Link>
+                <Link to="/notice">공지사항 관리</Link>
                 <Link to="/admin/community">커뮤니티 관리</Link>
                 <div className="dropdown">
                     <button onClick={toggleDropdown} className="dropBtn">회원 관리</button>

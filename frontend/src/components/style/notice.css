@@ -1,0 +1,281 @@
+/**{ padding: 0; margin: 0; font-family: 'Pretendard', sans-serif; font-size: 13px; color: #444; -webkit-font-smoothing: antialiased; }*/
+/*input, select, textarea, button, label{font-size: 14px; vertical-align: middle; }*/
+button{
+    background-color: transparent;
+    cursor: pointer;
+    border: 0px;
+}
+/*textarea{padding: 5px 10px; box-sizing: border-box; }*/
+/*li{ list-style: none; padding: 0; margin: 0;}*/
+/*a{ text-decoration: none; cursor: pointer; }*/
+/*img{ border: none; }*/
+/*table{ border-collapse:collapse; border-spacing: 0px; }*/
+/*address{ font-style: normal; }*/
+/*fieldset{ border: none; }*/
+/*legend{ position: absolute; left: -999em; }*/
+/*input[type=button], input[type=submit], input[type=reset], input[type=image], button{  }*/
+/*label.away{ position: absolute; left: -999em; }*/
+/*input::placeholder {color:#888; font-size: 14px; font-weight: 300;}*/
+/*caption{text-indent: -9999em; width: 1px; height: 1px; margin-top: -1px; line-height: 1px; overflow: hidden; }*/
+/*body{font-family: 'AppleSDGothicNeo', 'Pretendard', sans-serif; position: relative;}*/
+.material-symbols-rounded {
+    font-variation-settings:
+            'FILL' 0,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 40
+}
+p {
+    margin-block-end: 0rem!important;
+    margin-bottom: 0rem!important;
+}
+
+
+
+
+
+#board .sub_box{
+    width: 1200px;
+    min-height: 700px;
+    margin: 60px auto;
+
+}
+#board .main_list{
+    padding: 10px 0;
+}
+#board .main_list .main_list_column{
+    padding: 18px 0;
+    border-top: 1.5px solid #000;
+    border-bottom: 1px solid #ddd;
+}
+#board .main_list p span{
+    font-size: 14px;
+    text-align: center;
+    flex-basis: 100px;
+    font-weight: 500;
+    color: #000;
+}
+.flex_between{display: flex; justify-content: space-between;}
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+#board .main_list p span.b_subject{
+    flex-basis: 600px;
+    text-align: left;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+#board .main_list .noticeList{
+    padding: 28px 0;
+    border-bottom: 1px solid #eee;
+}
+#board .main_list .noticeList button{
+    width: 100%;
+}
+#board .main_list .noticeList p span{
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+}
+#board .sub_top{
+    margin: 20px 0 50px;
+    text-align: center;
+}
+#board .sub_right_title h2{
+    font-size: 33px;
+    margin-bottom: 50px;
+    color: #114344;
+}
+#board .sub_top .search input, .search select{
+    width: 150px;
+    border: 0px;
+    padding: 15px 12px; 
+    border-bottom: 1px solid #666;
+}
+#board .sub_top .search input{
+    width: 420px;
+    margin-left: 20px;
+}
+#board .sub_top .search .search_area{
+    position: relative;
+}
+#board .sub_top .search .search_area button{
+    position: absolute;
+    right: 8px;
+    top: -3px;
+}
+#board .page_con{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+#board .page_con li{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 3px;
+    text-align: center;
+}
+#board .page_con li a{
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+#board .page_con li a span{
+    width: 35px;
+    height: 30px;
+    line-height: 30px;
+}
+#board .page_con li.active{
+    color: #fff;
+    border-radius: 3px;
+    background-color: #359480;
+}
+#board .page_con li.active a{
+    color: #fff;
+    font-weight: 600;
+}
+#board .write_btn{
+    display: inline-block;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: 500;
+    border: 1px solid #114344;
+    color: #114344;
+    text-decoration: none;
+}
+#board .write_btn:hover{
+    background-color: #114344;
+    color: #fff;
+}
+*{ padding: 0; margin: 0; font-family: 'Pretendard', sans-serif; font-size: 13px; color: #444; -webkit-font-smoothing: antialiased; }
+.page_con .pagination > li:last-child, .pagination > li:first-child {
+    display: none;
+}
+
+.notice_date {
+    text-align: right;
+}
+
+/* board detail */
+#board .board_title{
+    padding: 20px 15px;
+    margin-bottom: 30px;
+    border-top: 2px  solid #000;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+}
+#board .board_title h2{
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #000;
+}
+#board .board_title p{
+    margin-right: 10px;
+    font-weight: 500;
+    font-size: 13px;
+    color: #000;
+}
+#board .sub_box .board_con{
+    text-align: center;
+    padding: 20px;
+    min-height: 300px;
+    border-bottom: 1px solid #ddd;
+}
+#board .sub_box .board_con p{
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px;
+}
+#board .sub_box .board_con img{
+    width: 70%;
+    margin-bottom: 20px;
+}
+#board .board_title p span{
+    padding-left: 2px;
+    color: #000;
+}
+#board .con_title{
+    font-size: 18px;
+    padding-left: 1px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid #ddd; /* 제목 아래 테두리 추가 */
+    color: #888;
+    font-weight: 500;
+    margin: 15px 0; 
+}
+#board .board_detail_btn{
+    justify-content: flex-end;
+    margin: 12px 0 20px;
+}
+#board .board_detail_btn a, .board_detail_btn button{
+    padding: 8px 20px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#board #comment{
+    padding: 12px;
+    border: 1px solid #ccc;
+    width: 94%;
+    height: 50px;
+    border-radius: 5px;
+}
+
+#board #comment_btn{
+    width: 6%;
+    height: 50px;
+    background-color: #359480;
+    color: #fff;
+    border-radius: 5px;
+    margin-left: 0.8%;
+}
+
+#board .comment_con{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+    margin-top: 10px;
+}
+#board .comment_con p{
+
+}
+
+/* board write */
+#board .sub_write form div{
+    padding: 10px;
+}
+#board .sub_write form > div > *{
+    padding: 10px 10px;
+    margin: 3px 0;
+    width: 800px;
+    border-radius: 3px;
+} 
+#board .sub_write form label{
+    width: 300px;
+    font-size: 15px;
+    color: #000;
+}
+#board .sub_write form input{
+    border: 1px solid #ccc;
+}
+#board .sub_write form textarea{
+    height: 300px;
+    border: 1px solid #ccc;
+}
+#board .sub_write button{
+    padding: 8px 18px;
+    margin-top: 25px;
+    background-color: #114344;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 3px;
+}
