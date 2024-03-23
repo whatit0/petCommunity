@@ -62,7 +62,7 @@ function MyPageHeader() {
                         </div>
                     )}
                 </div>
-                <Link to="/community">공지사항</Link>
+                <Link to="/notice">공지사항</Link>
             </nav>
             <div className="header-links">
                 <button onClick={handleLogout} className="btn-signup">로그아웃</button>

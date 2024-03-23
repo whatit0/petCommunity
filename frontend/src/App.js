@@ -69,6 +69,9 @@ function App() {
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
+                        <Route path="/notice" element={<WithHeader><NoticeList/></WithHeader>}/>
+                        <Route path="/noticewrite" element={<WithHeader><NoticeWrite/></WithHeader>}/>
+                        <Route path="/noticeDetail/:noticeNo" element={<WithHeader><NoticeDetail/></WithHeader>}/>
                         {/*채팅 라우트*/}
                         <Route path="/chat" element={<WithHeader><ChatPage/></WithHeader>}/>
                         {/* 건강 라우트 */}
