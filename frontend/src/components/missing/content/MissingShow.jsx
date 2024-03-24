@@ -1,12 +1,19 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./MissingShow.module.css"
 
-const MissingShow = () => {
+const MissingShow = ({post, onSelect}) => {
+
+    const handleClick = () => {
+        onSelect(post.missingLat, post.missingLng);
+    }
+
     return (
-        <li className={styles['li-container']}>
-            <div className={styles['li-title']}> 리트리버 </div>
-            <div className={styles['li-address']}> 주소 </div>
-            <div className={styles['li-content']}> 내용 </div>
+        <li className={styles['li-container']} onClick={handleClick}>
+            <div className={styles['li-title']}> {post.missingPetType}</div>
+            <div className={styles['li-address']}> {post.missingPlaceName}</div>
+            <div className={styles['li-address']}> {post.missingLocationAddress}</div>
+            <div className={styles['li-content']}> {post.missingDescription}</div>
+            <div className={styles['li-address']}> {post.missingUserName}</div>
         </li>
     );
 };
