@@ -81,6 +81,39 @@
     width: 60px;
     height: 60px;
 }
+
+.button-submit {
+    width: max-content;
+    cursor: pointer;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    background-color: rgb(225, 50, 92);
+    border: 1px solid rgb(225, 50, 92);
+    opacity: 1;
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-size: 14px;
+}
+.button-margin {
+    min-width: 16px;
+    min-height: 16px;
+}
+.button-cancel {
+    width: max-content;
+    cursor: pointer;
+    box-sizing: border-box;
+    color: rgb(225, 50, 92);
+    background-color: transparent;
+    border: 1px solid rgb(225, 50, 92);
+    opacity: 1;
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-size: 14px;
+}
+.button-div {
+    display: flex;
+    justify-content: flex-end;
+}
 section {
     margin: 20px 0 20px 0;
 }

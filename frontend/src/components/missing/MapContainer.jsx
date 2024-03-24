@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const MapContainer = ({ onLocationSelect }) => {
+const MapContainer = ({ onLocationSelect, selectedUserLocation }) => {
     const [map, setMap] = useState(null);
     const [marker, setMarker] = useState(null);
 
@@ -44,14 +44,14 @@ const MapContainer = ({ onLocationSelect }) => {
                             orders: [
                                 window.naver.maps.Service.OrderType.ADDR,
                                 window.naver.maps.Service.OrderType.ROAD_ADDR
-                            ].join('.')
+                            ].join(',')
                         }, function (status, response) {
                             if (status !== window.naver.maps.Service.Status.OK) {
                                 return alert('주소를 찾지 못했습니다.')
                             }
 
                             var result = response.v2,
-                                item = result.addresses[0];
+                                item = result.address;
 
                             onLocationSelect({ lat, lng, address: item.jibunAddress || item.roadAddress });
                             return alert('Address ' + item.jibunAddress);
@@ -70,6 +70,34 @@ const MapContainer = ({ onLocationSelect }) => {
             console.error('naver 객체가 정의되지 않았거나 네이버 지도 API가 로드되지 않았습니다.');
         }
     }, [map, onLocationSelect, marker]); // 의존성 배열 수정
+
+    useEffect(() => {
+        if (map && selectedUserLocation.lat && selectedUserLocation.lng) {
+            // 지정된 위치로 지도 중심 이동
+            const newPosition = new window.naver.maps.LatLng(selectedUserLocation.lat, selectedUserLocation.lng);
+            map.setCenter(newPosition);
+            map.setZoom(15); // 원하는 확대 수준으로 설정
+
+            // 기존 마커 제거
+            if (marker) {
+                marker.setMap(null);
+            }
+
+            // 새 위치에 마커 생성
+            const newMarkerOption = {
+                position: newPosition,
+                map: map,
+                icon: {
+                    content: '<img src="/dog.svg" alt="마커 아이콘" style="width:30px; height:30px;"/>',
+                    size: new window.naver.maps.Size(33, 33),
+                    origin: new window.naver.maps.Point(0, 0),
+                    anchor: new window.naver.maps.Point(10, 10)
+                }
+            };
+            const newMarker = new window.naver.maps.Marker(newMarkerOption);
+            setMarker(newMarker);
+        }
+    }, [selectedUserLocation, map]);
 
     return <div id="map" style={{ width: '100%', height: '100vh' }}></div>;
 };
