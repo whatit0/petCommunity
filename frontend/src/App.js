@@ -26,6 +26,9 @@ import PetBmi from "./components/health/PetBmi";
 import ChatPage from "./components/chat/pages/ChatPage/ChatPage";
 import MissingMain from "./components/missing/MissingMain";
 import Footer from "./components/footer/Footer";
+import NoticeList from "./components/notice/NoticeList";
+import NoticeWrite from "./components/notice/NoticeWrite";
+import NoticeDetail from "./components/notice/NoticeDetail";
 
 function App() {
     const dispatch = useDispatch();
@@ -69,6 +72,9 @@ function App() {
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
+                        <Route path="/notice" element={<WithHeader><NoticeList/></WithHeader>}/>
+                        <Route path="/noticewrite" element={<WithHeader><NoticeWrite/></WithHeader>}/>
+                        <Route path="/noticeDetail/:noticeNo" element={<WithHeader><NoticeDetail/></WithHeader>}/>
                         {/*채팅 라우트*/}
                         <Route path="/chat" element={<WithHeader><ChatPage/></WithHeader>}/>
                         {/* 건강 라우트 */}
