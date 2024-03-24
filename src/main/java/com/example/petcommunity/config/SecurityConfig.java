@@ -68,6 +68,8 @@ public class SecurityConfig {
                                 "/api/boardWrite",
                                 "/api/board/{boardNo}",
                                 "/api/comment",
+                                "/api/missingWrite",
+                                "/api/getMissing",
                                 "/api/calorie",
                                 "/api/age",
                                 "/api/notices",
