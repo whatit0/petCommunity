@@ -72,7 +72,9 @@ public class SecurityConfig {
                                 "/api/age",
                                 "/api/notices",
                                 "/api/noticeWrite",
-                                "/api/noticeDetail/{noticeNo}"
+                                "/api/noticeDetail/{noticeNo}",
+                                "api/noticeEdit",
+                                "api/delete"
                         ).permitAll()
 
                         // USER, ADMIN 권한이 있어야 접근 가능한 경로

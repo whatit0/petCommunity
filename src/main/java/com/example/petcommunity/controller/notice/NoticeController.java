@@ -1,11 +1,9 @@
-package com.example.petcommunity.controller.board;
+package com.example.petcommunity.controller.notice;
 
-import com.example.petcommunity.dto.board.BoardDTO;
-import com.example.petcommunity.dto.board.NoticeDTO;
-import com.example.petcommunity.entity.member.MemberEntity;
-import com.example.petcommunity.repository.member.MemberRepository;
-import com.example.petcommunity.role.UserRole;
-import com.example.petcommunity.service.board.NoticeService;
+import com.example.petcommunity.dto.notice.NoticeDTO;
+import com.example.petcommunity.service.notice.NoticeDeleteService;
+import com.example.petcommunity.service.notice.NoticeEditService;
+import com.example.petcommunity.service.notice.NoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +12,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +19,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST}, allowCredentials = "true")
 public class NoticeController {
     private final NoticeService noticeService;
+    private final NoticeDeleteService noticeDeleteService;
+    private final NoticeEditService noticeEditService;
 
     @GetMapping("/notices")
     public ResponseEntity<Page<NoticeDTO>> getAllNotices(@PageableDefault(size = 10, sort = "noticeDate", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -43,5 +42,18 @@ public class NoticeController {
 
         NoticeDTO noticeDTO = noticeService.getNoticeDetail(noticeNo);
         return ResponseEntity.ok(noticeDTO);
+    }
+
+    @PostMapping("/noticeEdit")
+    public ResponseEntity<?> noticeEdit(@RequestBody NoticeDTO noticeDTO) {
+        int noticeNo = noticeDTO.getNoticeNo();
+        noticeEditService.editNotice(noticeNo, noticeDTO);
+        return ResponseEntity.ok("Success");
+    }
+
+    @GetMapping("/delete")
+    public String noticeDelete(@RequestParam int noticeNo) {
+        noticeDeleteService.noticeDelete(noticeNo);
+        return "삭제 성공";
     }
 }

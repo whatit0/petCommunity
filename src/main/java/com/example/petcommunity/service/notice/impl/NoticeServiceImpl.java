@@ -1,15 +1,11 @@
-package com.example.petcommunity.service.board.impl;
+package com.example.petcommunity.service.notice.impl;
 
-import com.example.petcommunity.dto.board.BoardDTO;
-import com.example.petcommunity.dto.board.CommentDTO;
-import com.example.petcommunity.dto.board.NoticeDTO;
-import com.example.petcommunity.entity.board.BoardEntity;
-import com.example.petcommunity.entity.board.CommentEntity;
-import com.example.petcommunity.entity.board.NoticeEntity;
+import com.example.petcommunity.dto.notice.NoticeDTO;
+import com.example.petcommunity.entity.notice.NoticeEntity;
 import com.example.petcommunity.entity.member.MemberEntity;
-import com.example.petcommunity.repository.board.NoticeRepository;
+import com.example.petcommunity.repository.notice.NoticeRepository;
 import com.example.petcommunity.repository.member.MemberRepository;
-import com.example.petcommunity.service.board.NoticeService;
+import com.example.petcommunity.service.notice.NoticeService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -20,10 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.management.RuntimeMBeanException;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
