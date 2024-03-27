@@ -1,6 +1,6 @@
-package com.example.petcommunity.repository.board;
+package com.example.petcommunity.repository.notice;
 
-import com.example.petcommunity.entity.board.NoticeEntity;
+import com.example.petcommunity.entity.notice.NoticeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

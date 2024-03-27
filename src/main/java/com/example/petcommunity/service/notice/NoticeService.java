@@ -1,6 +1,6 @@
-package com.example.petcommunity.service.board;
+package com.example.petcommunity.service.notice;
 
-import com.example.petcommunity.dto.board.NoticeDTO;
+import com.example.petcommunity.dto.notice.NoticeDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

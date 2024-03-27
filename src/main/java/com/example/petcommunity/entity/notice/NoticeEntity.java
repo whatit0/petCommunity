@@ -1,4 +1,4 @@
-package com.example.petcommunity.entity.board;
+package com.example.petcommunity.entity.notice;
 
 import com.example.petcommunity.entity.member.MemberEntity;
 import jakarta.persistence.*;
