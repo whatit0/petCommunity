@@ -30,7 +30,7 @@ public class NoticeController {
 
     @PostMapping("/noticeWrite")
     public ResponseEntity<?> noticeWrite(@RequestBody NoticeDTO noticeDTO) {
-        System.out.println(noticeDTO.toString());
+//        System.out.println(noticeDTO.toString());
         noticeService.saveNotice(noticeDTO);
         return ResponseEntity.ok("Success");
     }
@@ -39,7 +39,6 @@ public class NoticeController {
     public ResponseEntity<?> getNoticeDetail(@PathVariable int noticeNo) {
         // 조회수 증가
         noticeService.noticeCnt(noticeNo);
-
         NoticeDTO noticeDTO = noticeService.getNoticeDetail(noticeNo);
         return ResponseEntity.ok(noticeDTO);
     }
