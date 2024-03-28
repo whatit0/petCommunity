@@ -16,6 +16,7 @@ function NoticeList() {
     const [userRole, setUserRole] = useState('');
 
     useEffect(() => {
+        // 사용자 토큰을 가져와서 사용자 권한을 확인
         const token = localStorage.getItem('userToken');
         if (token) {
             const decodedToken = jwtDecode(token);
@@ -33,8 +34,8 @@ function NoticeList() {
                         size: itemsPerPage
                     }
                 });
-                setNotice(response.data.content);
-                setTotalItems(response.data.totalElements);
+                setNotice(response.data.content);   // 공지사항 데이터를 상태에 저장
+                setTotalItems(response.data.totalElements); // 전체 항목 수
             } catch (error) {
                 console.error('Error fetching notices:', error);
             }
@@ -47,6 +48,7 @@ function NoticeList() {
     };
 
     const formatDate = (dateString) => {
+        // 날짜 형식 변환
         const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
