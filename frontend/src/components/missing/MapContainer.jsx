@@ -76,7 +76,7 @@ const MapContainer = ({ onLocationSelect, selectedUserLocation }) => {
             // 지정된 위치로 지도 중심 이동
             const newPosition = new window.naver.maps.LatLng(selectedUserLocation.lat, selectedUserLocation.lng);
             map.setCenter(newPosition);
-            map.setZoom(15); // 원하는 확대 수준으로 설정
+            map.setZoom(20); // 원하는 확대 수준으로 설정
 
             // 기존 마커 제거
             if (marker) {
