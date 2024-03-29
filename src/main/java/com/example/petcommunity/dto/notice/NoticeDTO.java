@@ -1,4 +1,4 @@
-package com.example.petcommunity.dto.board;
+package com.example.petcommunity.dto.notice;
 
 import lombok.*;
 

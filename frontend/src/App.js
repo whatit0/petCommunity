@@ -29,6 +29,7 @@ import Footer from "./components/footer/Footer";
 import NoticeList from "./components/notice/NoticeList";
 import NoticeWrite from "./components/notice/NoticeWrite";
 import NoticeDetail from "./components/notice/NoticeDetail";
+import NoticeEdit from "./components/notice/NoticeEdit";
 
 function App() {
     const dispatch = useDispatch();
@@ -75,6 +76,7 @@ function App() {
                         <Route path="/notice" element={<WithHeader><NoticeList/></WithHeader>}/>
                         <Route path="/noticewrite" element={<WithHeader><NoticeWrite/></WithHeader>}/>
                         <Route path="/noticeDetail/:noticeNo" element={<WithHeader><NoticeDetail/></WithHeader>}/>
+                        <Route path="/noticeEdit" element={<WithHeader><NoticeEdit/></WithHeader>}/>
                         {/*채팅 라우트*/}
                         <Route path="/chat" element={<WithHeader><ChatPage/></WithHeader>}/>
                         {/* 건강 라우트 */}

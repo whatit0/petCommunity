@@ -2,14 +2,48 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import "../style/notice.css";
+import {Link, useNavigate} from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 
 function NoticeDetail() {
     const location = useLocation();
     const noticeData = location.state.data;
+    const navigate = useNavigate();
+    const [userRole, setUserRole] = useState('');
+
+    useEffect(() => {
+        const token = localStorage.getItem('userToken');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            const role = decodedToken.auth;
+            setUserRole(role);
+        }
+    }, []);
 
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
         return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
+    const update = async (e) => {
+        try {
+            navigate('/noticeEdit', { state: { "data": noticeData } })
+        } catch (error) {
+            console.error('에러 발생입니다', error);
+        }
+    };
+
+    const del = async () => {
+        try {
+            const checkDel = window.confirm("삭제하시겠습니까?");
+            if (checkDel) {
+                const response = await axios.get(`http://localhost:8080/api/delete?noticeNo=${noticeData.noticeNo}`);
+                alert(response.data);
+                window.location.href = "/notice";
+            }
+        } catch (error) {
+            console.error('에러 발생입니다:', error);
+        }
     };
 
     return (
@@ -31,6 +65,11 @@ function NoticeDetail() {
                 <div className="board_con">
                     <p>{noticeData.noticeContent}</p><br/><br/><br/>
                     <img style={{width: '500px'}} src={noticeData.noticeURL}/>
+                </div>
+                <div className="flex board_detail_btn">
+                    {userRole === "ROLE_ADMIN" ? <button onClick={update}>수정</button> : null}
+                    {userRole === "ROLE_ADMIN" ? <button onClick={del}>삭제</button> : null}
+                    <Link to="/notice" style={{textDecoration: "none", color:"black"}}>목록</Link>
                 </div>
             </div>
         </div>
