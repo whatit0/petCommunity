@@ -94,24 +94,23 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ## ✅ 향후 프로젝트의 목표
 
-'saveBoard` 테스트 케이스
+## BoardServiceTest
 
+### 'saveBoard` 테스트 케이스
 - **목적**: 유효한 게시판 데이터로 `saveBoard`를 호출할 때 게시글이 정상적으로 저장되어야 합니다.
 - **조건**:
   - `BoardDTO`에는 유효한 제목, 내용, 카테고리, 견종, 게시글 타입이 포함되어야 합니다.
   - 사용자는 시스템에 등록되어 있어야 합니다.
 - **결과**: 게시글이 데이터베이스에 성공적으로 저장되어야 하며, 모든 필드가 정확하게 매핑되어야 합니다.
 
-'saveBoardWithoutTitleThrowsException` 테스트 케이스
-
+### 'saveBoardWithoutTitleThrowsException` 테스트 케이스
 - **목적**: 제목 없이 saveBoard를 호출할 때 IllegalArgumentException이 발생해야 합니다.
 - **조건**:
   - BoardDTO에 제목을 설정하지 않습니다.
   - 기타 필드는 유효한 값으로 설정합니다.
 - **결과**:  IllegalArgumentException이 발생하며, "게시글 제목은 필수입니다." 메시지가 포함되어야 합니다.
 
-- 'saveBoardWithNonExistentUserThrowsException` 테스트 케이스
-
+### 'saveBoardWithNonExistentUserThrowsException` 테스트 케이스
 - **목적**: 게시글 저장 시스템에 등록되지 않은 사용자(User) 정보를 사용하는 경우, 시스템은 IllegalArgumentException을 발생시켜야 합니다. 이 테스트는 사용자 정보가 데이터베이스에 존재하지 않을 때 적절한 예외 처리가 이루어지는지 검증합니다.
 - **조건**:
   - BoardDTO 객체는 유효한 제목("유저 없음 테스트 제목")과 내용("유저 없음 테스트 내용")을 포함해 생성됩니다.
