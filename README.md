@@ -95,7 +95,18 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 ## ✅ 향후 프로젝트의 목표
 
 - **테스트 코드 작성**
+- **목적**: 유효한 게시판 데이터로 `saveBoard`를 호출할 때 게시글이 정상적으로 저장되어야 합니다.
+- **조건**:
+  - `BoardDTO`에는 유효한 제목, 내용, 카테고리, 견종, 게시글 타입이 포함되어야 합니다.
+  - 사용자는 시스템에 등록되어 있어야 합니다.
 
+```java
+@Test
+public void saveBoardTest() {
+    // MemberEntity 가짜 객체 반환 설정
+    // BoardDTO 객체 생성 및 설정
+    // boardService.saveBoard 호출 및 결과 검증
+}
 ![API Description](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/b4def1f7-e474-40b7-a920-7106b18eadbf)
 ![Test Code Result](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/bccb33cb-9fe3-448d-9256-34c50eed5de0)
 
