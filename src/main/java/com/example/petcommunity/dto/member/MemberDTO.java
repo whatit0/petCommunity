@@ -2,6 +2,7 @@ package com.example.petcommunity.dto.member;
 
 import com.example.petcommunity.entity.member.MemberEntity;
 import com.example.petcommunity.role.UserRole;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 @Builder
+@Schema(description = "사용자 정보")
 public class MemberDTO {
 
     private Long userNo;

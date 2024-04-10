@@ -1,5 +1,9 @@
 package com.example.petcommunity.controller.health;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 public class CalorieController {
 
     @PostMapping("/api/calorie")
+    @Operation(summary = "반려동물 칼로리 계산", description = "반려동물의 체중과 상태에 따른 일일 필요 칼로리를 계산합니다.")
+    @ApiResponse(responseCode = "200", description = "Calculated calories for the pet",
+    content = @Content(schema = @Schema(implementation = CalorieResponse.class)))
     public CalorieResponse calculateCalorie(@RequestBody CalorieRequest request) {
         double weight = request.getWeight();
         String petType = request.getPetType();
