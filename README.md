@@ -94,19 +94,34 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ## ✅ 향후 프로젝트의 목표
 
-- **테스트 코드 작성**
+'saveBoard` 테스트 케이스
+
 - **목적**: 유효한 게시판 데이터로 `saveBoard`를 호출할 때 게시글이 정상적으로 저장되어야 합니다.
 - **조건**:
   - `BoardDTO`에는 유효한 제목, 내용, 카테고리, 견종, 게시글 타입이 포함되어야 합니다.
   - 사용자는 시스템에 등록되어 있어야 합니다.
+- **결과**: 게시글이 데이터베이스에 성공적으로 저장되어야 하며, 모든 필드가 정확하게 매핑되어야 합니다.
 
-```java
-@Test
-public void saveBoardTest() {
-    // MemberEntity 가짜 객체 반환 설정
-    // BoardDTO 객체 생성 및 설정
-    // boardService.saveBoard 호출 및 결과 검증
-}
+'saveBoardWithoutTitleThrowsException` 테스트 케이스
+
+- **목적**: 제목 없이 saveBoard를 호출할 때 IllegalArgumentException이 발생해야 합니다.
+- **조건**:
+  - BoardDTO에 제목을 설정하지 않습니다.
+  - 기타 필드는 유효한 값으로 설정합니다.
+- **결과**:  IllegalArgumentException이 발생하며, "게시글 제목은 필수입니다." 메시지가 포함되어야 합니다.
+
+- 'saveBoardWithNonExistentUserThrowsException` 테스트 케이스
+
+- **목적**: 게시글 저장 시스템에 등록되지 않은 사용자(User) 정보를 사용하는 경우, 시스템은 IllegalArgumentException을 발생시켜야 합니다. 이 테스트는 사용자 정보가 데이터베이스에 존재하지 않을 때 적절한 예외 처리가 이루어지는지 검증합니다.
+- **조건**:
+  - BoardDTO 객체는 유효한 제목("유저 없음 테스트 제목")과 내용("유저 없음 테스트 내용")을 포함해 생성됩니다.
+  - MemberRepository의 findByUserId 메소드는 Optional.empty()를 반환하도록 설정됩니다. 이는 시스템에 해당 사용자가 등록되어 있지 않음을 시뮬레이션합니다.
+- **결과**:
+  - 테스트는 BoardServiceImpl의 saveBoard 메소드를 호출할 때 IllegalArgumentException이 발생하는 것을 기대합니다.
+  - 발생한 예외의 메시지는 "사용자를 찾을 수 없습니다."로, 시스템이 데이터베이스에서 사용자 정보를 찾지 못했음을 나타냅니다.
+  - 이 테스트는 BoardServiceImpl이 사용자 정보가 없는 상태에서 게시글을 저장하려 할 때 적절한 예외 처리를 수행하는지 확인합니다.
+
+
 ![API Description](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/b4def1f7-e474-40b7-a920-7106b18eadbf)
 ![Test Code Result](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/bccb33cb-9fe3-448d-9256-34c50eed5de0)
 
