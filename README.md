@@ -88,17 +88,17 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ![ERD](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/2bdd0826-54d8-4917-9ad1-1bb2289a87b0)
 
-## ✅ 프로젝트 테스트
+## ✅ 프로젝트 과부하 테스트
 
 
 
 ## ✅ 향후 프로젝트의 목표
 
-- **에러 로그 관리**
-
-
 - **테스트 코드 작성**
- 
+
+![API Description](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/b4def1f7-e474-40b7-a920-7106b18eadbf)
+![Test Code Result](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/bccb33cb-9fe3-448d-9256-34c50eed5de0)
+
   - 테스트 코드 작성하는 이유.
 
   - 서버를 실행하는 등의 시간을 절약할 수 있다.
