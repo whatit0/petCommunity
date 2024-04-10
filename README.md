@@ -73,6 +73,8 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 [Notion API Address](https://www.notion.so/bde8061d127c4b53af622ab558c4df71)
 
+![API](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/88916f39-c971-45aa-8194-1fad3055ea09)
+
 ## 🌈 주요 기능
 
 1. Spring Security와 JSON Web Token(JWT)을 활용하여 안전하고 효율적인 사용자 인증 및 인가 시스템을 구축
