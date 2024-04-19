@@ -90,7 +90,11 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ## ✅ 프로젝트 과부하 테스트
 
+
 웹 애플리케이션의 성능을 평가하기 위해 수행된 부하 테스트 결과를 요약합니다. 이 테스트는 Artillery 부하 테스트 도구를 사용하여 시스템의 응답 시간, 처리량, 그리고 다양한 부하 상황에서의 성능을 측정하였습니다. 테스트는 로그인, 공지사항 조회, 게시판 사용 등 애플리케이션의 핵심 기능을 대상으로 하여 사용자 경험과 시스템 용량 계획에 필요한 데이터를 제공하고자 합니다.
+
+![1](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/e0c982d0-076a-4f95-9692-08649acc6586)
+
 
 #### 테스트 도구 및 소프트 웨어
 
@@ -113,7 +117,8 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 - Ramp down: 부하를 점차 줄여 시스템 회복 과정을 관찰
 
 자세한 내용은 노션에서 확인가능합니다.
-[notion Artillery Report](https://www.notion.so/b781ddbcefe244349a43f3a983708267)
+
+[Notion Artillery Report](https://www.notion.so/b781ddbcefe244349a43f3a983708267)
 
 
 ## ✅ 향후 프로젝트의 목표
