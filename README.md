@@ -86,7 +86,7 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 ## 📋 ERD
 
-![ERD](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/2bdd0826-54d8-4917-9ad1-1bb2289a87b0)
+![ERD(수정본)](https://github.com/Imadeveloperrr/petCommunity/assets/99321607/c23427cb-3de7-481b-84c1-77a33c64cbe1)
 
 ## ✅ 프로젝트 과부하 테스트
 
