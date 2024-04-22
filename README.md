@@ -23,6 +23,7 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 - Spring boot
 - MariaDB
+- Firebase
 - Nginx
 - spring security + jwt token
 - Swagger
@@ -48,7 +49,6 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 - React
 - Redux
 - Bootstrap
-- Firebase
 - Naver Maps API
 - 공공데이터 포털
 
