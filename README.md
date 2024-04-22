@@ -23,15 +23,11 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 
 - Spring boot
 - MariaDB
-- firebase
 - Nginx
-- react
 - spring security + jwt token
 - Swagger
 - Docker
-- EC2
-- S3
-- RDS
+- Artillery
 
 ## 🌧 Backend Library
 
@@ -45,14 +41,16 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 | lombok                           | 코드 간소화를 위해 Getter, Setter, Builder 등 자동 생성        |
 | mariadb-java-client              | MariaDB 데이터베이스 연결을 위한 JDBC 드라이버                 |
 | spring-boot-starter-test         | 스프링 부트 기반 테스트를 위한 스타터 키트                     |
-| swagger-ui                       | REST API 문서화를 위한 Swagger UI 라이브러리                  |
-| springfox-swagger2               | Spring Boot 프로젝트에서 Swagger 2를 구현하기 위한 라이브러리  |
-| AWS SDK for Java                 | AWS 서비스를 Java 애플리케이션에서 사용하기 위한 SDK            |
-| spring-cloud-aws                 | AWS 서비스를 쉽게 통합할 수 있도록 지원하는 라이브러리          |
+| springdoc                        | REST API 문서화를 위한 SpringDoc OpenAPI UI 라이브러리        |
 
 ## 🛠 Frontend Tech Stack
 
 - React
+- Redux
+- Bootstrap
+- Firebase
+- Naver Maps API
+- 공공데이터 포털
 
 
 ## 🌧 Frontend Library
@@ -61,12 +59,21 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 |----------------------------------|-------------------------------------------------------------|
 | axios                            | HTTP 클라이언트, React에서 REST API 호출을 위해 사용          |
 | React                            | 사용자 인터페이스를 구축하기 위한 JavaScript 라이브러리        |
+| @reduxjs/toolkit                 | Redux의 표준 도구 모음으로, 상태 관리를 더 효율적으로 수행     |
 | react-router-dom                 | SPA(Single Page Application) 라우팅을 위해 사용              |
 | redux                            | 애플리케이션의 상태 관리를 위한 JavaScript 라이브러리          |
 | react-redux                      | React와 Redux를 연결하기 위한 라이브러리                      |
 | redux-thunk                      | 비동기 작업을 처리하기 위해 Redux 미들웨어로 사용              |
 | styled-components                | CSS-in-JS 라이브러리, 컴포넌트 기반의 스타일링을 위해 사용     |
-| material-ui                      | React 컴포넌트 라이브러리, Material Design을 따르는 UI        |
+| react-bootstrap                  | Bootstrap 기반의 React 컴포넌트를 제공하는 라이브러리         |
+| react-hook-form                  | React에서 폼 처리를 간편하게 할 수 있도록 도와주는 라이브러리  |
+| react-icons                      | 다양한 아이콘을 React 컴포넌트로 사용할 수 있는 라이브러리     |
+| bootstrap                        | CSS 프레임워크, 반응형 웹사이트를 쉽게 구축할 수 있도록 지원   |
+| react-quill                      | React에서 사용할 수 있는 강력한 텍스트 에디터                 |
+| firebase                         | 클라우드 기반 플랫폼, 인증, 데이터베이스, 구성 등을 지원       |
+| jwt-decode                       | JWT를 디코드하여 사용자 인증 정보에 접근하는 데 사용           |
+| react-js-pagination              | React에서 사용할 수 있는 페이지네이션 컴포넌트                |
+| react-naver-maps                 | 네이버 지도 API를 React에서 사용할 수 있게 해주는 라이브러리   |
 
 
 ## 🔎 API
