@@ -1,17 +1,27 @@
 .main-content {
-    padding: 20px;
-    margin-top: 70px;
-    /*flex: 1;*/
-    height: 100vh;
+    width: 100%;
+    min-height: calc(100vh - 52px);
+    position: relative;
 }
 
 .search-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+    margin: 0 auto 40px;
+    text-align: center;
+    max-width: 1024px;
+}
+
+.search-bar img {
+    width: 400px;
+    height: 350px;
+}
+
+.search-bar-div {
     position: relative;
-    right: -20px;
+    width: 100%;
+    height: 96px;
+    margin: 0 auto;
+    padding: 24px 0;
+    overflow: hidden;
 }
 
 .search-bar input {
@@ -19,7 +29,7 @@
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    width: 35%;
+    width: 50%;
 }
 
 .search-bar input:focus {
@@ -48,7 +58,6 @@
 .recommendation-title {
     text-align: center;
     margin-top: 100px;
-    margin-bottom: 120px;
     font-size: 24px;
 }
 
@@ -56,15 +65,15 @@
     display: flex;
     justify-content: center; /* 중앙 정렬을 원하면 'center'로 변경하세요 */
     flex-wrap: wrap;
-    gap: 200px; /* 카드 사이의 간격을 조정할 수 있습니다. */
+    gap: 20px; /* 카드 사이의 간격을 조정할 수 있습니다. */
     padding-left: 15px; /* 필요하다면 이 값을 조정하세요. */
 }
 
 .card {
-    width: 300px; /* 카드의 너비를 조정하세요. */
+    width: 500px; /* 카드의 너비를 조정하세요. */
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
+    border: none !important;
     margin-bottom: 20px; /* 카드 사이의 수직 간격 */
 }
 
@@ -72,7 +81,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin: 0 0 10px 0;
+    margin: 0 0 30px 0;
 }
 
 .card p {
@@ -83,6 +92,7 @@
 
 .card .author {
     margin-bottom: 20px;
+    color: #797979;
 }
 
 .card img {

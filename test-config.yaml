@@ -1,0 +1,131 @@
+config:
+  target: 'http://localhost:8080'
+  payload:
+    path: './user.csv'
+    fields:
+      - "userId"
+  phases:
+    - duration: 30 # 이 단계는 60초간 지속됩니다.
+      arrivalRate: 5 # 이 단계에서는 초당 10명의 사용자가 시스템에 도착합니다.
+      name: 'Warm up'  # 서서히 시스템을 부하에 적응시키는 단계
+    - duration: 60
+      arrivalRate: 5 # 이 단계의 시작 부하는 초당 5명입니다.
+      rampTo: 30 # 60초의 끝까지 부하를 점진적으로 증가시켜 초당 30명에 도달하도록 합니다.
+      name: 'Ramp up load'  # 점차적으로 부하를 증가시켜 시스템의 한계를 탐색
+    - duration: 60
+      arrivalRate: 30
+      name: 'Sustained load'  # 일정 수준의 높은 부하를 지속적으로 유지
+    - duration: 30
+      arrivalRate: 30
+      rampTo: 5 # 60초의 끝까지 부하를 점진적으로 감소시켜 초당 10명에 도달하도록 합니다.
+      name: 'Ramp down'  # 부하를 점차 줄여 시스템 회복 과정 관찰
+
+#artillery run --output report.json test-config.yaml
+#
+#artillery report report.json --output report.html
+scenarios:
+  - name: 'user login'   # 회원가입 후 로그인
+    flow:
+      - post:
+          url: '/api/login'
+          json:
+            userId: '{{ userId }}'
+            userPwd: 'a@111111'
+
+  - name: 'user login and use the notice'  # 회원가입 & 로그인 후 공지사항 사용
+    flow:
+      - post:
+          url: '/api/login'
+          json:
+            userId: '{{ userId }}'
+            userPwd: 'a@111111'
+      - get:
+          url: "/api/notices"
+      - get:
+          url: "/api/noticeDetail/1"
+
+  - name: 'user login and use the missing'   # 회원가입 & 로그인 후 미아서비스 사용
+    flow:
+      - post:
+          url: '/api/login'
+          json:
+            userId: '{{ userId }}'
+            userPwd: 'a@111111'
+          capture:
+            - json: $.accessToken  # 응답 JSON에서 accessToken 값을 캡처
+              as: 'accessToken'  # 캡처한 JWT 토큰을 저장할 변수 이름
+      - get:
+          url: '/api/getMissing'
+      - post:
+          url: '/api/missingWrite'
+          headers:
+            Authorization: 'Bearer {{ accessToken }}'  # 캡처한 JWT 토큰을 헤더에 포함하여 인증
+          json:
+            missingPlaceName: '길거리'
+            missingLocationAddress: '경기도 양주시'
+            missingPetType: '개'
+            missingDescription: '말티즈입니다'
+            missingUserName: '한국인'
+            missingLat: 37.7252563
+            missingLng: 126.9789613
+
+  - name: 'user login and use the healthy'   # 회원가입 & 로그인 후 건강 서비스 사용
+    flow:
+      - post:
+          url: '/api/login'
+          json:
+            userId: '{{ userId }}'
+            userPwd: 'a@111111'
+      - post:
+          url: '/api/age'
+          json:
+            petType: 'cat'
+            years: 2
+            months: 5
+            size: 'medium'
+      - post:
+          url: '/api/calorie'
+          json:
+            petType: 'dog'
+            weight: 5
+            condition: 'dogHealthy2'
+
+  - name: 'user login and use the board'   # 회원가입 & 로그인 후 게시판 사용
+    flow:
+      - post:
+          url: '/api/login'
+          json:
+            userId: '{{ userId }}'
+            userPwd: 'a@111111'
+          capture:
+            - json: $.accessToken  # 응답 JSON에서 accessToken 값을 캡처
+              as: 'accessToken'
+      - get:
+          url: '/api/boards'
+      - post:
+          url: '/api/boardWrite'
+          headers:
+            Authorization: 'Bearer {{ accessToken }}'
+          json:
+            boardNo: 1
+            boardType: 'INFO'
+            boardCategory: '고양이'
+            boardTitle: 'ㅁㄴㅇ'
+            boardContent: 'ㅁㄴㅇㄹㄴㅁㅇㄻㄹ'
+      - get:
+          url: '/api/board/1'
+      - post:
+          url: '/api/likes/toggle'
+          headers:
+            Authorization: 'Bearer {{ accessToken }}'
+          json:
+            boardNo: 1
+            isLikeAction: true
+      - post:
+          url: '/api/comment'
+          headers:
+            Authorization: 'Bearer {{ accessToken }}'
+          json:
+            commentContent: 'aaa'
+            userName: '한국인'
+            boardNo: 1

@@ -26,6 +26,10 @@ import PetBmi from "./components/health/PetBmi";
 import ChatPage from "./components/chat/pages/ChatPage/ChatPage";
 import MissingMain from "./components/missing/MissingMain";
 import Footer from "./components/footer/Footer";
+import NoticeList from "./components/notice/NoticeList";
+import NoticeWrite from "./components/notice/NoticeWrite";
+import NoticeDetail from "./components/notice/NoticeDetail";
+import NoticeEdit from "./components/notice/NoticeEdit";
 
 function App() {
     const dispatch = useDispatch();
@@ -65,10 +69,14 @@ function App() {
                         <Route path="/community" element={<WithHeader><TotalBoard /></WithHeader>}/>
                         <Route path="/write" element={<WithHeader><WriteBoard /></WithHeader>} />
                         <Route path="/showboard/:boardNo" element={<WithHeader><ShowBoard /></WithHeader>} />
-                        <Route path="/missing" element={<WithHeader><MissingMain /></WithHeader>} />
+                        <Route path="/missing" element={<WithHeader showFooter={false}><MissingMain /></WithHeader>} />
                         {/* 관리자 라우트 */}
                         <Route path="/admin/page" element={<AdminPage/>}/>
                         <Route path="/admin/user/list" element={<AdminUserInfoList/>}/>
+                        <Route path="/notice" element={<WithHeader><NoticeList/></WithHeader>}/>
+                        <Route path="/noticewrite" element={<WithHeader><NoticeWrite/></WithHeader>}/>
+                        <Route path="/noticeDetail/:noticeNo" element={<WithHeader><NoticeDetail/></WithHeader>}/>
+                        <Route path="/noticeEdit" element={<WithHeader><NoticeEdit/></WithHeader>}/>
                         {/*채팅 라우트*/}
                         <Route path="/chat" element={<WithHeader><ChatPage/></WithHeader>}/>
                         {/* 건강 라우트 */}
@@ -84,12 +92,12 @@ function App() {
     );
 }
 
-function WithHeader({children}) {
+function WithHeader({children, showFooter = true}) {
     return (
         <>
             <AuthComponent/>
             {children}
-            <Footer/>
+            {showFooter && <Footer/>}
         </>
     );
 }

@@ -68,8 +68,23 @@ public class SecurityConfig {
                                 "/api/boardWrite",
                                 "/api/board/{boardNo}",
                                 "/api/comment",
+                                "/api/missingWrite",
+                                "/api/getMissing",
                                 "/api/calorie",
-                                "/api/age"
+                                "/api/age",
+                                "/api/notices",
+                                "/api/noticeWrite",
+                                "/api/noticeDetail/{noticeNo}",
+                                "api/noticeEdit",
+                                "api/delete",
+                                // Swagger UI 경로 추가
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**",
+                                "/swagger-resources/",
+                                "/error"
                         ).permitAll()
 
                         // USER, ADMIN 권한이 있어야 접근 가능한 경로
@@ -91,7 +106,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // React 앱의 URL
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080")); // React 앱의 URL
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);

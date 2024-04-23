@@ -67,12 +67,36 @@ const FrameComponent1 = ({board}) => {
         }
     };
 
-        useEffect(() => {
+    useEffect(() => {
+        const setContentHeight = () => {
             if (contentRef.current) {
                 const currentHeight = contentRef.current.scrollHeight;
                 contentRef.current.style.height = `${currentHeight}px`;
             }
-        }, [cleanHTML]);
+        };
+
+        if (contentRef.current) {
+            const images = contentRef.current.querySelectorAll('img');
+            const loadedImages = Array.from(images).filter(img => img.complete);
+
+            if (images.length === loadedImages.length) {
+                // 모든 이미지가 이미 로드된 경우
+                setContentHeight();
+            } else {
+                // 아직 로드되지 않은 이미지가 있는 경우
+                let loadedCount = 0;
+                Array.from(images).forEach(img => {
+                    img.onload = () => {
+                        loadedCount++;
+                        if (loadedCount === images.length) {
+                            // 모든 이미지 로딩 완료
+                            setContentHeight();
+                        }
+                    };
+                });
+            }
+        }
+    }, [cleanHTML]);
 
     return (
         <div className={styles['frame-parent']}>
@@ -94,7 +118,7 @@ const FrameComponent1 = ({board}) => {
                 alt=""
                 src="/vector5.svg"
             />
-            <div className={styles['content-frame']} ref={contentRef}>
+            <div className={styles['content-frame']} ref={contentRef} >
                 <div className={styles.div1} dangerouslySetInnerHTML={{__html: cleanHTML}}></div>
             </div>
 

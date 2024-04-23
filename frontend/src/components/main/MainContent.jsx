@@ -26,14 +26,14 @@ function MainContent() {
     return (
         <main className="main-content">
             <SearchBar />
+
             <section className="recommendation-section">
                 <h2 className="recommendation-title">추천 컨텐츠</h2>
                 <div className="cards-container">
                     {boards.map(board => (
                         <div key={board.boardNo} className="card">
-                            <h3>{board.boardTitle}</h3>
                             <img src="/logo.png" alt="Logo"/>
-                            <p>{board.boardContent}</p>
+                            <h3>{board.boardTitle}</h3>
                             <p className="author">작성자 : {board.userName}</p>
                         </div>
                     ))}
@@ -46,8 +46,12 @@ function MainContent() {
 function SearchBar() {
     return (
         <div className="search-bar">
-            <input type="text" placeholder="통합 검색" />
-            <button>검색</button>
+            <img src="/logo.png" alt="Logo"/>
+            <div className="search-bar-div">
+                <input type="text" placeholder="통합 검색"/>
+                <button>검색</button>
+            </div>
+
         </div>
     );
 }

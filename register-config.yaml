@@ -1,0 +1,21 @@
+config:
+  plugins:
+    fake-data: {}
+  target: 'http://localhost:8080'
+  phases:
+    - duration: 30
+      arrivalRate: 10
+scenarios:
+  - name: 'register'
+    flow:
+      - post:
+          url: '/api/register'
+          json:
+            userId: '{{ $randomString(8) }}'
+            userPwd: 'a@111111'
+            userName: '이성호'
+            userNickname: '성호'
+            userAge: 28
+            userGender: '남자'
+            userTel: '01001010101'
+            userAddress: '서울특별시'
