@@ -1,0 +1,41 @@
+config:
+  target: 'http://localhost:8080'
+  payload:
+    path: './user.csv'
+    fields:
+      - "userId"
+  phases:
+    - duration: 30 # 이 단계는 60초간 지속됩니다.
+      arrivalRate: 5 # 이 단계에서는 초당 10명의 사용자가 시스템에 도착합니다.
+      name: 'Warm up'  # 서서히 시스템을 부하에 적응시키는 단계
+    - duration: 60
+      arrivalRate: 5 # 이 단계의 시작 부하는 초당 5명입니다.
+      rampTo: 30 # 60초의 끝까지 부하를 점진적으로 증가시켜 초당 30명에 도달하도록 합니다.
+      name: 'Ramp up load'  # 점차적으로 부하를 증가시켜 시스템의 한계를 탐색
+    - duration: 60
+      arrivalRate: 30
+      name: 'Sustained load'  # 일정 수준의 높은 부하를 지속적으로 유지
+    - duration: 30
+      arrivalRate: 30
+      rampTo: 5 # 60초의 끝까지 부하를 점진적으로 감소시켜 초당 10명에 도달하도록 합니다.
+      name: 'Ramp down'  # 부하를 점차 줄여 시스템 회복 과정 관찰
+
+scenarios:
+  - name: 'user login'   # 회원가입 후 로그인
+    flow:
+      - post:
+          url: '/api/login'
+          json:
+            userId: 'sLtcIHLl'
+            userPwd: 'a@111111'
+          capture:
+            - json: $.accessToken  # 응답 JSON에서 accessToken 값을 캡처
+              as: 'accessToken'  # 캡처한 JWT 토큰을 저장할 변수 이름
+
+      - post:
+          url: '/api/noticeWrite'
+          headers:
+            Authorization: 'Bearer {{ accessToken }}'
+          json:
+            noticeTitle: '공지입니다'
+            noticeContent: '공지사항 내용'
