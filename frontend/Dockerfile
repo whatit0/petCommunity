@@ -1,6 +1,6 @@
 FROM node:18.17.1-alpine as build-stage
 WORKDIR /app/frontend
-COPY package.json package-lock.json ./
+COPY package*.json ./
 RUN npm install
 COPY . ./
 RUN npm run build
