@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.petcommunity.board.BoardServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-04-29T18:57:55" hostname="GUKIN" time="1.805">
+  <properties/>
+  <testcase name="saveBoardWithoutTitleThrowsException()" classname="com.example.petcommunity.board.BoardServiceTest" time="1.7"/>
+  <testcase name="saveBoardWithNonExistentUserThrowsException()" classname="com.example.petcommunity.board.BoardServiceTest" time="0.043"/>
+  <testcase name="saveBoardTest()" classname="com.example.petcommunity.board.BoardServiceTest" time="0.058"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
