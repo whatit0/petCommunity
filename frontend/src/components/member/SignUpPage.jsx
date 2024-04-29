@@ -47,7 +47,7 @@ export default function LoginPage() {
             debounceCheck = setTimeout(async () => {
                 // 디바운싱 타이머 설정
                 try {
-                    const response = await axios.get(`http://13.211.140.253:8080/api/check-userId?userId=${newId}`);
+                    const response = await axios.get(`http://pethub2.shop/api/check-userId?userId=${newId}`);
                     if (response.data === true) {
                         setUserIdValid(true);
                         setUserIdMessage("사용 가능한 아이디입니다.");
@@ -127,7 +127,7 @@ export default function LoginPage() {
         event.preventDefault();
         if (!notAllow) {
             try {
-                await axios.post('http://13.211.140.253:8080/api/register', {
+                await axios.post('http://pethub2.shop/api/register', {
                     userId,
                     userPwd,
                     userName,
