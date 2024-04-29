@@ -20,7 +20,7 @@ import java.util.Collections;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST}, allowCredentials = "true")
+@CrossOrigin(origins = "http://13.211.140.253:3000", methods = {RequestMethod.GET, RequestMethod.POST}, allowCredentials = "true")
 public class MemberController {
 
     private final MemberService memberService;
