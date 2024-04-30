@@ -25,7 +25,7 @@ services:
     image: mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: "0000"
-      MYSQL_DATABASE: pet
+      MYSQL_DATABASE: "pet"
     ports:
       - "3306:3306"
     volumes:
