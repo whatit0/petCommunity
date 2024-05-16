@@ -29,6 +29,7 @@ Pet Community는 애완동물을 사랑하는 사람들이 서로 소통하고 �
 - Swagger
 - Docker
 - Artillery
+- Amazon Web Service
 
 ## 🌧 Backend Library
 
