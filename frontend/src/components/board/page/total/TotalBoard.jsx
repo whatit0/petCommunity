@@ -60,7 +60,7 @@ const TotalBoard = () => {
     };
 
         useEffect(() => {
-            fetch(`http://localhost:8080/api/boards?page=${page}&size=10`)
+            fetch(`/api/boards?page=${page}&size=10`)
                 .then(response => response.json())
                 .then(data => {
                     setBoards(data.content);

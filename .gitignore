@@ -27,6 +27,9 @@ out/
 !**/src/test/**/out/
 docker-compose.yml
 
+# Ignore application.properties file
+/src/main/resources/application.properties
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

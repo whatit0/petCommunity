@@ -37,7 +37,7 @@ function NoticeDetail() {
         try {
             const checkDel = window.confirm("삭제하시겠습니까?");
             if (checkDel) {
-                const response = await axios.get(`http://localhost:8080/api/delete?noticeNo=${noticeData.noticeNo}`);
+                const response = await axios.get(`/api/delete?noticeNo=${noticeData.noticeNo}`);
                 alert(response.data);
                 window.location.href = "/notice";
             }

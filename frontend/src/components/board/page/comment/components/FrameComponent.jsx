@@ -29,7 +29,7 @@ const FrameComponent = ({comments, boardNo, fetchBoardData }) => {
 
         try {
             const token = localStorage.getItem('userToken');
-            const response = await fetch('http://localhost:8080/api/comment', {
+            const response = await fetch('/api/comment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

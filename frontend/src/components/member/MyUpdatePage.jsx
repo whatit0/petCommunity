@@ -85,7 +85,7 @@ export default function MyUpdatePage() {
                 const config = {
                     headers: { 'Authorization': `Bearer ${token}` }
                 };
-                const response = await axios.get(`http://localhost:8080/api/user/info/${userNo}`, config);
+                const response = await axios.get(`/api/user/info/${userNo}`, config);
                 const userData = response.data;
                 setUserId(userData.userId);
                 setUserName(userData.userName);
@@ -112,7 +112,7 @@ export default function MyUpdatePage() {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                await axios.patch('http://localhost:8080/api/user/update', {
+                await axios.patch('/api/user/update', {
                     userId,
                     userPwd,
                     userName,

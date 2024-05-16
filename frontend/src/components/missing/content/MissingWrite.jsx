@@ -92,7 +92,7 @@ const MissingWrite = ({selectedLocation}) => {
         try {
             console.log(JSON.stringify(postData));
             const token = localStorage.getItem('userToken');
-            const response = await fetch('http://localhost:8080/api/missingWrite', {
+            const response = await fetch('/api/missingWrite', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
