@@ -8,7 +8,7 @@ function MainContent() {
     useEffect(() => {
         const fetchBoards = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/boards');
+                const response = await axios.get('/api/boards');
                 // HTML 태그를 제거한 내용으로 업데이트
                 const updatedBoards = response.data.content.map(board => ({
                     ...board,

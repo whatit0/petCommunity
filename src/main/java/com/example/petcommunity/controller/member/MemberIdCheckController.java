@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://13.211.140.253", methods = {RequestMethod.GET, RequestMethod.POST}, allowCredentials = "true")
+@CrossOrigin(origins = "${cross.origin.url}", methods = {RequestMethod.GET, RequestMethod.POST}, allowCredentials = "true")
 public class MemberIdCheckController {
 
     private final MemberIdCheckService memberIdCheckService;

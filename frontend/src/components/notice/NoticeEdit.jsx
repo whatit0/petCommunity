@@ -29,7 +29,7 @@ function NoticeEdit() {
         };
         try {
             console.log(JSON.stringify(postData));
-            const response = await axios.post('http://localhost:8080/api/noticeEdit', postData,{
+            const response = await axios.post('/api/noticeEdit', postData,{
                 headers: {
                     'Content-Type': 'application/json',
                 },

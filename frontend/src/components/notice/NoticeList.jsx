@@ -28,7 +28,7 @@ function NoticeList() {
     useEffect(() => {
         const fetchNotice = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/notices', {
+                const response = await axios.get('/api/notices', {
                     params: {
                         page: page - 1,
                         size: itemsPerPage
@@ -55,7 +55,7 @@ function NoticeList() {
 
     const noticeDetail = async (noticeNo) => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/noticeDetail/${noticeNo}`)
+            const response = await axios.get(`/api/noticeDetail/${noticeNo}`)
             navigate(`/noticeDetail/${noticeNo}`, { state: { "data": response.data }});
         } catch (error) {
             alert(error + "error 발생")

@@ -84,7 +84,7 @@ export default function MyUpdatePage() {
                 const config = {
                     headers: {'Authorization': `Bearer ${token}`}
                 };
-                const response = await axios.get(`http://localhost:8080/api/user/info/${userNo}`, config);
+                const response = await axios.get(`/api/user/info/${userNo}`, config);
                 const userData = response.data;
                 setUserId(userData.userId);
                 setUserName(userData.userName);
@@ -111,7 +111,7 @@ export default function MyUpdatePage() {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                await axios.post('http://localhost:8080/api/user/delete', {
+                await axios.post('/api/user/delete', {
                     userId,
                     userPwd,
                     userName,

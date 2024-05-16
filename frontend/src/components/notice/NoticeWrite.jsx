@@ -27,7 +27,7 @@ function NoticeWrite() {
             console.log(JSON.stringify(postData));
             const token = localStorage.getItem('userToken');
             console.log(token)
-            const response = await axios.post('http://localhost:8080/api/noticeWrite', postData,{
+            const response = await axios.post('/api/noticeWrite', postData,{
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,

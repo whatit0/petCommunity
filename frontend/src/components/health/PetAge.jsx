@@ -6,7 +6,7 @@ const PetAge = () => {
     const [humanAge, setHumanAge] = useState(null);
     const [size, setSize] = useState('small'); // 'small', 'medium', 'large'
     const [loading, setLoading] = useState(false);
-    // 이미지 클릭 여부
+    // 이미지 클릭 여부dock
     const [dogClicked, setDogClicked] = useState(false);
     const [catClicked, setCatClicked] = useState(false);
 
@@ -15,7 +15,7 @@ const PetAge = () => {
     const handleCalculation = async () => {
         setLoading(true);
         const requestData = { petType, years, months, size: petType === 'dog' ? size : undefined };
-        const response = await fetch('http://localhost:8080/api/age', {
+        const response = await fetch('/api/age', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ const PetAge = () => {
                     <h1 className='fTYTfl'>
                         <span color='#f29833' className='jtRxxS'>나이</span>&nbsp;계산기
                     </h1>
-                    <p className='jSXtyK'>우리 집 아이는 <br/>사람 나이로는 몇 살일까요?</p>
+                    <p className='jSXtyK'>우리 집 아이는 <br/>사람 나이로는 몇 살일까요?(/api변경2)</p>
                 </div>
                 <img src='/images/PetAge.jpeg' className='dXDVfN'/>
             </div>

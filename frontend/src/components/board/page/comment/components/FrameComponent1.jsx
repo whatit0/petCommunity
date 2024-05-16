@@ -50,7 +50,7 @@ const FrameComponent1 = ({board}) => {
     const toggleLikeDislike = async (isLikeAction) => {
         const token = localStorage.getItem('userToken');
         try {
-            const response = await axios.post('http://localhost:8080/api/likes/toggle', {
+            const response = await axios.post('/api/likes/toggle', {
                 boardNo: board.boardNo,
                 isLikeAction: isLikeAction
             }, {

@@ -8,11 +8,11 @@ import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.GET, RequestMethod.POST}, allowCredentials = "true")
+@CrossOrigin(origins = "${cross.origin.url}", methods = {RequestMethod.GET, RequestMethod.POST}, allowCredentials = "true")
 public class AgeController {
 
     @PostMapping("/api/age")
-    @Operation(summary = "반려동물의 인간 나이 계산", description = "반려동물의 나이를 입력받아 인간 나이로 환산하여 반환합니다.")
+    @Operation(summary = "반려동물의 인간 나이 계산(테스트)", description = "반려동물의 나이를 입력받아 인간 나이로 환산하여 반환합니다.")
     @ApiResponse(responseCode = "200", description = "Calculated human age for the pet", content = @Content(schema = @Schema(implementation = AgeResponse.class)))
     public AgeResponse calculateHumanAge(@RequestBody AgeRequest request) {
         String petType = request.getPetType();

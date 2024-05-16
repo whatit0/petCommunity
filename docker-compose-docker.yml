@@ -1,20 +1,21 @@
 
 services:
   nginx:
-    build:
-      context: .  # 컨텍스트를 상위 디렉토리(petCommunity)로 설정
-      dockerfile: ./frontend/Dockerfile
-    image: nginx-custom:latest
+#    build:
+#      context: .  # 컨텍스트를 상위 디렉토리(petCommunity)로 설정
+#      dockerfile: ./frontend/Dockerfile
+
+    image: ddooochii/pethub:nginx-custom-latest
     ports:
       - "3000:80"
     depends_on:
       - backend
 
   backend:
-    build:
-      context: .  # 이 컨텍스트는 petCommunity 디렉토리를 가리킵니다
-      dockerfile: Dockerfile
-    image: backend:latest
+#    build:
+#      context: .  # 이 컨텍스트는 petCommunity 디렉토리를 가리킵니다
+#      dockerfile: Dockerfile
+    image: ddooochii/pethub:backend-latest
     ports:
       - "8080:8080"
     environment:
@@ -24,7 +25,8 @@ services:
       - db
 
   db:
-    image: mariadb:latest
+#    image: mariadb-latest
+    image: ddooochii/pethub:mariadb-latest
     environment:
       MYSQL_ROOT_PASSWORD: "0000"
       MYSQL_DATABASE: "pet"
