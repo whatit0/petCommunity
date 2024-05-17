@@ -9,8 +9,11 @@
 /coverage
 
  production
-#/build
-#
+/build
+/public/index.html
+/Dockerfile
+/src/components/chat/firebase.js
+
  misc
 .DS_Store
 .env.local
