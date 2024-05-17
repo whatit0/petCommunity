@@ -177,7 +177,7 @@ export default function LoginPage() {
 
     return (
         <div className="page">
-            <form onSubmit={handleSubmit}>
+            <form className="pageform" onSubmit={handleSubmit}>
                 <div className="titleWrap">회원가입</div>
                 <div className="contentWrap">
                     <div className="inputTitle">아이디</div>

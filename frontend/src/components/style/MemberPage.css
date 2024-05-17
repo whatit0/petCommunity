@@ -1,5 +1,5 @@
 .page {
-    position: absolute;
+    position: relative;
     top: 30px;
     bottom: 0;
     width: 100%;
@@ -12,6 +12,12 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+
+.pageform {
+    display: block;
+    margin-top: 0em;
+    margin-bottom: 50px;
 }
 
 .titleWrap {

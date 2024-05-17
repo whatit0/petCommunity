@@ -62,7 +62,7 @@ function App() {
                         {/* 메인 홈페이지 라우트 */}
                         <Route path="/" element={<WithHeader><IndexPage/></WithHeader>}/>
                         {/* 사용자 라우트 */}
-                        <Route path="/login" element={<WithHeader><LoginPage/></WithHeader>}/>
+                        <Route path="/login" element={<WithHeader showFooter={false}><LoginPage/></WithHeader>}/>
                         <Route path="/signup" element={<WithHeader><SignUpPage/></WithHeader>}/>
                         <Route path="/profile/update/:userNo" element={<WithHeader><MyUpdatePage/></WithHeader>} />
                         <Route path="/profile/delete/:userNo" element={<WithHeader><MyDeletePage/></WithHeader>}/>

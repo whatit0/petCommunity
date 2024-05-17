@@ -77,7 +77,7 @@ export default function LoginPage() {
 
     return (
         <div className="page">
-            <form onSubmit={handleLogin}>
+            <form className="pageform" onSubmit={handleLogin}>
                 <div className="titleWrap">로그인</div>
 
                 <div className="contentWrap">
