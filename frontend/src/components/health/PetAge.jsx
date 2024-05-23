@@ -15,7 +15,7 @@ const PetAge = () => {
     const handleCalculation = async () => {
         setLoading(true);
         const requestData = { petType, years, months, size: petType === 'dog' ? size : undefined };
-        const response = await fetch('/api/age', {
+        const response = await fetch('http://localhost:8080/api/age', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -10,7 +10,7 @@ const MissingMain = () => {
 
     const fetchMissingPosts = async () => {
         try {
-            const response = await fetch("/api/getMissing");
+            const response = await fetch("http://localhost:8080/api/getMissing");
             if (!response.ok) {
                 throw new Error("데이터를 불러오는데 실패했습니다.");
             }

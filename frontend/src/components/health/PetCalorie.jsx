@@ -23,7 +23,7 @@ const PetCalorie = () => {
             condition
         };
         try {
-            const response = await fetch('/api/calorie', {
+            const response = await fetch('http://localhost:8080/api/calorie', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

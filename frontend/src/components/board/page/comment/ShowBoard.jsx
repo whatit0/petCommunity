@@ -11,7 +11,7 @@ const ShowBoard = () => {
 
     const fetchBoardData = async () => {
         try {
-            const response = await fetch(`/api/board/${boardNo}`);
+            const response = await fetch(`http://localhost:8080/api/board/${boardNo}`);
             const data = await response.json();
             setBoardData(data);
         } catch (e) {

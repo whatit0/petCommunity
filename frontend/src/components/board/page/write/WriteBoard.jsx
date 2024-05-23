@@ -55,7 +55,7 @@ const WriteBoard = () => {
         try {
             console.log(JSON.stringify(postData));
             const token = localStorage.getItem('userToken');
-            const response = await fetch('/api/boardWrite', {
+            const response = await fetch('http://localhost:8080/api/boardWrite', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
